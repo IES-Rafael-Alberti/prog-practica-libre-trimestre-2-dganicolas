@@ -41,6 +41,8 @@ fun main() {
     val jugador = Jugador("nico",23,23f,23f,23f,0f,Armas.Hacha)
     val informe = informePartidas(jugador.Nombre.nombreCorrecto(),jugador.nivel,jugador.vida,jugador.vidaActual,jugador.experiencia)
     val partida = Partida(jugador, enemigos,informe)
+    //esto de aqui abajo es de prueba
+    //preguntar a diego sobre los tests
     println(jugador.cambiarArma())
     println(jugador.arma)
     partida.batalla()
