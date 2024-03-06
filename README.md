@@ -92,3 +92,35 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?
 
+**APUNTES PARA NICOLAS**
+CLASES
+-class
+-abstract class
+-enum class
+-sealed class
+interfaces
+
+Tematica de la practica, 
+posible rpg 
+con un enum class para el tipo de arma 
+una data class para el personaje
+una abstract class o interfaz para los enemigo
+posible abstract class para los dungeons 
+una funcion generica para las batallas
+una class juego 
+quiero que el personaje pueda tener nombre
+
+principios de responsabilidad unica que debo cumplir
+
+
+Principio de Responsabilidad Única ("**S**ingle Responsibility Principle" - SRP)
+Un módulo o clase debe tener solo una razón para cambiar, lo que significa que debe tener solo una tarea o responsabilidad
+
+Principio de Abierto/Cerrado ("**O**pen/Closed Principle" - OCP)
+Definición: Las entidades de software (clases, módulos, funciones, etc.) deben estar abiertas para la extensión, pero cerradas para la modificación. Es decir, se debe poder extender el comportamiento de la entidad pero sin modificar su código fuente.
+
+Principio de Substitución de Liskov ("**L**iskov Substitution Principle" - LSP)
+Definición: Los objetos de una superclase deben poder ser reemplazados con objetos de sus subclases sin afectar la correctitud del programa.
+
+Principio de Segregación de la Interfaz ("**I**nterface Segregation Principle" - ISP)
+Definición: Los clientes no deben ser forzados a depender de interfaces que no utilizan.
