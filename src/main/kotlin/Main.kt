@@ -2,8 +2,7 @@ package org.practicatrim2
 import Enemigos
 import Jugador
 import Partida
-import Personajes
-import java.util.*
+import Vendedor
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -62,23 +61,10 @@ fun Float.redondear(posiciones: Int = 2): Float {
 fun main() {
 
     val enemigos = listOf(Enemigos("zombie",2,2f,1f,1f,1f,Armas.Hacha))
-    val jugador = Jugador("nico",23,23f,23f,23f,440f,Armas.Hacha)
-    val informe = informePartidas(jugador.Nombre.nombreCorrecto(),jugador.nivel,jugador.vida,jugador.vidaActual,jugador.experiencia)
-    val partida = Partida(jugador, enemigos,informe)
+    val informe = informePartidas(Jugador.nombre.nombreCorrecto(),Jugador.nivel,Jugador.vida,Jugador.vidaActual,Jugador.monedas)
+    val partida = Partida(Jugador,Vendedor, enemigos,informe)
 
 
-    //esto de aqui abajo es de prueba
-    //preguntar a diego sobre los tests
-    println(jugador.cambiarArma())
-    println(jugador.arma)
-    println(jugador.cambiarArma())
-    println(jugador.arma)
-    println(jugador.cambiarArma())
-    println(jugador.arma)
-    println(jugador.cambiarArma())
-    println(jugador.arma)
-    println(jugador.cambiarArma())
-    println(jugador.arma)
-    partida.batalla()
-    println("${jugador.experiencia.calcularExperiencia(jugador.nivel.ExperienciaRequeridaPorNivel())}")
+
+    partida.comienzajuego()
 }

@@ -4,49 +4,109 @@ import kotlin.random.Random
 //la clase donde se hara toda la partida
 //controlando si el jugador esta en una montaña, campo o ciudad
 // aqui tambien controlara el informe de partida
-class Partida(val jugador: Jugador, val enemigos: List<Enemigos>, val informePartidas: informePartidas){
+class Partida(val jugador: Jugador, val vendedor:Vendedor, val enemigos: List<Enemigos>, val informePartidas:
+informePartidas)
+{
+    companion object{
+        val estado = true
+    }
 
+
+
+
+
+
+
+
+    fun hacerAccion(opcion: Int){
+        when (opcion){
+            1 -> Pelear()
+            2 -> irAlVendedor()
+            3 -> { Textojuego().animacion()
+                jugador.dormirSuelo()}
+        }
+    }
+
+        fun Pelear(){
+            val enemigo = enemigos.random()
+
+            informePartidas.acciones.add(Enfretamientos().pelea(jugador,enemigo))
+        }
+        fun irAlVendedor(){
+            println("")
+        }
+
+
+    fun comienzajuego(){
+        while (estado) {
+            Textojuego().limpiarConsola()
+            Textojuego().mostrarMenu()
+            val opcion =Opciones().opciones()
+            if (opcion != 0){
+                hacerAccion(opcion)
+            }else{
+                Textojuego().enterparacontinuar()
+            }
+
+
+
+        }
+    }
+}
+/**
     /**
      *  funcion generica
      *  que nos da a quien le toca el turno,
      *  es generica por que ya sea jugador o enemigo
      *
-     *  @return la entidad que le ha tocado el turno
      * */
-    fun <T> asignarTurno(t1: T, t2: T): T {
-        return when (Random(0).nextInt(2)) {
-            0 -> t1
-            1 -> t2
-            else -> t1
+    fun asignarTurno(jugador1:Jugador,jugador2:Enemigos) {
+        val numero = Random.nextInt(2)
+        when (numero){
+            0 -> turnoJugador(jugador1,jugador2)
+            1 -> turnoMaquina(jugador2,jugador1)
         }
     }
-    fun <T> mostrarParticipantes(t1: T, t2: T){
-        println(t1.toString())
-        println(t2.toString())
+
+    /**
+     * Funcion genercia
+     * que muestra la informacion de los participantes
+     * @param jugador1 la entidad seleccionada que muestra la informacion
+     * @param jugador2 la entidad seleccionada que muestra la informacion
+     * */
+    fun <T> mostrarParticipantes(jugador1:T ,jugador2:T ){
+        println(jugador1.toString())
+        println(jugador2.toString())
     }
-    //se puede mejorar con el ejercicio 3
-    fun turnoAtaque(turno: Personajes,enemigo: Enemigos):String{
-        return when(turno){
-            is Jugador ->{ enemigo.vidaActual -= jugador.atacar()
-                "${enemigo.mostrarNombre()} ha sufrido un ataque de ${jugador.atacar()}"}
-            is Enemigos -> {jugador.vidaActual -= enemigo.atacar()
-                "${jugador.Nombre} ha sufrido un ataque de ${enemigo.atacar()}"}
-
-            else -> ""
-        }
+    fun turnoMaquina(atacante: Enemigos, objetivo: Jugador){
+        ControladorVida().recibirAtaque(atacante,objetivo)
+        imprimirAccion(atacante,objetivo)
         }
 
+    fun imprimirVida(entidad:Personajes):String{
+        return when (entidad){
+            is Jugador -> "${entidad.vidaActual}"
+            is Enemigos -> "${entidad.vidaActual}"
+            else ->""
+        }
+    }
+    fun imprimirAccion(atacante: Personajes,objetivo: Personajes){
 
-
-
-    fun batalla(){
-        val enemigo = enemigos[0]
+        when (atacante){
+            is Jugador -> println("El ${atacante.nombre} le causo un ataque de ${atacante.hacerAtaque()} a ${objetivo.nombre}, vida restante ${imprimirVida(objetivo)}")
+            is Enemigos -> println("El ${atacante.nombre} le causo un ataque de ${atacante.hacerAtaque()} a ${objetivo.nombre}, vida restante ${imprimirVida(objetivo)}")
+        }
+    }
+    fun turnoJugador(atacante: Jugador, objetivo: Enemigos){
+        ControladorVida().recibirAtaque(atacante,objetivo)
+        imprimirAccion(atacante,objetivo)
+    }
+    fun batalla(jugador: Jugador,enemigo: Enemigos){
+        mostrarParticipantes(jugador,enemigo)
         while (jugador.vidaActual > 0 && enemigo.vidaActual > 0) {
-            mostrarParticipantes(jugador,enemigo)
-            val turno = asignarTurno(enemigo ,jugador) //mira omo aqui no me llora  si cambio el orden
-            println(turnoAtaque(turno,enemigo))
+
+            asignarTurno(jugador,enemigo)
             println(enemigo.toString())
-            jugador.vidaActual -= enemigo.atacar() - jugador.defensa()
         }
     }
-}
+}*/
