@@ -1,8 +1,9 @@
 package org.practicatrim2
-import Enemigos
+import Luchadores
 import Jugador
 import Partida
 import Vendedor
+import Zombie
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -59,12 +60,9 @@ fun Float.redondear(posiciones: Int = 2): Float {
     return (this * factor).roundToInt() / factor
 }
 fun main() {
-
-    val enemigos = listOf(Enemigos("zombie",2,2f,1f,1f,1f,Armas.Hacha))
+    val enemigos = listOf<Luchadores>(Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f),Zombie("araña",2f,2,1f,1f,1f,Armas.Hacha,5f),Zombie("Creeper",2f,2,1f,1f,1f,Armas.Hacha,10f))
     val informe = informePartidas(Jugador.nombre.nombreCorrecto(),Jugador.nivel,Jugador.vida,Jugador.vidaActual,Jugador.monedas)
     val partida = Partida(Jugador,Vendedor, enemigos,informe)
 
-
-
-    partida.comienzajuego()
+    partida.comienzaJuego()
 }

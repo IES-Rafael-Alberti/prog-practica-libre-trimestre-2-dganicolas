@@ -1,14 +1,14 @@
 class Textojuego {
+
+    /**
+     * FUNCIONES VARIAS
+     * */
     fun limpiarConsola(){
         println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     }
 
-    fun mostrarMenu(){
-
-        println("que quieres hacer ${Jugador.nombre}")
-        println("(1) ir a luchar")
-        println("(2) ir al vendedor")
-        println("(3) dormir en el suelo")
+    fun <T>imprimir(imprimir:T){
+        println(imprimir)
     }
 
     fun animacion(){
@@ -22,25 +22,33 @@ class Textojuego {
             puntos += "."
             limpiarConsola()
             println(puntos)
-            Thread.sleep(1000)
+            Thread.sleep(500)
         }
         puntos += "*"
-        Thread.sleep(1000)
+        Thread.sleep(500)
         println(puntos)
     }
 
-    fun mostrarEscenario(jugador: Jugador, enemigo: Enemigos) {
+    /**
+     * Mostrar pantalla
+     * */
+
+    fun mostrarEscenario(jugador: Jugador, enemigo: Luchadores) {
+        limpiarConsola()
         val escenario = arrayOf(
             "-------------------------------------------------------",
-            "-${enemigo.nombre}",
-            "-${enemigo.nivel}",
-            "-${enemigo.vida}",
+            "-Enemigo: ${enemigo.nombre}",
+            "-Nivel: ${enemigo.nivel}",
+            "-Vida: ${enemigo.vida}",
             "-   ....   ...   ... ...  ..",
             "-  ...  ...   ...       .. .",
             "- ... ........     ...     .",
+            "-Tu: ${jugador.nombre}",
+            "-Nivel: ${jugador.nivel}",
+            "-Vida: ${jugador.vida}",
             "-------------------------------------------------------",
-            "-${jugador.nombre} Selecciona una opcion:",
-            "- (1) atacar (2) defensa      Arma: ${jugador.arma}",
+            "-Selecciona una opcion:      Arma: ${jugador.arma}",
+            "- (1)atacar      (2)huir",
             "-------------------------------------------------------"
         )
         for (lineas in escenario) {
@@ -48,28 +56,55 @@ class Textojuego {
         }
     }
 
-    fun jugadorAtaca(jugador: Jugador,enemigo: Enemigos,frase:Int):String{
-        if (frase ==1){
-            if (enemigo.vidaActual < 0){enemigo.vidaActual= 0f}
-            return "${jugador.nombre} ha causado un daño de ${jugador.hacerAtaque()} al ${enemigo.nombre}, vida restante ${enemigo.vidaActual}"
+    fun mostrarvida():String{
+        var corazones= ""
+        for (i in 0.. (Jugador.vida.toInt()-1){
+            corazones+= "♥"
         }
-        if (frase ==2){
-            if (jugador.vidaActual < 0){jugador.vidaActual= 0f}
-            return "el ${enemigo.nombre} ha causado un daño de ${enemigo.hacerAtaque()} al ${jugador.nombre}, vida restante ${jugador.vidaActual}"
-        }else {return ""}
+        for(i in 0..(((Jugador.vidaActual).toInt() - Jugador.vida)-1).toInt()){
+            corazones+= "*"
+        }
+        return corazones
+    }
 
+    fun mostrarmenu(){
+        limpiarConsola()
+        println("BIENVENIDO A NAYD3C WORLDS")
+        println("Nombre: ${Jugador.nombre}")
+        println("Nivel: ${Jugador.nivel}")
+        println("Vida: ${mostrarvida()}")
+        println("¿Que quieres hacer joven aventurero?")
+        println("(1)Pelea")
+        println("(2)Recuperar vida")
+        println("(3)Fin del juego")
+    }
+
+    /**
+     * Acciones
+     * */
+    fun<T> curarVida(nombre:T){
+        println("$nombre se ha curado sus heridas")
+    }
+    /**
+     * BATALLAS
+     * */
+
+
+    fun recibirAtaque(nombre:String, ataque:Float){
+        println("$nombre recibe un daño de $ataque puntos")
+    }
+
+    fun hacerAtaque(nombre:String, ataque:Float){
+        println("$nombre lanza un ataque de $ataque puntos")
     }
 
     fun huidaPelea() = "Has podido huir de la batalla"
 
-    fun huidaPeleaFracasa() = "no has podido escapar"
-
-    fun jugadorSeProtegue(jugador: Jugador) = "${jugador.nombre} se esta protegiendo"
-
     fun enterparacontinuar() {
         println("pulsa ENTER para continuar")
-        readLine()
+        readlnOrNull()
     }
 
-    fun mensajeDeError()= "ERROR has introducido un dato erroneo, escribe \"1\" \"2\" \"3\", para ir a las opcion querida, ENTER PARA CONTINUAR"
+    fun mensajeDeError()= "ERROR,Las Opciones validas son 1, 2 o 3"
+
 }

@@ -15,5 +15,13 @@ interface Peleas {
      * @param ataqueRecibido el ataque que recibe
      * @return retorna el daño del ataque recibido
      * */
-    fun recibirAtaque(ataqueRecibido:Float):Float
+    fun recibirAtaque(ataqueRecibido:Float,defenderse:Boolean)
+}
+
+interface curarse{
+    fun curar()
+}
+interface transacciones{
+    fun pagar(coste:Float)
+    fun ingreso(coste:Float)
 }

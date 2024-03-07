@@ -1,14 +1,15 @@
 class Opciones() {
     fun opciones():Int{
-        try {
+        return try {
             val opcion = readln().toInt()
             if (opcion > 3) {
                 throw IllegalArgumentException()
             }
-            return opcion
+            opcion
         }catch (e:IllegalArgumentException){
             println(Textojuego().mensajeDeError())
-            return 0
+            Textojuego().enterparacontinuar()
+            0
         }
     }
 }

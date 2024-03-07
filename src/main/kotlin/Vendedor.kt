@@ -1,15 +1,11 @@
-import org.practicatrim2.ExperienciaRequeridaPorNivel
-import org.practicatrim2.calcularExperiencia
-import org.practicatrim2.redondear
-
 // la clase padre de enemigos, jugador y cualquier entidad viviente
-object Vendedor:Personajes("vendedor") {
-    fun DormirHostal(nivel: Int) = nivel * 3
+object Vendedor {
+    fun DormirHostal(nivel: Int) = nivel * 3f
     fun dormirHostal(jugador: Jugador) {
         val costeNoche = DormirHostal(jugador.nivel)
         if (jugador.monedas > costeNoche) {
-            jugador.monedas -= costeNoche
-            jugador.vidaActual = jugador.vida
+            jugador.pagar(costeNoche)
+            jugador.curar()
             println("Has dormido en el hostal NXDXG, coste de la noche: $costeNoche")
         }
     }
