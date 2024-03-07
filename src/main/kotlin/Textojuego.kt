@@ -48,9 +48,16 @@ class Textojuego {
         }
     }
 
-    fun jugadorAtaca(jugador: Jugador,enemigo: Enemigos):String{
-        if (enemigo.vidaActual < 0){enemigo.vidaActual= 0f}
-        return "${jugador.nombre} ha causado un daño de ${jugador.hacerAtaque()} al ${enemigo.nombre}, vida restante ${enemigo.vidaActual}"
+    fun jugadorAtaca(jugador: Jugador,enemigo: Enemigos,frase:Int):String{
+        if (frase ==1){
+            if (enemigo.vidaActual < 0){enemigo.vidaActual= 0f}
+            return "${jugador.nombre} ha causado un daño de ${jugador.hacerAtaque()} al ${enemigo.nombre}, vida restante ${enemigo.vidaActual}"
+        }
+        if (frase ==2){
+            if (jugador.vidaActual < 0){jugador.vidaActual= 0f}
+            return "el ${enemigo.nombre} ha causado un daño de ${enemigo.hacerAtaque()} al ${jugador.nombre}, vida restante ${jugador.vidaActual}"
+        }else {return ""}
+
     }
 
     fun huidaPelea() = "Has podido huir de la batalla"
