@@ -124,7 +124,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
     - fun ataqueJugador(jugador:Jugador,enemigo:Luchadores)
     - fun ataqueJugador(enemigo:Luchadores,jugador:Jugador)
   - entonces, lo podre hacer en una sola funcion y llegue a la siguiente funcion:
-    - **fun <T:Peleas>atacar(atacante:T, objetivo:T)**{
+    - **fun <T: Peleas>atacar(atacante:T, objetivo:T)**{
       objetivo.recibirAtaque(atacante.hacerAtaque(),DEFENSA)
       }
   - entonces gracias a esta funcion pude lograr ahorrarme unas cuantas lineas de codigos en mi proyecto
