@@ -22,6 +22,6 @@ interface curarse{
     fun curar()
 }
 interface transacciones{
-    fun pagar(coste:Float)
-    fun ingreso(coste:Float)
+    fun pagar(coste:Float):Float
+    fun ingreso(coste:Float):Float
 }

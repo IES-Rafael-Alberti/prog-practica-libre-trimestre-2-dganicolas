@@ -12,7 +12,7 @@ object Jugador :Peleas,curarse,transacciones{
             private set
     var dano:Float = 3f
             private set
-    var vida: Float = 5f
+    var vida: Float = 50f
             private set
     var vidaActual:Float = 10f
         private set
@@ -22,17 +22,21 @@ object Jugador :Peleas,curarse,transacciones{
     private var DEFENSA = 5
 
 
-    override fun pagar(coste: Float) {
-        monedas -= coste
+    override fun pagar(coste: Float):Float {
+        monedas -= coste.redondear()
+        return coste
+
     }
 
-    override fun ingreso(coste: Float){
-        monedas+= coste
+    override fun ingreso(coste: Float):Float{
+        monedas+= coste.redondear()
+        return coste
     }
 
     override fun curar(){
-        Textojuego().curarVida(nombre)
-        vidaActual = vida
+        Textojuego().curarVida(nombre, vidaActual-vida)
+        vida = vidaActual
+
     }
 
     override fun recibirAtaque(ataqueRecibido: Float,defenderse:Boolean){

@@ -18,7 +18,6 @@ class Textojuego {
         Thread.sleep(1000)
 
         for (i in 1..5) {
-            // Espera un segundo
             puntos += "."
             limpiarConsola()
             println(puntos)
@@ -39,7 +38,7 @@ class Textojuego {
             "-------------------------------------------------------",
             "-Enemigo: ${enemigo.nombre}",
             "-Nivel: ${enemigo.nivel}",
-            "-Vida: ${enemigo.vida}",
+            "-Vida: ${mostrarvida(enemigo.vida,0f)}",
             "-   ....   ...   ... ...  ..",
             "-  ...  ...   ...       .. .",
             "- ... ........     ...     .",
@@ -56,14 +55,18 @@ class Textojuego {
         }
     }
 
-    fun mostrarvida():String{
+    fun mostrarvida(vida:Float,vidaActual:Float):String{
+
         var corazones= ""
-        for (i in 0.. (Jugador.vida.toInt()-1){
+        for (i in 1.. (vida.toInt())){
             corazones+= "♥"
         }
-        for(i in 0..(((Jugador.vidaActual).toInt() - Jugador.vida)-1).toInt()){
-            corazones+= "*"
+        if (vidaActual != 0f){
+            for(i in 1..(vidaActual - vida).toInt()){
+                corazones+= "♡"
+            }
         }
+        corazones += " ($vida)"
         return corazones
     }
 
@@ -72,7 +75,7 @@ class Textojuego {
         println("BIENVENIDO A NAYD3C WORLDS")
         println("Nombre: ${Jugador.nombre}")
         println("Nivel: ${Jugador.nivel}")
-        println("Vida: ${mostrarvida()}")
+        println("Vida: ${mostrarvida(Jugador.vida,Jugador.vidaActual)}")
         println("¿Que quieres hacer joven aventurero?")
         println("(1)Pelea")
         println("(2)Recuperar vida")
@@ -82,8 +85,8 @@ class Textojuego {
     /**
      * Acciones
      * */
-    fun<T> curarVida(nombre:T){
-        println("$nombre se ha curado sus heridas")
+    fun<T> curarVida(nombre:T, recuperado:T){
+        println("$nombre se ha curado sus heridas, recupero $recuperado")
     }
     /**
      * BATALLAS
@@ -98,7 +101,19 @@ class Textojuego {
         println("$nombre lanza un ataque de $ataque puntos")
     }
 
-    fun huidaPelea() = "Has podido huir de la batalla"
+    fun <T>finalBatalla(jugador : T){
+        when(jugador){
+            is Jugador -> { "${Jugador.nombre} ha sido debilitado, has perdido ${Jugador.pagar(Jugador.monedas/2)}" }
+            is Luchadores -> { "${jugador.nombre} ha sido debilitado, has ganado ${Jugador.pagar(Jugador.monedas/2)}" }
+        }
+    }
+    fun huidaPelea(){
+        println("Has podido huir de la batalla")
+    }
+
+    fun bloqueoEnemigo(){
+        println("intentaste huir pero el enemigo te bloqueo el paso, ataque inminente")
+    }
 
     fun enterparacontinuar() {
         println("pulsa ENTER para continuar")

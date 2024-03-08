@@ -1,4 +1,5 @@
 import org.practicatrim2.informePartidas
+import kotlin.random.Random
 
 //la clase donde se hara toda la partida
 //controlando si el jugador esta en una montaña, campo o ciudad
@@ -11,6 +12,7 @@ informePartidas)
         var PARTIDA = true
         var DEFENSA= false
         var PELEA =true
+        var HUIDA = false
     }
     fun <T:Peleas>atacar(atacante:T, objetivo:T){
         objetivo.recibirAtaque(atacante.hacerAtaque(),DEFENSA)
@@ -18,8 +20,15 @@ informePartidas)
 
     fun elegirOpcion()= Opciones().opciones()
 
-    private fun huida(){
-        PELEA = false
+    private fun huida(luchador: Luchadores){
+        if (50 >= (0..100).random()){
+            PELEA = false
+            Textojuego().huidaPelea()
+        }else{
+            Textojuego().bloqueoEnemigo()
+            atacar(luchador,Jugador)
+        }
+
     }
 
     fun comienzaJuego(){
@@ -39,7 +48,7 @@ informePartidas)
     }
     fun batalla(){
         val luchador = enemigo.random()
-        while (PELEA) {
+        while (PELEA && luchador.vida > 0 && jugador.vida > 0) {
 
             Textojuego().mostrarEscenario(Jugador, luchador)
             val opcion = elegirOpcion()
@@ -53,11 +62,29 @@ informePartidas)
                 }
 
                 3 -> {
-                    huida()
+                    HUIDA = true
                 }
             }
             Textojuego().enterparacontinuar()
+            finalBatalla(luchador)
+        }
+
+
+        PELEA = true
+    }
+
+    private fun finalBatalla(luchador:Luchadores) {
+        if (HUIDA){
+            huida(luchador)
+            HUIDA = false
 
         }
+        if (Jugador.vida <= 0){
+            Textojuego().finalBatalla(Jugador)
+        }
+        if(luchador.vida <= 0){
+            Textojuego().finalBatalla(luchador)
+        }
+        Textojuego().enterparacontinuar()
     }
 }
