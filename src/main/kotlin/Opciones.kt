@@ -2,7 +2,7 @@ class Opciones() {
     fun opciones():Int{
         return try {
             val opcion = readln().toInt()
-            if (opcion > 3) {
+            if (opcion > 4) {
                 throw IllegalArgumentException()
             }
             opcion

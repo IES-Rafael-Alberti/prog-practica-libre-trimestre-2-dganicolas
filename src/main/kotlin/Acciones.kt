@@ -19,9 +19,29 @@ interface Peleas {
 }
 
 interface curarse{
-    fun curar()
+    fun curar(porcentajeQueSeVaACurar:Int= 100)
 }
-interface transacciones{
-    fun pagar(coste:Float):Float
-    fun ingreso(coste:Float):Float
+interface transacciones<T>{
+    fun pagar(coste:T):Float
+    fun ingreso(coste:T):Float
+}
+interface darObjeto<T> {
+    fun darObjeto(destinatario:T)
+}
+
+interface recibirObjeto{
+    fun recibirobjeto(objeto:Objetos)
+}
+
+interface aparencia{
+    fun mostrarAparencia()
+}
+
+interface levelear{
+    fun subirDeNivel()
+    fun ComprobarSiTieneExpSuficiente(nivel: Float):Float
+}
+
+interface registrarAccion{
+    fun haMatadoOHeMuerto()
 }

@@ -1,14 +1,19 @@
 // la clase padre de enemigos, jugador y cualquier entidad viviente
-object Vendedor {
-    fun DormirHostal(nivel: Int) = nivel * 3f
-    fun dormirHostal(jugador: Jugador) {
-        val costeNoche = DormirHostal(jugador.nivel)
-        if (jugador.monedas > costeNoche) {
-            jugador.pagar(costeNoche)
-            jugador.curar()
-            println("Has dormido en el hostal NXDXG, coste de la noche: $costeNoche")
-        }
+object Vendedor:transacciones<Int>,darObjeto<Any> {
+    val nombre = "nico"
+    override fun pagar(coste: Int): Float {
+        TODO("Not yet implemented")
     }
+
+    override fun ingreso(coste: Int): Float {
+        TODO("Not yet implemented")
+    }
+
+    override fun darObjeto(destinatario: Any) {
+        TODO("Not yet implemented")
+    }
+
+
 }
 
 

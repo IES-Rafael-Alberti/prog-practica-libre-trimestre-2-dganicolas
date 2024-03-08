@@ -3,7 +3,6 @@ import Luchadores
 import Jugador
 import Partida
 import Vendedor
-import Zombie
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -56,13 +55,18 @@ fun Float.calcularExperiencia(experiencia: Float): Float{
  * retorna 10.12
  * */
 fun Float.redondear(posiciones: Int = 2): Float {
-    val factor = 10.0.pow(posiciones.toDouble()).toFloat()
-    return (this * factor).roundToInt() / factor
+    if (posiciones > 0){
+        val factor = 10.0.pow(posiciones.toDouble()).toFloat()
+        return (this * factor).roundToInt() / factor
+    }else{
+        return this/100
+    }
+
 }
 fun main() {
-    val enemigos = listOf<Luchadores>(Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f),Zombie("araña",2f,2,1f,1f,1f,Armas.Hacha,5f),Zombie("Creeper",2f,2,1f,1f,1f,Armas.Hacha,10f))
-    val informe = informePartidas(Jugador.nombre.nombreCorrecto(),Jugador.nivel,Jugador.vida,Jugador.vidaActual,Jugador.monedas)
-    val partida = Partida(Jugador,Vendedor, enemigos,informe)
 
+    val enemigos = listOf<Luchadores>(Luchadores.Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f))
+    println(enemigos[0].toString())
+    val partida = Partida(Jugador,Vendedor, enemigos)
     partida.comienzaJuego()
 }

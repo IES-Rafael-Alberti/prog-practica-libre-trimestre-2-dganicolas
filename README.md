@@ -69,13 +69,20 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
+- 
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
 
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.
+- en el proceso de creacion de clases, al crear las diferentes clases padres, el IDE me ayudaba en errores comunes como el noi poner que tipo de variables que es en e lconstructor 
+- tambien a la hora de hacer clases heredadas, el id e ntodo mopmento me aleertaba de fallos como que en el constructor primario de la clase heredada no era igual que el de la clase padre o que me faltaba importar variables de la clase padre
+- en el proceso de compilacion el propio IDE me decia, aqui hay un error de sisntaxis, o en el archivo, en la funcion y en la linea (98:94) se esperaba un valor de tipo Float, pero se ha introducido uno de tipo Int
+
+- en las pruebas del programa utilize el modo debug directamente:
+- donde ide me ha ayudado con su modo debug al hacer pruebas, tantos como formulas matematicas que puse de manera erronea, donde me decia en todo momento con el watch, los valores de variables, como el poder asignar el valor en el propio tiempo de ejecucion 
 - El ide me ha ayudado en el uso de la visibilidad de las variables/metodos, por ejemplo si veia que esa variable o metodo se usaba solo dentro de una clase/objeto, me alertaa que se podia poner privada, tambien en el modo debug o depuracion tenia un bucle infinito en Partida.kt, el cual es el siguiente:
   - codigo erroneo resumido:
-  - ````
+    ````
     companion object{
        var HUIDA = false
     }
@@ -94,10 +101,10 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
       HUIDA = false 
     }
     }
-  - donde este codiog resumido, cuando el usuario apretaba la opcion 3, 
-  - que era huida,
-  - entonces en el if marcado ateriormente, estaba la condicion distinto de true de HUID, entonces me geneor un bucle infinito
-  - que gracias al ide pude solucionar
+- donde este codiog resumido, cuando el usuario apretaba la opcion 3, 
+- que era huida,
+- entonces en el if marcado ateriormente, estaba la condicion distinto de true de HUID, entonces me geneor un bucle infinito
+- que gracias al IDE pude solucionar
 
 #### **Criterio global 4: Definir clases y su contenido**
 - **(4.b, 4.c, 4.d, 4.g)**: Explica sobre un ejemplo de tu código, cómo definiste las clases en tu proyecto, es decir como identificaste las de propiedades, métodos y constructores y modificadores del control de acceso a métodos y propiedades, para representar al objeto del mundo real. ¿Cómo contribuyen estas clases a la solución del problema que tu aplicación aborda?
