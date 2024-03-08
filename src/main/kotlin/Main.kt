@@ -64,9 +64,9 @@ fun Float.redondear(posiciones: Int = 2): Float {
 
 }
 fun main() {
-
-    val enemigos = listOf<Luchadores>(Luchadores.Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f))
-    println(enemigos[0].toString())
-    val partida = Partida(Jugador,Vendedor, enemigos)
-    partida.comienzaJuego()
+   val personas = listOf<Luchadores>(Luchadores.Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f))
+    val gestioninfoJuego = GestioninfoJuego()
+    gestioninfoJuego.iniciarJuego(personas,Jugador)
+    val partida = Partida(Jugador,Vendedor, personas, gestioninfoJuego)
+   partida.comienzaJuego()
 }

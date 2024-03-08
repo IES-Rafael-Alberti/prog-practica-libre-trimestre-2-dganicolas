@@ -1,9 +1,10 @@
 import org.practicatrim2.Armas
+import org.practicatrim2.estadisticas
 import org.practicatrim2.redondear
 
 // este es el personaje principal, aqui llevara el puntuaje de exp, el multiplicador de daño
 // el arma que lleva y el ratio de armadura que lleva
-object Jugador :Peleas,curarse,transacciones<Float>, aparencia, levelear,registrarAccion{
+object Jugador :Peleas,curarse,transacciones<Float>, aparencia, levelear,registrarAccion,estadisticas{
     var nombre:String= "troy"
         private set
     var monedas: Float = 10f
@@ -94,4 +95,6 @@ object Jugador :Peleas,curarse,transacciones<Float>, aparencia, levelear,registr
     override fun haMatadoOHeMuerto() {
         TODO("Not yet implemented")
     }
+
+    override fun estadisticas(): List<String> = listOf("Jugador","nombre: ${this.nombre}","monedas: ${this.monedas}","Nivel: ${this.nivel}","Daño: ${this.dano}","Vida: ${this.vida}","${this.vida}","${this.arma}")
 }

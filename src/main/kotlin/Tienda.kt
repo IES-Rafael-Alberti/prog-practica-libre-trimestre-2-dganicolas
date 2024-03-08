@@ -1,4 +1,4 @@
-class Tienda() {
+class Tienda():curarse {
     companion object{
         var JUGADORESTAADENTRO = true
     }
@@ -19,11 +19,11 @@ class Tienda() {
         }
         JUGADORESTAADENTRO = true
     }
-    fun dormirHostal(jugador: Jugador) {
-        val costeNoche = DormirHostal(jugador.nivel)
-        if (jugador.monedas > costeNoche) {
-            jugador.pagar(costeNoche)
-            ManejoVida().curar(jugador)
+    private fun dormirHostal(huesped:Jugador) {
+        val costeNoche = DormirHostal(huesped.nivel)
+        if (huesped.monedas > costeNoche) {
+            huesped.pagar(costeNoche)
+            ManejoVida().curar(huesped)
             Textojuego().duermeHostal(costeNoche)
         }
     }

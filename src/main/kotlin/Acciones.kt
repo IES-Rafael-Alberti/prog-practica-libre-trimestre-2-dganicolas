@@ -2,6 +2,13 @@
  * Interfaz Peleas 
  * la usa la clase Personajes
  * */
+
+interface mostrarMenus{
+    fun mostrarMenuPrincipal(){
+        Textojuego().mostrarMenu()
+    }
+}
+
 interface Peleas {
     /**
      * funcion que determina el daño que hace la entidad
