@@ -1,4 +1,4 @@
-class Textojuego {
+class Textojuego:mostrarMenus {
 
     /**
      * FUNCIONES VARIAS
@@ -74,7 +74,7 @@ class Textojuego {
     fun subirDeNivel(podraSubirNivel: Boolean){
         println("${Jugador.nombre} se volvio mas fuerte")
     }
-    fun mostrarmenu(){
+    fun mostrarMenu(){
         limpiarConsola()
         println("BIENVENIDO A NAYD3C WORLDS")
         println("Nombre: ${Jugador.nombre}")
@@ -116,7 +116,7 @@ class Textojuego {
         println("$nombre lanza un ataque de $ataque puntos")
     }
 
-    fun <T>finalBatalla(jugador : T,monedasContricante: Float=0f){
+    fun <T>finalBatallaTexto(jugador : T, monedasContricante: Float=0f){
         when(jugador){
             is Jugador -> { println("${Jugador.nombre} ha sido debilitado, has perdido ${Jugador.pagar(Jugador.monedas/2)}") }
             is Luchadores -> { println("${jugador.nombre} ha sido debilitado, has ganado ${Jugador.ingreso(monedasContricante)}") }

@@ -1,14 +1,12 @@
-import org.practicatrim2.informePartidas
-import kotlin.random.Random
+import org.practicatrim2.GestioninfoJuego
 
 //la clase donde se hara toda la partida
 //controlando si el jugador esta en una montaña, campo o ciudad
 // aqui tambien controlara el informe de partida
-class Partida(val jugador: Jugador, val vendedor:Vendedor, val enemigo: List<Luchadores>)
+class Partida(val jugador: Jugador, val vendedor:Vendedor, val enemigo: List<Luchadores>,private var gestioninfoJuego: GestioninfoJuego):mostrarMenus
 {
 
     companion object{
-        val informePartidas = informePartidas(Jugador.nombre,Jugador.nivel,Jugador.vida,Jugador.vidaActual,Jugador.experiencia)
         var PARTIDA = true
         var DEFENSA= false
         var PELEA =true
@@ -42,10 +40,11 @@ class Partida(val jugador: Jugador, val vendedor:Vendedor, val enemigo: List<Luc
 
     fun comienzaJuego(){
         while (PARTIDA) {
-            Textojuego().mostrarmenu()
             escogerOpcion(elegirOpcion())
+            mostrarMenuPrincipal()
         }
     }
+
 
     fun escogerOpcion(opcion:Int){
         when(opcion){
@@ -97,12 +96,12 @@ class Partida(val jugador: Jugador, val vendedor:Vendedor, val enemigo: List<Luc
             huida(luchador)
         }
         if (Jugador.vida <= 0){
-            Textojuego().finalBatalla(Jugador)
+            Textojuego().finalBatallaTexto(Jugador)
             COMBATEGANADO= false
             registrarCombate(luchador)
         }
         if(luchador.vida <= 0){
-            Textojuego().finalBatalla(luchador,luchador.monedas)
+            Textojuego().finalBatallaTexto(luchador,luchador.monedas)
             registrarCombate(luchador)
             ManejoVida().curar(luchador)
         }
@@ -120,4 +119,6 @@ class Partida(val jugador: Jugador, val vendedor:Vendedor, val enemigo: List<Luc
     private fun registrarCombate(luchador: Luchadores) {
         RegistrarCombate().combateRealizado(luchador, COMBATEGANADO)
     }
+
+
 }
