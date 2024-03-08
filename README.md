@@ -75,12 +75,11 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.
 - El ide me ha ayudado en el uso de la visibilidad de las variables/metodos, por ejemplo si veia que esa variable o metodo se usaba solo dentro de una clase/objeto, me alertaa que se podia poner privada, tambien en el modo debug o depuracion tenia un bucle infinito en Partida.kt, el cual es el siguiente:
   - codigo erroneo resumido:
-  - 
-  - **companion object**{
-    var HUIDA = false
+  - ````
+    companion object{
+       var HUIDA = false
     }
-  - 
-  - **fun batalla**(){
+    fun batalla(){
     while (PELEA && luchador.vida > 0 && jugador.vida > 0) {
          Textojuego().mostrarEscenario(Jugador, luchador)
          val opcion = elegirOpcion()
@@ -88,14 +87,13 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
                 3 -> {
                     **HUIDA = true**
                 }
-  - }
-  - 
-  - **private fun finalBatalla(luchador:Luchadores)** {
-    if (**!HUIDA**){
+    } 
+    private fun finalBatalla(luchador:Luchadores){
+    if (!HUIDA){
       huida(luchador)
       HUIDA = false 
     }
-  }
+    }
   - donde este codiog resumido, cuando el usuario apretaba la opcion 3, 
   - que era huida,
   - entonces en el if marcado ateriormente, estaba la condicion distinto de true de HUID, entonces me geneor un bucle infinito
@@ -133,10 +131,13 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - tambien tengo otro ejemplo:
 - en la clase textoJuego() que su unica responsabilidad es mostrar texto en pantalla
 - tengo la siguiente funcion:
+- ````
   - fun <T>finalBatalla(jugador : T){
       when(jugador){
-         is Jugador -> { "${Jugador.nombre} ha sido debilitado, has perdido ${Jugador.pagar(Jugador.monedas/2)}" }
-         is Luchadores -> { "${jugador.nombre} ha sido debilitado, has ganado ${Jugador.pagar(Jugador.monedas/2)}" }
+       is Jugador -> { 
+         "${Jugador.nombre} ha sido debilitado, has perdido ${Jugador.pagar(Jugador.monedas/2)}" }
+       is Luchadores -> { 
+        "${jugador.nombre} ha sido debilitado, has ganado ${Jugador.pagar(Jugador.monedas/2)}" }
     }
     }
 - la cual me compacto dos funciones en una, y lo mismo me ahorro unas cuantas lineas de codigos en el proyecto
