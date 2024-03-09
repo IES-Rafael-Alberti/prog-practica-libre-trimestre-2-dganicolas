@@ -1,8 +1,6 @@
 package org.practicatrim2
-import Luchadores
-import Jugador
+import Personas
 import Partida
-import Vendedor
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -20,6 +18,10 @@ fun String.nombreCorrecto(): String{
     return cadena.filter { it.isNotEmpty() }.joinToString(" ") { it.replaceFirstChar(Char::uppercaseChar) }
 }
 
+fun <T> List<T>.enemigoAleatorio(): T {
+    val  luchador = this[(2 until this.size).random()]
+     return luchador
+
 /**
  * esta funcion es para calcular si tiene la experiencia requerida para subir de nivel
  *
@@ -31,7 +33,7 @@ fun String.nombreCorrecto(): String{
  * para el nivel 1 necesitas 3 puntos de experiencia
  * nivel 2 necesitas 6 puntos
  * */
-fun Int.ExperienciaRequeridaPorNivel():Float {
+fun Int.costeTratamiento():Float {
     return (this * 3).toFloat()
 }
 
@@ -64,9 +66,7 @@ fun Float.redondear(posiciones: Int = 2): Float {
 
 }
 fun main() {
-   val personas = listOf<Luchadores>(Luchadores.Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f))
-    val gestioninfoJuego = GestioninfoJuego()
-    gestioninfoJuego.iniciarJuego(personas,Jugador)
-    val partida = Partida(Jugador,Vendedor, personas, gestioninfoJuego)
-   partida.comienzaJuego()
+    val personajes = mutableListOf<Personas>(Personas.Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f))
+    val partida = Partida(personajes)
+            partida.prepararJuego()
 }

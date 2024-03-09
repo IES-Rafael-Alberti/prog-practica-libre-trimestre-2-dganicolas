@@ -8,32 +8,38 @@ import org.practicatrim2.enemigoAleatorio
 class Partida(private var personajes: List<Personas>) {
 
     companion object{
+
         var PARTIDA = true
     }
-
+     private lateinit var jugador:Personas
+    private lateinit var persona2OVendedor:Personas
     fun elegirOpcion()= EntradasUsuario().cuatroOpciones()
-
 
     fun prepararJuego(){
         var gestioninfoJuego: GestioninfoJuego
-        val Jugador = Personas.Jugador(EntradasUsuario().usuarioIntroduceNombre("Jugador"),0f,1,0f,5f,10f,10f, Armas.Puños,
-            mutableListOf())
-        val Vendedor = Personas.Vendedor(EntradasUsuario().usuarioIntroduceNombre("Vendedor"),10f,10f, 10f, mutableListOf())
-        personajes.addFirst(Vendedor)
-        personajes.addFirst(Jugador)
-    }
-    fun comienzaJuego(){
-        while (PARTIDA) {
-            Textojuego().mostrarMenu(personajes[0])
-            escogerOpcion(elegirOpcion())
-        }
+        jugador = Personas.Jugador(EntradasUsuario().usuarioIntroduceNombre("Jugador"),0f,1,0f,5f,10f,10f, Armas.Puños,
+        mutableListOf())
+        persona2OVendedor= Personas.Vendedor(EntradasUsuario().usuarioIntroduceNombre("Vendedor"),10f,10f, 10f, mutableListOf())
+        comienzaJuego()
     }
 
-    fun escogerOpcion(opcion:Int){
+    fun comienzaJuego(){
+        while (PARTIDA) {
+            Textojuego().mostrarMenu(jugador)
+            escogerOpcion1Jugador(elegirOpcion())
+        }
+    }
+    fun irATienda(){
+        val primeroJugadorSegundoVendedor = listOf(jugador,persona2OVendedor)
+        primeroJugadorSegundoVendedor= Tienda().tienda(primeroJugadorSegundoVendedor)
+
+    }
+
+    fun escogerOpcion1Jugador(opcion:Int){
         when(opcion){
-            1 -> RealizarBatalla().batalla(personajes[0],personajes.enemigoAleatorio())
-            2 -> RecibirTratamiento().queTipoDeTratamiento(personajes[0])
-            3 -> Tienda().tienda(personajes)
+            1 -> RealizarBatalla().batalla(jugador,personajes.enemigoAleatorio())
+            2 -> RecibirTratamiento().queTipoDeTratamiento(jugador)
+            3 -> irATienda()
             4 -> PARTIDA= false
         }
     }

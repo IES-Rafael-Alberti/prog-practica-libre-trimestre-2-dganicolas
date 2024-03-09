@@ -1,3 +1,4 @@
+import org.practicatrim2.Armaduras
 import org.practicatrim2.Armas
 import org.practicatrim2.estadisticas
 import org.practicatrim2.redondear
@@ -7,7 +8,7 @@ import org.practicatrim2.redondear
 // de aqui saldra nuevas clases de especialidades, como zombies, arañas o cualquier bicho
 sealed class Personas(val nombre: String, var vida: Float, var vidaActual: Float){
 
-    class Jugador(nombre:String,var monedas:Float,var nivel: Int,var experiencia: Float,var dano:Float,vida: Float,vidaActual:Float,var arma:Armas,val inventario:MutableList<Objetos>) :
+    class Jugador(nombre:String,var monedas:Float,var nivel: Int,var experiencia: Float,var dano:Float,vida: Float,vidaActual:Float,var armadura : Armaduras,var arma:Armas,val inventario:MutableList<Objetos>) :
         Personas(nombre,vida,vidaActual),Peleas,curarse,Transacciones<Float>, Aparencia, levelear,registrarAccion,estadisticas{
 
         private var DEFENSA = 5

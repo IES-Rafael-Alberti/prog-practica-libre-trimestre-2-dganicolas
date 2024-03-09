@@ -16,6 +16,13 @@ class Textojuego {
     }
     /**************** Fin de la Clase: EntradasUsuario**************************/
 
+    /**************** Clase: Tienda**************************/
+    fun menuComprar(){
+        println("(1) Comprar Armas")
+        println("(2) Comprar Armadura")
+        println("(3) No hacer nada")
+    }
+    /**************** Fin de la Clase: Tienda**************************/
     /**************** Clase: RecibirTratamiento**************************/
     fun mostrarTratamientos(){
         println("¿?Que quieres hacer?")
@@ -113,7 +120,7 @@ class Textojuego {
         println("(4) fin del juego")
     }
 
-    fun mostrarTienda(jugador:Jugador){
+    fun mostrarTienda(jugador:Personas){
         println("Bienvenido a NAYD3C SHOPS")
         println("¿Que deseas ${jugador.nombre}?")
         println("(1) Comprar")
