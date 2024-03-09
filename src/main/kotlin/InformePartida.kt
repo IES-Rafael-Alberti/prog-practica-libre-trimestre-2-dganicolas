@@ -1,7 +1,6 @@
 package org.practicatrim2
 
-import Jugador
-import Luchadores
+import Personas
 
 class GestioninfoJuego() : InformacionJuego{
 
@@ -35,9 +34,9 @@ class GestioninfoJuego() : InformacionJuego{
        iniciarInforme()
     }
 
-    override fun sumarLuchadorDerrotado(luchador:Luchadores) {
+    override fun sumarLuchadorDerrotado(luchador:Personas) {
         when (luchador){
-            is Luchadores.Zombie -> informePartida.zombiesMuertos ++
+            is Personas.Zombie -> informePartida.zombiesMuertos ++
             else ->
         }
     }
@@ -50,7 +49,7 @@ class GestioninfoJuego() : InformacionJuego{
 interface InformacionJuego{
     var personas: MutableMap<String, List<String>>
     fun <T:estadisticas>iniciarJuego(luchadores: List<T>,jugador: T)
-    fun sumarLuchadorDerrotado(luchador:Luchadores)
+    fun sumarLuchadorDerrotado(luchador:Personas)
 }
 
 interface estadisticas{

@@ -1,8 +1,8 @@
 class RegistrarCombate() {
-    fun <T:Luchadores>combateRealizado(luchador:T,resultadoCombate: Boolean){
+    fun <T:Personas>combateRealizado(luchador:T, resultadoCombate: Boolean){
         if (resultadoCombate){
             when (luchador){
-                is Luchadores.Zombie ->Partida.informePartidas.zombies ++
+                is Personas.Zombie ->Partida.informePartidas.zombies ++
             }
 
         }

@@ -1,4 +1,4 @@
-class Textojuego:mostrarMenus {
+class Textojuego {
 
     /**
      * FUNCIONES VARIAS
@@ -6,12 +6,38 @@ class Textojuego:mostrarMenus {
     private fun limpiarConsola(){
         println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     }
-
-
-    fun duermeHostal(coste:Float){
-        println("Has dormido en el hostal NXDXG, coste de la noche: $coste" +
-                "${Jugador.nombre} se recupero completamente")
+    /**************** Clase: EntradasUsuario**************************/
+    fun textoNombre(nombre:String){
+        println("Dime el nombre del $nombre")
     }
+
+    fun nombreMalTecleado(nombre: String){
+        println("El nombre no puede estar vacio,Por Favor dime el nombre del $nombre")
+    }
+    /**************** Fin de la Clase: EntradasUsuario**************************/
+
+    /**************** Clase: RecibirTratamiento**************************/
+    fun mostrarTratamientos(){
+        println("¿?Que quieres hacer?")
+        println("(1) curarte tu mismo")
+        println("(2) ir al doctor")
+        println("(3) no hacer nada")
+    }
+
+    fun recibeTratamiento(nombreJugador:String,coste:Float){
+        println("El doctor te curo, coste del tratamiento: $coste" +
+                "$nombreJugador se recupero completamente")
+    }
+
+    fun noRecibeTratamiento(coste:Float,cartera:Float){
+        println("Dinero insuficiente, el tratamiento cuesta $coste y tienes $cartera ")
+    }
+
+    fun noRealizarNingunaAccion(nombreJugador:String){
+        println("$nombreJugador no realizo ninguna opcion")
+    }
+
+    /**************** Fin de la Clase: RecibirTratamiento**************************/
     fun <T>imprimir(imprimir:T){
         println(imprimir)
     }
@@ -34,7 +60,7 @@ class Textojuego:mostrarMenus {
      * Mostrar pantalla
      * */
 
-    fun <T:Luchadores>mostrarEscenario(jugador: Jugador, enemigo: T) {
+    fun <T:Personas>mostrarEscenario(jugador: Jugador, enemigo: T) {
         limpiarConsola()
         println("-------------------------------------------------------")
         println("-Enemigo: ${enemigo.nombre}")
@@ -49,10 +75,10 @@ class Textojuego:mostrarMenus {
         println("- (1)Atacar (2)Defenderse (3)Huir")
         println("-------------------------------------------------------")
     }
-    fun <T:Luchadores>mostrarpng(persona: T){
+    fun <T:Personas>mostrarpng(persona: T){
         when (persona){
-            is Luchadores.Zombie -> aparenciaZombie()
-            is Luchadores.Arquero -> aparenciaZombie()
+            is Personas.Zombie -> aparenciaZombie()
+            is Personas.Arquero -> aparenciaZombie()
         }
     }
 
@@ -74,12 +100,12 @@ class Textojuego:mostrarMenus {
     fun subirDeNivel(podraSubirNivel: Boolean){
         println("${Jugador.nombre} se volvio mas fuerte")
     }
-    fun mostrarMenu(){
+    fun mostrarMenu(jugador: Jugador){
         limpiarConsola()
         println("BIENVENIDO A NAYD3C WORLDS")
-        println("Nombre: ${Jugador.nombre}")
-        println("Nivel: ${Jugador.nivel}")
-        println("Vida: ${mostrarvida(Jugador.vida,Jugador.vidaActual)}")
+        println("Nombre: ${jugador.nombre}")
+        println("Nivel: ${jugador.nivel}")
+        println("Vida: ${mostrarvida(jugador.vida,jugador.vidaActual)}")
         println("¿Que quieres hacer joven aventurero?")
         println("(1) Pelea")
         println("(2) Recuperar vida")
@@ -87,13 +113,12 @@ class Textojuego:mostrarMenus {
         println("(4) fin del juego")
     }
 
-    fun mostrarTienda(){
+    fun mostrarTienda(jugador:Jugador){
         println("Bienvenido a NAYD3C SHOPS")
-        println("¿Que deseas ${Jugador.nombre}?")
+        println("¿Que deseas ${jugador.nombre}?")
         println("(1) Comprar")
         println("(2) vender")
-        println("(3) Dormir en Hostal")
-        println("(4) Salir de la tienda")
+        println("(3) Salir de la tienda")
     }
 
     /**
@@ -119,7 +144,7 @@ class Textojuego:mostrarMenus {
     fun <T>finalBatallaTexto(jugador : T, monedasContricante: Float=0f){
         when(jugador){
             is Jugador -> { println("${Jugador.nombre} ha sido debilitado, has perdido ${Jugador.pagar(Jugador.monedas/2)}") }
-            is Luchadores -> { println("${jugador.nombre} ha sido debilitado, has ganado ${Jugador.ingreso(monedasContricante)}") }
+            is Personas -> { println("${jugador.nombre} ha sido debilitado, has ganado ${Jugador.ingreso(monedasContricante)}") }
         }
     }
     fun huidaPelea(){

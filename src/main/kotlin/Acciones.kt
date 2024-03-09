@@ -2,13 +2,6 @@
  * Interfaz Peleas 
  * la usa la clase Personajes
  * */
-
-interface mostrarMenus{
-    fun mostrarMenuPrincipal(){
-        Textojuego().mostrarMenu()
-    }
-}
-
 interface Peleas {
     /**
      * funcion que determina el daño que hace la entidad
@@ -28,19 +21,18 @@ interface Peleas {
 interface curarse{
     fun curar(porcentajeQueSeVaACurar:Int= 100)
 }
-interface transacciones<T>{
+
+interface Transacciones<T>{
     fun pagar(coste:T):Float
     fun ingreso(coste:T):Float
 }
-interface darObjeto<T> {
-    fun darObjeto(destinatario:T)
-}
 
-interface recibirObjeto{
+interface Intercambio{
     fun recibirobjeto(objeto:Objetos)
+    fun darObjeto(objeto:Objetos)
 }
 
-interface aparencia{
+interface Aparencia{
     fun mostrarAparencia()
 }
 

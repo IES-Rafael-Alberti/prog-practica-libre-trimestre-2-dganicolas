@@ -1,30 +1,23 @@
-class Tienda():curarse {
+//se encarga de la logistica de la tienda
+class Tienda() {
     companion object{
         var JUGADORESTAADENTRO = true
     }
     fun comprobarOpciones(opcion:Int){
         when (opcion){
             1 -> print(" ")//comprar()
-            2 -> print(" ")//vender()
-            3 -> dormirHostal(Jugador)
-            4 -> JUGADORESTAADENTRO = false
+            2 -> comprar()
+            3 -> JUGADORESTAADENTRO = false
         }
     }
-    fun DormirHostal(nivel: Int) = nivel * 3f
+    fun comprar(){
 
-    fun tienda(){
+    }
+    fun tienda(jugador:Jugador){
         while(JUGADORESTAADENTRO){
-            Textojuego().mostrarTienda()
-            comprobarOpciones(Opciones().opciones())
+            Textojuego().mostrarTienda(jugador)
+            comprobarOpciones(EntradasUsuario().tresOpciones())
         }
         JUGADORESTAADENTRO = true
-    }
-    private fun dormirHostal(huesped:Jugador) {
-        val costeNoche = DormirHostal(huesped.nivel)
-        if (huesped.monedas > costeNoche) {
-            huesped.pagar(costeNoche)
-            ManejoVida().curar(huesped)
-            Textojuego().duermeHostal(costeNoche)
-        }
     }
 }
