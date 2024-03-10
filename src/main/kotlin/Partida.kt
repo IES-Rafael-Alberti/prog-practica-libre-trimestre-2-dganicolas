@@ -13,14 +13,16 @@ class Partida(private var personajes: List<Personas>) {
     }
      private lateinit var jugador:Personas
     private lateinit var persona2OVendedor:Personas
+    lateinit var gestioninfoJuego: GestioninfoJuego
     fun elegirOpcion()= EntradasUsuario().cuatroOpciones()
 
     fun prepararJuego(){
-        var gestioninfoJuego: GestioninfoJuego
+
         jugador = Personas.Jugador(EntradasUsuario().usuarioIntroduceNombre("Jugador"),0f,1,0f,5f,10f,10f, Armas.Puños,
         mutableListOf())
         persona2OVendedor= Personas.Vendedor(EntradasUsuario().usuarioIntroduceNombre("Vendedor"),10f,10f, 10f, mutableListOf())
         comienzaJuego()
+        var gestioninfoJuego= GestioninfoJuego
     }
 
     fun comienzaJuego(){

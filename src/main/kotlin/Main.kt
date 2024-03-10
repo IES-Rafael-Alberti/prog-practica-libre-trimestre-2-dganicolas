@@ -19,9 +19,9 @@ fun String.nombreCorrecto(): String{
 }
 
 fun <T> List<T>.enemigoAleatorio(): T {
-    val  luchador = this[(2 until this.size).random()]
-     return luchador
-
+    val luchador = this[(2 until this.size).random()]
+    return luchador
+}
 /**
  * esta funcion es para calcular si tiene la experiencia requerida para subir de nivel
  *

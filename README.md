@@ -101,7 +101,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
       HUIDA = false 
     }
     }
-- donde este codiog resumido, cuando el usuario apretaba la opcion 3, 
+- donde este codigo resumido, cuando el usuario apretaba la opcion 3, 
 - que era huida,
 - entonces en el if marcado ateriormente, estaba la condicion distinto de true de HUID, entonces me geneor un bucle infinito
 - que gracias al IDE pude solucionar

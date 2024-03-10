@@ -15,32 +15,20 @@ interface Peleas {
      * @param ataqueRecibido el ataque que recibe
      * @return retorna el daño del ataque recibido
      * */
-    fun recibirAtaque(ataqueRecibido:Float,defenderse:Boolean)
+    fun recibirAtaque(ataqueRecibido:Float)
 }
 
 interface curarse{
-    fun curar(porcentajeQueSeVaACurar:Int= 100)
-}
-
-interface Transacciones<T>{
-    fun pagar(coste:T):Float
-    fun ingreso(coste:T):Float
-}
-
-interface Intercambio{
-    fun recibirobjeto(objeto:Objetos)
-    fun darObjeto(objeto:Objetos)
+    fun curar()
 }
 
 interface Aparencia{
     fun mostrarAparencia()
 }
 
-interface levelear{
-    fun subirDeNivel()
-    fun ComprobarSiTieneExpSuficiente(nivel: Float):Float
-}
+interface SubirDeNivel{
+    fun subirDeNivel(experienciaQuitadaPorNivel:Int)
+    fun queNivelTengo():Int
 
-interface registrarAccion{
-    fun haMatadoOHeMuerto()
+    fun<T:Number> calcularSubidaEstadistica(Estadistica:Int)
 }
