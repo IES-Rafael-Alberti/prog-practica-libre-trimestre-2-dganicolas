@@ -1,3 +1,7 @@
+import org.practicatrim2.Armaduras
+import org.practicatrim2.Armas
+import org.practicatrim2.Objetos
+
 class Textojuego {
 
     /**
@@ -19,7 +23,7 @@ class Textojuego {
     /**************** Clase: Tienda**************************/
     fun menuComprar(){
         println("(1) Comprar Armas")
-        println("(2) Comprar Armadura")
+        println("(2) Comprar Armaduras")
         println("(3) No hacer nada")
     }
     /**************** Fin de la Clase: Tienda**************************/
@@ -120,11 +124,11 @@ class Textojuego {
         println("(4) fin del juego")
     }
 
-    fun mostrarTienda(jugador:Personas){
+    fun <T>mostrarTienda(jugador:Personas<T>){
         println("Bienvenido a NAYD3C SHOPS")
         println("¿Que deseas ${jugador.nombre}?")
         println("(1) Comprar")
-        println("(2) vender")
+        println("(2) vender Objeto")
         println("(3) Salir de la tienda")
     }
 
@@ -194,5 +198,27 @@ class Textojuego {
                 "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
                 "⣿⣿⣿⣿⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⣿⣿⣿⣿\n" +
                 "⣿⣿⣿⣿⣷⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣾⣿⣿⣿⣿\n")
+    }
+
+    fun mostrarArmaduras(armaduras: List<Armaduras>) {
+        for (i in (0..armaduras.size-1)){
+            println("${i+1}. ${armaduras[i].name}  ${armaduras[i].precio()}€ (${armaduras[i].estadistica()} PD)")
+        }
+        println("6. no comprar nada")
+    }
+
+    fun mostrarArmas(armas: List<Armas>) {
+        for (i in (0..armas.size-1)){
+            println("${i+1}. ${armas[i].name}  ${armas[i].precio()}€ (${armas[i].estadistica()} PD)")
+        }
+        println("6. no comprar nada")
+    }
+
+    companion object {
+        fun mostrarObjetosVentaJugador(listaObjetoJugador: Map<String, Objetos>) {
+            listaObjetoJugador.keys.forEachIndexed { index, key ->
+                println("${index + 1}. $key")
+            }
+        }
     }
 }

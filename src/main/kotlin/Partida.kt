@@ -30,8 +30,7 @@ class Partida(private var personajes: List<Personas>) {
         }
     }
     fun irATienda(){
-        val primeroJugadorSegundoVendedor = listOf(jugador,persona2OVendedor)
-        primeroJugadorSegundoVendedor= Tienda().tienda(primeroJugadorSegundoVendedor)
+        Tienda().tienda(jugador,persona2OVendedor)
 
     }
 

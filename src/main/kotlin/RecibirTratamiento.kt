@@ -2,45 +2,31 @@ import org.practicatrim2.costeTratamiento
 
 //esta clase se encarga de curar a personas
 class RecibirTratamiento() { // clase terminada
-    fun<T> darTratamiento(persona:T, porcentaje:Int=100){
-        if(persona is curarse){
-            persona.curar(porcentaje)
-        }
+    fun<T:TratamientoRecibido> darTratamiento(persona:T, porcentaje:Int=100):Float{
+        return persona.curar(porcentaje)
+
     }
-    fun <T:Personas>queTipoDeTratamiento(personaACurar:T){
+    fun <T> queTipoDeTratamiento(personaACurar:T):Float where T:Personas<T>, T:TratamientoRecibido, T:Transacciones{
 
         while (true){
             val opciones = EntradasUsuario().tresOpciones()
             Textojuego().mostrarTratamientos()
             if(opciones != 0){
                 if (opciones == 1){ // se cura el solo, no gasta dinero
-                    darTratamiento(personaACurar,(5..70).random())
-                    break
+                    return darTratamiento(personaACurar,(5..70).random())
                 }
                 if (opciones == 2){ // recibe tratamiento, gasta dinero
-                    when (personaACurar){
+                    val coste = personaACurar.medicoPreguntaPorTuCondicionFisica()
+                    val dinero = personaACurar.medicoPreguntaPorTuDinero(coste)
+                    if(dinero != null){
+                        personaACurar.pagar(coste)
+                        return darTratamiento(personaACurar,100)
 
-                        is Personas.Jugador ->{
-                            val coste = personaACurar.nivel.costeTratamiento()
-                            if(personaACurar.monedas > coste){
-                                darTratamiento(personaACurar,100)
-                                personaACurar.pagar(coste)
-                                Textojuego().recibeTratamiento(personaACurar.nombre,coste)
-                            }else{
-                                Textojuego().noRecibeTratamiento(coste,personaACurar.monedas)
-                            }
-
-                        }
-                        else -> darTratamiento(personaACurar,100)
                     }
-                    break
+                    return 0f
                 }
                 if(opciones == 3){
-                    Textojuego().noRealizarNingunaAccion(personaACurar.nombre)
-                    break
+                    return 0f
                 }
-            }
 
-        }
-    }
-}
+        }}}}

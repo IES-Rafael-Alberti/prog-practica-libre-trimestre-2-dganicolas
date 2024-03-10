@@ -1,15 +1,15 @@
 import org.practicatrim2.Armaduras
 import org.practicatrim2.Armas
-import org.practicatrim2.estadisticas
+import org.practicatrim2.Objetos
 import org.practicatrim2.redondear
 
 // esta clase seran los ennemigos, segun el nivel del jugador, hara mas o menos daños
 // o lo hare daño estatico, segun el mobs o entidad, hara un daño fijo
 // de aqui saldra nuevas clases de especialidades, como zombies, arañas o cualquier bicho
-sealed class Personas(val nombre: String, var vida: Float, var vidaActual: Float){
+sealed class Personas<out T>(val nombre: String, var vida: Float, var vidaActual: Float){
 
     class Jugador(nombre:String,var monedas:Float,var nivel: Int,var experiencia: Float,var dano:Float,vida: Float,vidaActual:Float,var armadura : Armaduras,var arma:Armas,val inventario:MutableList<Objetos>) :
-        Personas(nombre,vida,vidaActual),Peleas,curarse,Transacciones<Float>, Aparencia, levelear,registrarAccion,estadisticas{
+        Personas(nombre,vida,vidaActual),Peleas,TratamientoRecibido,Transacciones,MostrarDarObjeto,RecibirObjeto, SubirDeNivel,EquiparEquipables{
 
         private var DEFENSA = 5
 
@@ -25,7 +25,19 @@ sealed class Personas(val nombre: String, var vida: Float, var vidaActual: Float
             return coste
         }
 
-        override fun curar(porcentajeQueSeVaACurar:Int){
+        override fun medicoPreguntaPorTuCondicionFisica(): Float {
+            return (vidaActual - vida)*2
+        }
+
+        override fun medicoPreguntaPorTuDinero(coste: Float):Float?{
+            if(coste < monedas){
+                val curacion = vidaActual - vida
+                return curacion
+            }else {return null}
+        }
+
+        override fun curar(porcentajeQueSeVaACurar:Int):Float{
+            val vidaPrevia =vida
             val porcentaje= porcentajeQueSeVaACurar.toFloat().redondear(-2)
             val recuperar = (vidaActual*porcentaje).redondear()
             if (recuperar+ vida<vidaActual){
@@ -35,7 +47,7 @@ sealed class Personas(val nombre: String, var vida: Float, var vidaActual: Float
                 Textojuego().curarVida(nombre, vidaActual-vida)
                 vida = vidaActual
             }
-
+            return vida - vidaPrevia
         }
 
 
@@ -58,47 +70,92 @@ sealed class Personas(val nombre: String, var vida: Float, var vidaActual: Float
         return dano + arma.dañoExtra()
     }
 
-    override fun mostrarAparencia() {
-        Textojuego().aparenciaTroy()
-    }
-
-    override fun subirDeNivel() {
+    override fun subirDeNivel(): Int? {
         val costePorSubirDeNivel = ComprobarSiTieneExpSuficiente(nivel.toFloat())
-        if (experiencia > costePorSubirDeNivel){
+        return if (experiencia > costePorSubirDeNivel){
             experiencia -= costePorSubirDeNivel
             nivel ++
-            Textojuego().subirDeNivel(true)
         }else {
-            Textojuego().subirDeNivel(false)
+            null
         }
     }
-
     override fun ComprobarSiTieneExpSuficiente(nivel: Float): Float = ((nivel/2) * 3.01f).redondear()
-    override fun haMatadoOHeMuerto() {
-        TODO("Not yet implemented")
+        override fun comprobarObjetos(nombreObjetos: String): Objetos? {
+            val objeto = inventario.find { it.nombre == nombreObjetos }
+            if (objeto != null){
+                return darObjeto(objeto)
+            }else{
+                return objeto
+            }
+
+        }
+
+        override fun recibirobjeto(objeto: Objetos): Objetos {
+            inventario.add(objeto)
+            return objeto
+        }
+
+        override fun mostrarObjetos(): Map<String, Objetos> {
+            val listaObjetos= mutableMapOf<String, Objetos>()
+            inventario.forEach{ listaObjetos["Objeto: ${it.name} Precio: ${it.precio}"] = it}
+            return listaObjetos
+        }
+
+        override fun darObjeto(objeto: Objetos): Objetos {
+            inventario.remove(objeto)
+            return objeto
+        }
+
+        override fun equiparArma(arma: Armas) {
+            this.arma= arma
+        }
+
+        override fun equiparArmadura(armadura: Armaduras) {
+            this.armadura=armadura
+        }
+
     }
 
-    override fun estadisticas(): List<String> = listOf("Jugador","nombre: ${this.nombre}","monedas: ${this.monedas}","Nivel: ${this.nivel}","Daño: ${this.dano}","Vida: ${this.vida}","${this.vida}","${this.arma}")
-}
+    class Vendedor(nombre:String,var monedas: Float,vida: Float,vidaActual: Float,val Armas:List<Armas>,val armaduras:List<Armaduras>):Personas(nombre,vida,vidaActual),Transacciones,MostrarDarEquipables{
+        override fun pagar(coste:Float):Float {
+            monedas -= coste.redondear()
+            return coste
 
-    class Vendedor(nombre:String,val monedas: Float,vida: Float,vidaActual: Float,val inventario:MutableList<Objetos>):Personas(nombre,vida,vidaActual): Intercambio  {
-        override fun pagar(coste: Int): Float {
+        }
+
+        override fun ingreso(coste:Float):Float{
+            monedas+= coste.redondear()
+            return coste
+        }
+
+        override fun mostrarArmaduras(): List<Armaduras> {
+            val listaArmadurasAleatoria= emptyList<Armaduras>()
+            var armaduraAleatoria = armaduras.random()
+            for (i in (0..5)){
+                while(armaduraAleatoria in listaArmadurasAleatoria){
+                    armaduraAleatoria = armaduras.random()
+                }
+                listaArmadurasAleatoria.addFirst()
+            }
+            return listaArmadurasAleatoria
+        }
+
+        override fun darArma(arma: Armas): Armas {
             TODO("Not yet implemented")
         }
 
-        override fun ingreso(coste: Int): Float {
+        override fun darArmadura(armadura: Armaduras): Armaduras {
             TODO("Not yet implemented")
         }
 
-        override fun darObjeto(destinatario: Any) {
+        override fun mostrarArmas(): List<Armas> {
             TODO("Not yet implemented")
         }
-
 
     }
 
     final class Zombie(nombre: String,var monedas: Float, var nivel: Int,var dano: Float, vida: Float, vidaActual: Float,var arma: Armas, var defensa: Float):
-            Personas(nombre,vida,vidaActual),Peleas,curarse,Aparencia {
+            Personas(nombre,vida,vidaActual),Peleas,TratamientoRecibido,Aparencia {
         override fun recibirAtaque(ataqueRecibido: Float,defenderse:Boolean){
             var dano = 0f
             if (defenderse){
