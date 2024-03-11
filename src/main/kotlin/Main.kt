@@ -1,8 +1,9 @@
 package org.practicatrim2
-import Luchadores
+import Arquero
 import Jugador
 import Partida
 import Vendedor
+import Zombie
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -31,7 +32,7 @@ fun String.nombreCorrecto(): String{
  * para el nivel 1 necesitas 3 puntos de experiencia
  * nivel 2 necesitas 6 puntos
  * */
-fun Int.ExperienciaRequeridaPorNivel():Float {
+fun Int.costeTratamiento():Float {
     return (this * 3).toFloat()
 }
 
@@ -55,18 +56,59 @@ fun Float.calcularExperiencia(experiencia: Float): Float{
  * retorna 10.12
  * */
 fun Float.redondear(posiciones: Int = 2): Float {
-    if (posiciones > 0){
-        val factor = 10.0.pow(posiciones.toDouble()).toFloat()
-        return (this * factor).roundToInt() / factor
-    }else{
-        return this/100
-    }
-
+    val factor = 10.0.pow(posiciones.toDouble()).toFloat()
+    return (this * factor).roundToInt() / factor
+}
+fun Float.dividirEntreCien():Float{
+    return this/100
 }
 fun main() {
-   val personas = listOf<Luchadores>(Luchadores.Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f))
-    val gestioninfoJuego = GestioninfoJuego()
-    gestioninfoJuego.iniciarJuego(personas,Jugador)
-    val partida = Partida(Jugador,Vendedor, personas, gestioninfoJuego)
-   partida.comienzaJuego()
+    val personajes =
+        mutableListOf(
+            Arquero(
+                "Arquero",
+                15f,
+                15f,
+                Objetos.APROBADO_DE_DIEGO,
+                20f,
+                20f
+
+            ),Zombie(
+                "Zombie",
+                5f,
+                12f,
+                Objetos.CODIGO_DE_DIEGO,
+                10f,
+                10f
+            )
+        )
+    val jugador = Jugador(
+        "Nicolas",
+        10f,
+        1f,
+        10f,
+        10f,
+        Armaduras.ARMADURA_DE_DRAGON,
+        Armas.ANILLO_UNICO,
+        mutableListOf(Objetos.INVESTIGARESPONDE_DE_ELOY)
+    )
+    val vendedor = Vendedor(
+        "Troy",
+        10f,
+        listOf<EquipablesPrecioEstadisticas>(
+            Armaduras.ARMADURA_DE_DRAGON,
+            Armaduras.ARMADURA_DE_MITHRIL,
+            Armaduras.ARMADURA_DE_PLATINO,
+            Armaduras.ARMADURA_DE_ADAMANTIO,
+            Armaduras.ARMADURA_DE_ACHILLES),
+        listOf<EquipablesPrecioEstadisticas>(
+            Armas.ANILLO_UNICO,
+            Armas.DAGA_DE_ALTÄIR,
+            Armas.ARCO_DE_LEGOLAS,
+            Armas.VARITA_DE_SAUCO,
+            Armas.ESPADA_EXCALIBUR))
+    val bdRpg = InformePartida(jugador.nombre,jugador.vida,jugador.vidaActual,jugador.totalMonedas,0,0,0,0)
+    val bdLocal = GestioninfoJuego(bdRpg)
+    val partida = Partida(jugador,vendedor,personajes,bdLocal)
+    partida.prepararJuego()
 }
