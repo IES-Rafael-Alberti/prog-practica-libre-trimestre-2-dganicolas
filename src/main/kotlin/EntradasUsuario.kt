@@ -5,16 +5,31 @@ class EntradasUsuario() {
     fun usuarioIntroduceNombre(nombre:String):String{
         while(true){
             try {
-                Textojuego().textoNombre(nombre)
+                TextoConsola.textoNombre(nombre)
                 val nombre = readln()
-            }catch (e:IllegalArgumentException){
-                Textojuego().nombreMalTecleado(nombre)
-                Textojuego().enterparacontinuar()
-            }finally {
 
+            }catch (e:IllegalArgumentException){
+                TextoConsola.nombreMalTecleado(nombre)
+                TextoConsola.enterparacontinuar()
             }
         }
     }
+
+    fun Opciones(numeroOpciones:Int):Int{
+        return try {
+            val opcion = readln().toInt()
+            if (opcion > numeroOpciones || opcion < 0) {
+                throw IllegalArgumentException()
+            }
+            opcion
+        }catch (e:IllegalArgumentException){
+            println(TextoConsola.mensajeDeError())
+            TextoConsola.enterparacontinuar()
+            0
+        }
+    }
+
+
     fun cuatroOpciones():Int{
         return try {
             val opcion = readln().toInt()
@@ -23,8 +38,8 @@ class EntradasUsuario() {
             }
             opcion
         }catch (e:IllegalArgumentException){
-            println(Textojuego().mensajeDeError())
-            Textojuego().enterparacontinuar()
+            println(TextoConsola.mensajeDeError())
+            TextoConsola.enterparacontinuar()
             0
         }
 
@@ -38,8 +53,8 @@ class EntradasUsuario() {
             }
             opcion
         }catch (e:IllegalArgumentException){
-            println(Textojuego().mensajeDeError())
-            Textojuego().enterparacontinuar()
+            println(TextoConsola.mensajeDeError())
+            TextoConsola.enterparacontinuar()
             0
         }
 
@@ -53,27 +68,26 @@ class EntradasUsuario() {
             }
             opcion
         }catch (e:IllegalArgumentException){
-            println(Textojuego().mensajeDeError())
-            Textojuego().enterparacontinuar()
+            println(TextoConsola.mensajeDeError())
+            TextoConsola.enterparacontinuar()
             0
         }
 
     }
 
-    fun variasOpciones(listaObjetos: List<String>, listaObjetoJugador: Map<String, Objetos>): Objetos? {
+    fun variasOpciones(listaObjetos: Int): Int?{
         while (true){
             try {
                 val opcion = readln().toInt()
-                if (opcion > listaObjetos.size || opcion < 0) {
+                if (opcion > listaObjetos || opcion < 0) {
                     throw IllegalArgumentException()
                 }
-                return listaObjetoJugador[listaObjetos[opcion]]
+                return opcion
             }catch (e:IllegalArgumentException){
-                println(Textojuego().mensajeDeError())
-                Textojuego().enterparacontinuar()
-                0
+                return null
             }
         }
         }
+
 
 }

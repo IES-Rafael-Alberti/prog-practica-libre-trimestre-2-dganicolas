@@ -6,87 +6,67 @@ class RealizarBatalla {
         var HUIDA = false
         var COMBATEGANADO = true
     }
-    private fun huida(luchador: Personas){
-        if (50 >= (0..100).random()){
-            PELEA = false
-            Textojuego().huidaPelea()
-        }else{
-            Textojuego().bloqueoEnemigo()
-            comprobarAtacar(luchador,Jugador)
-        }
 
+    fun <T>atacar(atacante:T, objetivo:T) where T:Peleas,T:Estadisticas{
+        TextoConsola.hacerAtaque(atacante.nombre,atacante.hacerAtaque())
+        objetivo.recibirAtaque(atacante.hacerAtaque())
+        TextoConsola.recibirAtaque(objetivo.nombre,atacante.hacerAtaque())
     }
-    fun <T:Peleas>atacar(atacante:T, objetivo:T){
-        when (atacante){
-            is Jugador -> objetivo.recibirAtaque(atacante.hacerAtaque(),DEFENSA)
-            is Personas -> objetivo.recibirAtaque(atacante.hacerAtaque(),DEFENSA)
-        }
-    }
-    fun<T> comprobarAtacar(atacante: T,objetivo:T){
-        if (atacante is Peleas && objetivo is Peleas){
-            atacar(atacante,objetivo)
-        }
+
+    fun <T:Any>comienzaBatalla(jugador:T,luchador:T):Boolean{
+        return if (jugador is Peleas && jugador is Curarse && jugador is Estadisticas && luchador is Estadisticas && luchador is Peleas && luchador is Curarse )
+            batalla(jugador,luchador)
+        else{false}
     }
 
     fun elegirOpcion() = EntradasUsuario().tresOpciones()
-    fun batalla(jugador:Jugador,enemigo:Personas){
-        val luchador = enemigo
+    fun <T>batalla(jugador:T,luchador:T):Boolean where T:Peleas,T:Curarse,T:Estadisticas{
         DEFENSA= false
         PELEA =true
-        HUIDA = false
         COMBATEGANADO = true
-        while (PELEA && luchador.vida > 0 && jugador.vida > 0) {
-
-            Textojuego().mostrarEscenario(Jugador, luchador)
-            val opcion = elegirOpcion()
+        while (PELEA && luchador.saberVida() >= 0 && jugador.saberVida() >= 0 && !HUIDA) {
+            TextoConsola.mostrarEscenario(jugador, luchador)
+            val opcion = EntradasUsuario().Opciones(2)
             when (opcion) {
+                //atacar
                 1 -> {
-                    comprobarAtacar(jugador, luchador); comprobarAtacar(luchador, jugador)
+                    atacar(jugador, luchador)
                 }
-
+                //huir
                 2 -> {
-                    DEFENSA = true; comprobarAtacar(luchador, jugador); DEFENSA = false
-                }
-
-                3 -> {
                     HUIDA = true
                 }
+
             }
-            Textojuego().enterparacontinuar()
-            finalBatalla(luchador)
+            if (luchador.saberVida() >= 0 && !HUIDA){
+                atacar(luchador, jugador)
+                TextoConsola.enterparacontinuar()
+            }else{
+                TextoConsola.enterparacontinuar()
+            }
+
+
         }
-
-
-
+        return finalBatalla(luchador,jugador)
     }
 
-    private fun finalBatalla(luchador:Personas) {
+    private fun <T>finalBatalla(luchador:T,jugador: T):Boolean where T:Peleas, T:Curarse {
 
+        luchador.curar(100)
         if (HUIDA){
-            huida(luchador)
+            HUIDA = false
+            TextoConsola.huidaPelea()
+            return false
         }
-        if (Jugador.vida <= 0){
-            Textojuego().finalBatallaTexto(Jugador)
-            COMBATEGANADO= false
-            registrarCombate(luchador)
+        if (jugador.saberVida() <= 0){
+            TextoConsola.finalBatalla(jugador,luchador)
+            TextoConsola.enterparacontinuar()
+            return false
         }
-        if(luchador.vida <= 0){
-            Textojuego().finalBatallaTexto(luchador,luchador.monedas)
-            registrarCombate(luchador)
-            RecibirTratamiento().darTratamiento(luchador)
+        else{
+            TextoConsola.finalBatalla(luchador,jugador)
+            TextoConsola.enterparacontinuar()
+            return true
         }
-        curarContricante(luchador)
-        if (!HUIDA || Jugador.vida >= 0 || luchador.vida >= 0){
-            Textojuego().enterparacontinuar()
-        }
-
-    }
-
-    private fun curarContricante(luchador :Personas) {
-
-    }
-
-    private fun registrarCombate(luchador: Personas) {
-        RegistrarCombate().combateRealizado(luchador, COMBATEGANADO)
     }
 }

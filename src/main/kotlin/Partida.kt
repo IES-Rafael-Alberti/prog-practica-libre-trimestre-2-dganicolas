@@ -1,43 +1,43 @@
-import org.practicatrim2.Armas
 import org.practicatrim2.GestioninfoJuego
-import org.practicatrim2.enemigoAleatorio
 
 //la clase donde se hara toda la partida
 //controlando si el jugador esta en una montaña, campo o ciudad
 // aqui tambien controlara el informe de partida
-class Partida(private var personajes: List<Personas>) {
+class Partida(private var jugador: Peleas,
+              private var vendedor:TransaccionesObjetos,
+              private var personajes: List<Peleas>,
+              private var informePartida: GestioninfoJuego) {
 
     companion object{
 
         var PARTIDA = true
     }
-     private lateinit var jugador:Personas
-    private lateinit var persona2OVendedor:Personas
-    fun elegirOpcion()= EntradasUsuario().cuatroOpciones()
 
     fun prepararJuego(){
-        var gestioninfoJuego: GestioninfoJuego
-        jugador = Personas.Jugador(EntradasUsuario().usuarioIntroduceNombre("Jugador"),0f,1,0f,5f,10f,10f, Armas.Puños,
-        mutableListOf())
-        persona2OVendedor= Personas.Vendedor(EntradasUsuario().usuarioIntroduceNombre("Vendedor"),10f,10f, 10f, mutableListOf())
         comienzaJuego()
     }
 
     fun comienzaJuego(){
         while (PARTIDA) {
-            Textojuego().mostrarMenu(jugador)
-            escogerOpcion1Jugador(elegirOpcion())
+            TextoConsola.mostrarMenu(jugador)
+            escogerOpcion1Jugador(EntradasUsuario().Opciones(4))
         }
     }
     fun irATienda(){
-        Tienda().tienda(jugador,persona2OVendedor)
+        Tienda().tienda(jugador,vendedor)
 
+    }
+
+    fun batallaComienza(){
+        val enemigo = personajes.random()
+        val resultado = RealizarBatalla().comienzaBatalla(jugador,enemigo)
+        informePartida.registrarResultadoCombte(resultado)
     }
 
     fun escogerOpcion1Jugador(opcion:Int){
         when(opcion){
-            1 -> RealizarBatalla().batalla(jugador,personajes.enemigoAleatorio())
-            2 -> RecibirTratamiento().queTipoDeTratamiento(jugador)
+            1 -> batallaComienza()
+            2 -> RecibirTratamiento().empezarTratamiento(jugador)
             3 -> irATienda()
             4 -> PARTIDA= false
         }

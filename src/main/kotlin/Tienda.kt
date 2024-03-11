@@ -1,32 +1,48 @@
 //se encarga de la logistica de la tienda
 class Tienda() {
-        var JUGADORESTAADENTRO = true
-    fun <T>comprobarOpciones(opcion:Int, jugador: Personas.Jugador, vendedor: Personas.Vendedor){
+        private var JUGADORESTAADENTRO = true
+    fun <T>comprobarOpciones(opcion:Int, jugador: T, vendedor: T)where T:MostrarDarObjeto, T:TransaccionesObjetos, T:MostrarDarEquipables, T:EquiparEquipables{
         when (opcion){
             1 -> vender(jugador,vendedor)
             2 -> comprar(jugador,vendedor)
             3 -> JUGADORESTAADENTRO = false
         }
     }
-    fun comprar(jugador:Personas.Jugador,vendedor:Personas.Vendedor):String{
+    /**
+     * esta completada :D
+     * */
+    fun <T>comprar(jugador:T,vendedor:T) where T:MostrarDarEquipables, T:EquiparEquipables, T:TransaccionesObjetos{
         while (true){
-            Textojuego().menuComprar()
+            TextoConsola.menuComprar()
             when (EntradasUsuario().tresOpciones()){
                 1 ->{
-                    val armaduras = vendedor.mostrarArmaduras()
-                    Textojuego().mostrarArmaduras(armaduras)
+                    val armas = vendedor.mostrarArmas()
+                    TextoConsola.mostrarArmas(armas)
                     val opcion =EntradasUsuario().seisOpciones()
-                    jugador.equiparArmadura(vendedor.darArmadura(armaduras[opcion-1]))
-
-
+                    var arma = vendedor.darArma(armas[opcion-1])
+                    arma = jugador.equiparArma(arma)
+                    if(arma != null){
+                        vendedor.ingresoEquipable(arma)
+                        jugador.pagarEquipable(arma)
+                    }
+                    TextoConsola.jugadorRecibeEquipable(arma)
+                    break
                 }
                 2->{
-                    val armas = vendedor.mostrarArmas()
-                    Textojuego().mostrarArmas(armas)
+                    val armaduras = vendedor.mostrarArmaduras()
+                    TextoConsola.mostrarArmaduras(armaduras)
                     val opcion =EntradasUsuario().seisOpciones()
-                    jugador.equiparArma(vendedor.darArma(armas[opcion-1]))
+                    var armadura = vendedor.darArmadura(armaduras[opcion-1])
+                    armadura = jugador.equiparArmadura(armadura)
+                    if(armadura != null){
+                        vendedor.ingresoEquipable(armadura)
+                        jugador.pagarEquipable(armadura)
+                    }
+                    TextoConsola.jugadorRecibeEquipable(armadura)
+                    break
                 }
                 3->{
+                    TextoConsola.jugadorNoCompraNada()
                     break
                 }
             }
@@ -34,19 +50,40 @@ class Tienda() {
 
     }
 
-    fun vender(jugador: Personas.Jugador, vendedor: Personas.Vendedor) {
-        val listaObjetoJugador= jugador.mostrarObjetos()
-        val listaObjetos= List<String>()
-        listaObjetoJugador.keys.forEach{ listaObjetos.addLast(it)}
-        Textojuego.mostrarObjetosVentaJugador(listaObjetoJugador)
-        val opcion = EntradasUsuario().variasOpciones(listaObjetos,listaObjetoJugador)
-        if (opcion != null){
-            jugador.darObjeto(listaObjetoJugador[opcion])
+    fun <T>vender(jugador: T, vendedor: T) where T:MostrarDarObjeto,T:TransaccionesObjetos {
+        while (true){
+            val inventarioDisponible= (jugador.mostrarObjetos())
+            TextoConsola.mostrarObjetosVentaJugador(inventarioDisponible)
+            if(inventarioDisponible.isNotEmpty()){
+                val opcion = EntradasUsuario().variasOpciones(inventarioDisponible.size)
+                if (opcion != null){
+                    TextoConsola.objetoVendido(inventarioDisponible[opcion])
+                    vendedor.pagarEquipable(inventarioDisponible[opcion])
+                    jugador.ingresoEquipable(inventarioDisponible[opcion])
+                    jugador.darObjeto(inventarioDisponible[opcion])
+                    break
+                }else{
+                    TextoConsola.errorObjetos()
+                }
+            } else{
+                break
+            }
+
         }
     }
-    fun <T>tienda(jugador:Personas<T>,vendedor: Personas<T>){
+    fun <T>tienda(jugador:T,vendedor: T)
+    where T:Any{
+        if (
+            jugador is EquiparEquipables &&
+            jugador is MostrarDarEquipables &&
+            jugador is MostrarDarObjeto &&
+            jugador is TransaccionesObjetos &&
+            vendedor is EquiparEquipables &&
+            vendedor is MostrarDarEquipables &&
+            vendedor is MostrarDarObjeto &&
+            vendedor is TransaccionesObjetos)
         while(JUGADORESTAADENTRO){
-            Textojuego().mostrarTienda(jugador)
+            TextoConsola.mostrarTienda()
             val opcion = EntradasUsuario().tresOpciones()
             comprobarOpciones(opcion,jugador,vendedor)
         }

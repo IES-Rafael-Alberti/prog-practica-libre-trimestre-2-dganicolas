@@ -1,8 +1,7 @@
-import org.practicatrim2.Armaduras
 import org.practicatrim2.Armas
-import org.practicatrim2.Objetos
+import org.practicatrim2.EquipablesPrecioEstadisticas
 
-class Textojuego {
+object TextoConsola {
 
     /**
      * FUNCIONES VARIAS
@@ -25,6 +24,43 @@ class Textojuego {
         println("(1) Comprar Armas")
         println("(2) Comprar Armaduras")
         println("(3) No hacer nada")
+    }
+    fun jugadorRecibeArma(arma: Armas?) {
+        if (arma != null){
+            println("El jugador se equipa el ${arma.name}.")
+        }else{
+            println("El jugador no pudo equiparse el arma.")
+        }
+    }
+    fun jugadorNoCompraNada(){
+        println("bueno otro dia sera...")
+    }
+    fun errorObjetos() {
+        println("Objeto no encontrado, por favor introduce el numero del objeto que quieres")
+    }
+
+    fun <T:Enum<T>>jugadorRecibeEquipable(objeto: EquipablesPrecioEstadisticas?){
+        if (objeto != null){
+            println("El jugador se equipa el objeto.")
+        }else{
+            println("El jugador no pudo comprar la armadura.")
+        }
+    }
+
+    fun objetoVendido(objeto: EquipablesPrecioEstadisticas) {
+        println("El objeto ha sido vendido con exito, has ganado ${objeto.precio()}")
+    }
+
+    fun mostrarObjetosVentaJugador(listaObjetoJugador: List<EquipablesPrecioEstadisticas>) {
+        var contador= 0
+        if (listaObjetoJugador.isEmpty()) {
+            println("No hay objetos en el inventario.")
+        } else {
+            println("que objeto quieres vender inventario:")
+            for (objeto in listaObjetoJugador) {
+                println("(${contador++}). ${objeto.nombre()}: ${objeto.precio()}")
+            }
+        }
     }
     /**************** Fin de la Clase: Tienda**************************/
     /**************** Clase: RecibirTratamiento**************************/
@@ -71,26 +107,24 @@ class Textojuego {
      * Mostrar pantalla
      * */
 
-    fun <T:Personas>mostrarEscenario(jugador: Jugador, enemigo: T) {
+    fun <T:Peleas>mostrarEscenario(jugador: T, enemigo: T)  {
+        if (jugador is Estadisticas &&
+            enemigo is Estadisticas)
+            mostrarEscenarioEnPantalla(jugador,enemigo)
+    }
+    fun <T>mostrarEscenarioEnPantalla(jugador:T,enemigo:T)where T:Estadisticas{
         limpiarConsola()
         println("-------------------------------------------------------")
         println("-Enemigo: ${enemigo.nombre}")
         println("-Nivel: ${enemigo.nivel}")
         println("-Vida: ${mostrarvida(enemigo.vida,0f)}")
-        mostrarpng(enemigo)
         println("-Tu: ${jugador.nombre}")
         println("-Nivel: ${jugador.nivel}")
         println("-Vida: ${jugador.vida}")
         println("-------------------------------------------------------")
-        println("-Selecciona una opcion:      Arma: ${jugador.arma}")
+        println("-Selecciona una opcion:")
         println("- (1)Atacar (2)Defenderse (3)Huir")
         println("-------------------------------------------------------")
-    }
-    fun <T:Personas>mostrarpng(persona: T){
-        when (persona){
-            is Personas.Zombie -> aparenciaZombie()
-            is Personas.Arquero -> aparenciaZombie()
-        }
     }
 
     fun mostrarvida(vida:Float,vidaActual:Float):String{
@@ -108,10 +142,16 @@ class Textojuego {
         return corazones
     }
 
-    fun subirDeNivel(podraSubirNivel: Boolean){
-        println("${Jugador.nombre} se volvio mas fuerte")
+    fun subirDeNivel(jugador:Estadisticas){
+        println("${jugador.nombre} se volvio mas fuerte")
     }
-    fun mostrarMenu(jugador: Jugador){
+    fun <T>mostrarMenu(jugador:T) where T:Peleas{
+        if(jugador is Estadisticas){
+            mostrarMenuenPantalla(jugador)
+        }
+
+    }
+    fun <T:Estadisticas>mostrarMenuenPantalla(jugador: T){
         limpiarConsola()
         println("BIENVENIDO A NAYD3C WORLDS")
         println("Nombre: ${jugador.nombre}")
@@ -124,9 +164,9 @@ class Textojuego {
         println("(4) fin del juego")
     }
 
-    fun <T>mostrarTienda(jugador:Personas<T>){
+    fun mostrarTienda(){
         println("Bienvenido a NAYD3C SHOPS")
-        println("¿Que deseas ${jugador.nombre}?")
+        println("¿Que deseas?")
         println("(1) Comprar")
         println("(2) vender Objeto")
         println("(3) Salir de la tienda")
@@ -135,9 +175,9 @@ class Textojuego {
     /**
      * Acciones
      * */
-    fun<T> curarVida(nombre:T, recuperado:T){
+    fun curarVida(recuperado:Float){
         animacion()
-        println("$nombre se ha curado sus heridas, recupero $recuperado")
+        println("has recuperado $recuperado puntos de salud")
     }
     /**
      * BATALLAS
@@ -152,10 +192,15 @@ class Textojuego {
         println("$nombre lanza un ataque de $ataque puntos")
     }
 
-    fun <T>finalBatallaTexto(jugador : T, monedasContricante: Float=0f){
+    fun <T>finalBatalla(jugador : T,luchador:T){
+        if (jugador is Estadisticas && luchador is Estadisticas &&
+            jugador is TransaccionesPeleas && luchador is TransaccionesPeleas)
+            finalBatallaTexto(jugador,luchador)
+    }
+    fun <T>finalBatallaTexto(jugador : T,luchador:T) where T:Estadisticas, T:TransaccionesPeleas{
         when(jugador){
-            is Jugador -> { println("${Jugador.nombre} ha sido debilitado, has perdido ${Jugador.pagar(Jugador.monedas/2)}") }
-            is Personas -> { println("${jugador.nombre} ha sido debilitado, has ganado ${Jugador.ingreso(monedasContricante)}") }
+            is Jugador -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagarPelea(jugador.totalMonedas/2)}") }
+            else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${jugador.ingresoPelea(luchador.totalMonedas)}") }
         }
     }
     fun huidaPelea(){
@@ -173,52 +218,20 @@ class Textojuego {
 
     fun mensajeDeError()= "ERROR,Las Opciones validas son 1, 2 o 3"
 
-    fun aparenciaTroy(){
-        println("                  .:c.                  \n" +
-                "                  ,k0:                  \n" +
-                "         .'lkOOOx,,kKc'dOOOOo,..        \n" +
-                "     'dKWXocxXMWK:,kKc;KMMWO:.,d0k;     \n" +
-                "    .lxdO0cl0WM0; ,OKc;KMMMMNk' 'oo'    \n" +
-                "  cO,;x:..... 'oxloKXd''lkkko'  ,dc'xd. \n" +
-                "  ck,cNNO:.    .clldx00l.    .,xXWd'xd  \n" +
-                "  ck,cNWd......,d0XWMMNk;......lXWd'xd. \n" +
-                "  ck,cXNl  ||    'xXNO;.    || ;XWo'xd. \n" +
-                "  ;d'.c0l  |||    :0Xo.    ||| ;0o..lc  \n" +
-                "      .cl,  |||  cXWWNd.  ||| .cl.      \n" +
-                "  ':.   ':c'     'cccc,     .:c,.  .;,  \n" +
-                "  cX0:.ll''ll.             co;':o''kNd  \n" +
-                "  'oo,.;l;.lk.        .   .dx.,l:..ld;  \n" +
-                " ,lll'.:oolOk'',.      .,,.d0olol..cll:.\n" +
-                "     .'',,'.                 .'','. ")
-    }
-
-    fun aparenciaZombie(){
-        println("⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷\n" +
-                "⣿⣿⣿⡇⠀⠀⠀⠀⠀⢸⣿⣿⡟⠉⠉⠉⠉⠉⢻⣿⣿⣿\n" +
-                "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
-                "⣿⣿⣿⣿⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⣿⣿⣿⣿\n" +
-                "⣿⣿⣿⣿⣷⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣾⣿⣿⣿⣿\n")
-    }
-
-    fun mostrarArmaduras(armaduras: List<Armaduras>) {
+    fun mostrarArmaduras(armaduras: List<EquipablesPrecioEstadisticas>) {
         for (i in (0..armaduras.size-1)){
-            println("${i+1}. ${armaduras[i].name}  ${armaduras[i].precio()}€ (${armaduras[i].estadistica()} PD)")
+            println("${i+1}. ${armaduras[i].nombre()}  ${armaduras[i].precio()}€ (${armaduras[i].estadistica()} PD)")
         }
         println("6. no comprar nada")
     }
 
-    fun mostrarArmas(armas: List<Armas>) {
+    fun mostrarArmas(armas: List<EquipablesPrecioEstadisticas>) {
         for (i in (0..armas.size-1)){
-            println("${i+1}. ${armas[i].name}  ${armas[i].precio()}€ (${armas[i].estadistica()} PD)")
+            println("${i+1}. ${armas[i].nombre()}  ${armas[i].precio()}€ (${armas[i].estadistica()} PD)")
         }
         println("6. no comprar nada")
-    }
-
-    companion object {
-        fun mostrarObjetosVentaJugador(listaObjetoJugador: Map<String, Objetos>) {
-            listaObjetoJugador.keys.forEachIndexed { index, key ->
-                println("${index + 1}. $key")
-            }
-        }
     }
 }
+
+
+

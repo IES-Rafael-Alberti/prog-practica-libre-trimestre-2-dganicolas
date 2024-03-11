@@ -1,6 +1,9 @@
 package org.practicatrim2
-import Personas
+import Arquero
+import Jugador
 import Partida
+import Vendedor
+import Zombie
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -18,10 +21,6 @@ fun String.nombreCorrecto(): String{
     return cadena.filter { it.isNotEmpty() }.joinToString(" ") { it.replaceFirstChar(Char::uppercaseChar) }
 }
 
-fun <T> List<T>.enemigoAleatorio(): T {
-    val luchador = this[(2 until this.size).random()]
-    return luchador
-}
 /**
  * esta funcion es para calcular si tiene la experiencia requerida para subir de nivel
  *
@@ -57,16 +56,67 @@ fun Float.calcularExperiencia(experiencia: Float): Float{
  * retorna 10.12
  * */
 fun Float.redondear(posiciones: Int = 2): Float {
-    if (posiciones > 0){
-        val factor = 10.0.pow(posiciones.toDouble()).toFloat()
-        return (this * factor).roundToInt() / factor
-    }else{
-        return this/100
-    }
-
+    val factor = 10.0.pow(posiciones.toDouble()).toFloat()
+    return (this * factor).roundToInt() / factor
+}
+fun Float.dividirEntreCien():Float{
+    return this/100
 }
 fun main() {
-    val personajes = mutableListOf<Personas>(Personas.Zombie("zombie",2f,2,1f,1f,1f,Armas.Hacha,5f))
-    val partida = Partida(personajes)
-            partida.prepararJuego()
+    val personajes =
+        mutableListOf(
+            Arquero(
+                "Arquero",
+                5,
+                5f,
+                20f,
+                20f,
+                17f,
+                6f
+
+            ),Zombie(
+                "Zombie",
+                5f,
+                12,
+                10f,
+                10f,
+                10f,
+                10f,
+                9f
+            )
+        )
+    val jugador = Jugador(
+        "Troy",
+        10f,
+        1,
+        0f,
+        10f,
+        10f,
+        10f,
+        Armaduras.ARMADURA_DE_DRAGON,
+        Armas.ANILLO_UNICO,
+        mutableListOf(Objetos.INVESTIGARESPONDE_DE_ELOY)
+    )
+    val vendedor = Vendedor(
+        "Troy",
+        10f,
+        1f,
+        0f,
+        10f,
+        listOf<EquipablesPrecioEstadisticas>(
+            Armaduras.ARMADURA_DE_DRAGON,
+            Armaduras.ARMADURA_DE_MITHRIL,
+            Armaduras.ARMADURA_DE_PLATINO,
+            Armaduras.ARMADURA_DE_ADAMANTIO,
+            Armaduras.ARMADURA_DE_ACHILLES),
+        listOf<EquipablesPrecioEstadisticas>(
+            Armas.ANILLO_UNICO,
+            Armas.DAGA_DE_ALTÄIR,
+            Armas.ARCO_DE_LEGOLAS,
+            Armas.VARITA_DE_SAUCO,
+            Armas.ESPADA_EXCALIBUR))
+    val bdRpg = InformePartida("troy",1,1f,2f,3f,3f,3,0,0)
+    val bdLocal = GestioninfoJuego(bdRpg)
+    val partida = Partida(jugador,vendedor,personajes,bdLocal)
+    partida.prepararJuego()
 }
