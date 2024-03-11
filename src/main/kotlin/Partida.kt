@@ -1,4 +1,5 @@
 import org.practicatrim2.GestioninfoJuego
+import org.practicatrim2.InteractuarBasesDeDatos
 import org.practicatrim2.Objetos
 
 //la clase donde se hara toda la partida
@@ -6,8 +7,8 @@ import org.practicatrim2.Objetos
 // aqui tambien controlara el informe de partida
 class Partida(private var jugador: Player,
               private var vendedor:Seller,
-              private var personajes: List<Enemigos>,
-              private var informePartida: GestioninfoJuego) {
+              private var personajes: List<Enemigo>,
+              private var informePartida: InteractuarBasesDeDatos) {
 
     companion object{
         val listaObjetos= listOf(

@@ -86,7 +86,7 @@ fun main() {
         "Nicolas",
         10f,
         1f,
-        0f,
+        10f,
         10f,
         Armaduras.ARMADURA_DE_DRAGON,
         Armas.ANILLO_UNICO,

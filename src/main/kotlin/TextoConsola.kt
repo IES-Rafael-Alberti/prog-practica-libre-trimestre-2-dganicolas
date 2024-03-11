@@ -1,6 +1,10 @@
+import com.github.ajalt.mordant.rendering.TextColors
+import com.github.ajalt.mordant.rendering.Whitespace
+import com.github.ajalt.mordant.terminal.Terminal
+import com.github.ajalt.mordant.widgets.Panel
+import com.github.ajalt.mordant.widgets.Text
 import org.practicatrim2.EquipablesPrecioEstadisticas
 import org.practicatrim2.InformePartida
-
 object TextoConsola {
 
     /**
@@ -103,7 +107,7 @@ object TextoConsola {
      * Mostrar pantalla
      * */
 
-    fun mostrarEscenario(jugador: Player, enemigo: Enemigos)  {
+    fun mostrarEscenario(jugador: Player, enemigo: Enemigo)  {
         limpiarConsola()
         println("-------------------------------------------------------")
         println("-Enemigo: ${enemigo.nombre}")
@@ -129,23 +133,30 @@ object TextoConsola {
                 corazones+= "♡"
             }
         }
-        corazones += " ($vida)"
+        corazones += "($vida)"
         return corazones
     }
 
     fun mostrarMenu(jugador: Player){
         limpiarConsola()
-        println("BIENVENIDO A NAYD3C WORLDS")
-        println("Nombre: ${jugador.nombre}")
-        println("Monedas: ${jugador.totalMonedas}€")
-        println("Vida: ${mostrarvida(jugador.vida,jugador.vidaActual)}")
-        println("¿Que quieres hacer joven aventurero?")
-        println("(1) Pelea")
-        println("(2) Recuperar vida")
-        println("(3) ir al vendedor")
-        println("(4) ver Historial")
-        println("(5) salir del juego")
-    }
+        val vida = mostrarvida(jugador.vida,jugador.vidaActual)
+        val terminal = Terminal()
+            terminal.println(
+                Panel(
+                    content = Text(
+                        TextColors.red("Nombre: ${jugador.nombre}\n") +
+                                        "Monedas: ${jugador.totalMonedas}€\n"+
+                                        "Vida: ${vida}"+
+                                    "\n¿Que quieres hacer joven aventurero?\n"+
+                                    "(1) Pelea\n"+
+                                    "(2) Recuperar vida\n"+
+                                    "(3) ir al vendedor\n" +
+                                    "(4) ver Historial\n" +
+                                    "(5) salir del juego", whitespace = Whitespace.PRE_WRAP),
+                    title = Text("BIENVENIDO A NAYD3C WORLDS")
+                )
+            )
+        }
 
 
 
@@ -170,15 +181,9 @@ object TextoConsola {
     fun hacerAtaque(nombre:String, ataque:Float){
         println("$nombre lanza un ataque de $ataque puntos")
     }
-
-    fun <T>finalBatalla(jugador : T,luchador:T){
-        if (jugador is Estadisticas && luchador is Estadisticas &&
-            jugador is Transacciones && luchador is Transacciones)
-            finalBatallaTexto(jugador,luchador)
-    }
-    fun <T>finalBatallaTexto(jugador : T,luchador:T) where T:Estadisticas, T:Transacciones{
+    fun <T>finalBatalla(jugador : T,luchador:T) where T:Estadisticas, T:Transacciones{
         when(jugador){
-            is Jugador -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagar(jugador.totalMonedas/2)}") }
+            is Player -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagar(jugador.totalMonedas/2)}") }
             else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${jugador.ingreso(luchador.totalMonedas)}") }
         }
     }

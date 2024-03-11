@@ -17,14 +17,12 @@ import org.practicatrim2.*
         Player
     {
         override fun pagar(coste:Float):Float {
-            val deuda = coste
-            totalMonedas -= deuda
-            return deuda
+            totalMonedas -= coste
+            return coste
         }
         override fun ingreso(coste:Float):Float{
-            val deuda = coste
-            totalMonedas+= deuda
-            return deuda
+            totalMonedas+= coste
+            return coste
         }
 
         override fun medicoPreguntaPorTuCondicionFisica(): Float {
@@ -102,7 +100,7 @@ import org.practicatrim2.*
         override var totalMonedas: Float,
         override var dano: Float
     ):
-        Enemigos{
+        Enemigo{
         override fun saberVida()= vida
 
         override fun hacerAtaque()= dano
@@ -136,7 +134,7 @@ import org.practicatrim2.*
         override var totalMonedas: Float,
         override var dano: Float
     ):
-        Enemigos{
+        Enemigo{
         override fun saberVida()= vida
 
         override fun hacerAtaque(): Float {

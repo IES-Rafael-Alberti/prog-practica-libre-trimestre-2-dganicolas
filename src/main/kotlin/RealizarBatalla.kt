@@ -13,7 +13,7 @@ class RealizarBatalla {
         TextoConsola.recibirAtaque(objetivo.nombre,atacante.hacerAtaque())
     }
 
-    fun batalla(jugador:Player, luchador:Enemigos):Any{
+    fun batalla(jugador:Player, luchador:Enemigo):Any{
         DEFENSA= false
         PELEA =true
         COMBATEGANADO = true
@@ -43,7 +43,7 @@ class RealizarBatalla {
         return finalBatalla(jugador,luchador)
     }
 
-    private fun finalBatalla(jugador:Player,luchador: Enemigos):Any{
+    private fun finalBatalla(jugador:Player,luchador: Enemigo):Any{
         luchador.curar(100)
         if (HUIDA){
             HUIDA = false
@@ -57,11 +57,11 @@ class RealizarBatalla {
                 TextoConsola.elJugadorSeGuardaElItemDelEnemigo(luchador.objeto)
                 jugador.inventario.add(luchador.objeto)
             }
-            luchador
+            jugador
         } else{
             TextoConsola.finalBatalla(luchador,jugador)
             TextoConsola.enterparacontinuar()
-            jugador
+            luchador
         }
     }
 }

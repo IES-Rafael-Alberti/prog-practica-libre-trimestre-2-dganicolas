@@ -18,7 +18,7 @@ interface Seller:Transacciones{
     val armas:List<EquipablesPrecioEstadisticas>
     val armaduras:List<EquipablesPrecioEstadisticas>
     }
-interface Enemigos:
+interface Enemigo:
     Estadisticas,
     Curarse,
     Transacciones,Peleas{

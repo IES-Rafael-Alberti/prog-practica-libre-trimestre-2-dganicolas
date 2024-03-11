@@ -1,10 +1,8 @@
 package org.practicatrim2
 
-import Enemigos
-import Estadisticas
+import Enemigo
 import Player
 import TextoConsola
-import Zombie
 
 data class InformePartida(
     var nombre:String?,
@@ -29,7 +27,7 @@ class GestioninfoJuego(var basesDeDatos:InformePartida):
             basesDeDatos.combatesPerdidos++
             basesDeDatos.totalMonedas
         }
-        if (personaDerrotada is Enemigos){
+        if (personaDerrotada is Enemigo){
             basesDeDatos.combatesGanados++
             basesDeDatos.enemigos++
         }
