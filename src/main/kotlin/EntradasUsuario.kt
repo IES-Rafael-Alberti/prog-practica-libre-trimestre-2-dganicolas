@@ -27,19 +27,16 @@ class EntradasUsuario() {
         }
     }
 
-    fun variasOpcionesTienda(listaObjetos: Int):Any{
+    fun variasOpcionesTienda(listaObjetos: Int):Int?{
         while (true) {
-            var opcion:Any = readln()
             try {
-                 opcion=opcion.toString().toInt()
+                 val opcion= readln().toInt()
                 if (opcion > listaObjetos || opcion < 0) {
                     throw IllegalArgumentException()
                 }
                 return opcion
             }catch (e:IllegalArgumentException){
-                return ""
-            }catch (e:NumberFormatException){
-                return opcion.toString()
+                return null
             }
         }
     }

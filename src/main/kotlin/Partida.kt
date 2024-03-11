@@ -46,9 +46,7 @@ class Partida(private var jugador: Player,
         val enemigo = personajes.random()
         enemigo.objeto = listaObjetos.random()
         val resultado = RealizarBatalla().batalla(jugador,enemigo)
-        informePartida.basesDeDatos.totalMonedas = jugador.totalMonedas
-        informePartida.basesDeDatos.vida = jugador.vida
-        informePartida.registrarResultadoCombate(resultado)
+        informePartida.registrarResultadoCombate(jugador)
     }
 
 

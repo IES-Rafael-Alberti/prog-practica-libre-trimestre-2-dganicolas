@@ -11,7 +11,7 @@ class Tienda() {
                 1 ->{
                     TextoConsola.mostrarArmas(vendedor.armaduras)
                     var opcion = EntradasUsuario().variasOpcionesTienda(vendedor.armaduras.size)
-                    if(opcion.toString() != "X"){
+                    if(opcion != null){
                         opcion = opcion.toString().toInt()
                         val armadura=vendedor.armaduras[opcion]
                         vendedor.ingreso(armadura.precio())
@@ -26,8 +26,7 @@ class Tienda() {
                 2->{
                     TextoConsola.mostrarArmas(vendedor.armaduras)
                     var opcion = EntradasUsuario().variasOpcionesTienda(vendedor.armas.size)
-                    if(opcion.toString() != "X"){
-                        opcion = opcion.toString().toInt()
+                    if(opcion != null){
                         val arma=vendedor.armas[opcion]
                         vendedor.ingreso(arma.precio())
                         jugador.pagar(arma.precio())
@@ -52,7 +51,7 @@ class Tienda() {
             TextoConsola.mostrarObjetosVentaJugador(jugador.inventario)
             if(jugador.inventario.isNotEmpty()){
                 var opcion = EntradasUsuario().variasOpcionesTienda(jugador.inventario.size)
-                if (opcion.toString() != "X"){
+                if (opcion != null){
                     opcion = opcion.toString().toInt()
                     val objeto=jugador.inventario[opcion]
                     TextoConsola.jugadorVendeEquipable(objeto)
@@ -62,6 +61,7 @@ class Tienda() {
                     break
                 }else{
                     TextoConsola.jugadorNoCompraNada()
+                    break
                 }
             } else{
                 TextoConsola.enterparacontinuar()

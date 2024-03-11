@@ -58,8 +58,8 @@ import org.practicatrim2.*
 
 
         override fun recibirAtaque(ataqueRecibido: Float):Float{
-            vida -= ataqueRecibido - armadura.estadistica()
-            return ataqueRecibido - armadura.estadistica()
+            vida -= ataqueRecibido + armadura.estadistica()
+            return ataqueRecibido + armadura.estadistica()
         }
 
         override fun saberVida()= vida
@@ -138,7 +138,7 @@ import org.practicatrim2.*
         override fun saberVida()= vida
 
         override fun hacerAtaque(): Float {
-            val ataque=dano + dano * (1..20).random()
+            val ataque=dano + dano * (1..20).random().toFloat().dividirEntreCien()
             return ataque
         }
 

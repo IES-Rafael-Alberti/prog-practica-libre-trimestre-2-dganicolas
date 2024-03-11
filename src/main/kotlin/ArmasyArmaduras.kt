@@ -40,27 +40,27 @@ enum class Armaduras:EquipablesPrecioEstadisticas{
     ARMADURA_DE_ACHILLES {
         override fun nombre() = "Armadura de Achilles"
         override fun precio() = 2000.0f
-        override fun estadistica() = 14.0f
+        override fun estadistica() = 3.0f
     },
     ARMADURA_DE_PLATINO {
         override fun nombre() = "armadura de platino"
         override fun precio() = 1500.0f
-        override fun estadistica() = 12.0f
+        override fun estadistica() = 2.0f
     },
     ARMADURA_DE_DRAGON {
         override fun nombre() = "armadura de dragon"
         override fun precio() = 3000.0f
-        override fun estadistica() = 15.0f
+        override fun estadistica() = 1f
     },
     ARMADURA_DE_MITHRIL {
         override fun nombre() = "armadura de Mithril"
         override fun precio() = 2500.0f
-        override fun estadistica() = 13.0f
+        override fun estadistica() = 4.0f
     },
     ARMADURA_DE_ADAMANTIO {
         override fun nombre() ="armadura de adamantio"
         override fun precio() = 3500.0f
-        override fun estadistica() = 16.0f
+        override fun estadistica() = 6.0f
     };
 }
 

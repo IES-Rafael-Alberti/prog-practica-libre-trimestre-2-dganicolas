@@ -2,6 +2,7 @@ package org.practicatrim2
 import Arquero
 import Jugador
 import Partida
+import RealizarBatalla
 import Vendedor
 import Zombie
 import kotlin.math.pow
@@ -84,7 +85,7 @@ fun main() {
         )
     val jugador = Jugador(
         "Nicolas",
-        10f,
+        10000000000f,
         1f,
         10f,
         10f,

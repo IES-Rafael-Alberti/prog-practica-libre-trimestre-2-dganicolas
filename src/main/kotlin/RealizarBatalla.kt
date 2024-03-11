@@ -1,5 +1,5 @@
 //esta clase se encarga de toda logistica de la batalla
-class RealizarBatalla {
+class RealizarBatalla() {
     companion object{
         var DEFENSA= false
         var PELEA =true

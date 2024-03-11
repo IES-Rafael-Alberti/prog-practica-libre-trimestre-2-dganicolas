@@ -1,6 +1,7 @@
 package org.practicatrim2
 
 import Enemigo
+import Jugador
 import Player
 import TextoConsola
 
@@ -21,16 +22,8 @@ class GestioninfoJuego(var basesDeDatos:InformePartida):
         TextoConsola.mostrarBaseDeDatos(basesDeDatos)
     }
 
-    override fun registrarResultadoCombate(personaDerrotada:Any) {
-        if (personaDerrotada is Player){
-            basesDeDatos.combatesTotales++
-            basesDeDatos.combatesPerdidos++
-            basesDeDatos.totalMonedas
-        }
-        if (personaDerrotada is Enemigo){
-            basesDeDatos.combatesGanados++
-            basesDeDatos.enemigos++
-        }
+    override fun registrarResultadoCombate(jugador: Player) {
+
     }
 
 
@@ -38,5 +31,5 @@ class GestioninfoJuego(var basesDeDatos:InformePartida):
 
 interface InteractuarBasesDeDatos{
     fun mostrarBaseDeDatos()
-    fun registrarResultadoCombate(personaDerrotada:Any)
+    fun registrarResultadoCombate(personaDerrotada:Player)
 }

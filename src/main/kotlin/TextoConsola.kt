@@ -28,14 +28,14 @@ object TextoConsola {
     fun mostrarTienda(nombreJugador: String){
         println("Bienvenido a NAYD3C SHOPS")
         println("¿Que deseas $nombreJugador?")
-        println("(1) Comprar")
-        println("(2) vender Objeto")
+        println("(1) vender Objeto")
+        println("(2) Comprar Armaduras")
         println("(3) Salir de la tienda")
     }
 
     fun menuComprar(){
-        println("(1) Comprar Armaduras")
-        println("(2) Comprar Armas")
+        println("(1) Comprar Armas")
+        println("(2) Comprar Armaduras")
         println("(3) No hacer nada")
     }
     fun jugadorNoCompraNada(){
@@ -146,8 +146,11 @@ object TextoConsola {
                     content = Text(
                         TextColors.red("Nombre: ${jugador.nombre}\n") +
                                         "Monedas: ${jugador.totalMonedas}€\n"+
-                                        "Vida: ${vida}"+
-                                    "\n¿Que quieres hacer joven aventurero?\n"+
+                                        "Vida: ${vida}\n"+
+                                        "arma: ${jugador.arma} (${jugador.arma.estadistica()}\n"+
+                                        "armadura:  ${jugador.armadura} (${jugador.armadura.estadistica()}\n"+
+                                        "Bolsa: ${jugador.inventario.size} objetos\n"+
+                                    "¿Que quieres hacer joven aventurero?\n"+
                                     "(1) Pelea\n"+
                                     "(2) Recuperar vida\n"+
                                     "(3) ir al vendedor\n" +
@@ -184,7 +187,7 @@ object TextoConsola {
     fun <T>finalBatalla(jugador : T,luchador:T) where T:Estadisticas, T:Transacciones{
         when(jugador){
             is Player -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagar(jugador.totalMonedas/2)}") }
-            else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${jugador.ingreso(luchador.totalMonedas)}") }
+            else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${luchador.ingreso(jugador.totalMonedas)}") }
         }
     }
     fun huidaPelea(){
@@ -215,7 +218,7 @@ object TextoConsola {
         armas.forEach{
             println("(${contador++}). ${it.nombre()}  ${it.precio()}€ (${it.estadistica()} PD)")
         }
-        println("6. no comprar nada")
+        println("(6). no comprar nada")
     }
 
     fun mostrarBaseDeDatos(basesDeDatos: InformePartida) {
