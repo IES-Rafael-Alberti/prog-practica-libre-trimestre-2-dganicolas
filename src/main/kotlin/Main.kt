@@ -67,31 +67,26 @@ fun main() {
         mutableListOf(
             Arquero(
                 "Arquero",
-                5,
-                5f,
+                15f,
+                15f,
+                Objetos.APROBADO_DE_DIEGO,
                 20f,
-                20f,
-                17f,
-                6f
+                20f
 
             ),Zombie(
                 "Zombie",
                 5f,
-                12,
+                12f,
+                Objetos.CODIGO_DE_DIEGO,
                 10f,
-                10f,
-                10f,
-                10f,
-                9f
+                10f
             )
         )
     val jugador = Jugador(
-        "Troy",
+        "Nicolas",
         10f,
-        1,
+        1f,
         0f,
-        10f,
-        10f,
         10f,
         Armaduras.ARMADURA_DE_DRAGON,
         Armas.ANILLO_UNICO,
@@ -99,9 +94,6 @@ fun main() {
     )
     val vendedor = Vendedor(
         "Troy",
-        10f,
-        1f,
-        0f,
         10f,
         listOf<EquipablesPrecioEstadisticas>(
             Armaduras.ARMADURA_DE_DRAGON,
@@ -115,7 +107,7 @@ fun main() {
             Armas.ARCO_DE_LEGOLAS,
             Armas.VARITA_DE_SAUCO,
             Armas.ESPADA_EXCALIBUR))
-    val bdRpg = InformePartida("troy",1,1f,2f,3f,3f,3,0,0)
+    val bdRpg = InformePartida(jugador.nombre,jugador.vida,jugador.vidaActual,jugador.totalMonedas,0,0,0,0)
     val bdLocal = GestioninfoJuego(bdRpg)
     val partida = Partida(jugador,vendedor,personajes,bdLocal)
     partida.prepararJuego()

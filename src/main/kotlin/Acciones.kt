@@ -1,21 +1,40 @@
 import org.practicatrim2.EquipablesPrecioEstadisticas
-import org.practicatrim2.Objetos
 
-/**
- * Interfaz Peleas 
- * la usa la clase Personajes
- * */
+
+interface Player:
+    Estadisticas,
+    Peleas,
+    Curarse,
+    Transacciones,
+    TratamientoRecibido{
+    var arma:EquipablesPrecioEstadisticas
+    var armadura:EquipablesPrecioEstadisticas
+    var inventario:MutableList<EquipablesPrecioEstadisticas>
+    }
+
+interface Seller:Transacciones{
+    val nombre:String
+    var monedas: Float
+    val armas:List<EquipablesPrecioEstadisticas>
+    val armaduras:List<EquipablesPrecioEstadisticas>
+    }
+interface Enemigos:
+    Estadisticas,
+    Curarse,
+    Transacciones,Peleas{
+        var objeto:EquipablesPrecioEstadisticas
+    }
 
 interface Estadisticas{
     val nombre:String
-    val nivel:Int
     var vida:Float
     val vidaActual:Float
-    var experiencia:Float
     var totalMonedas:Float
 
 }
+
 interface Peleas {
+    var dano:Float
     /**
      * en la vida real tu tienes que saber cuand oesta muy mal y detener la pelea
      * */
@@ -46,54 +65,26 @@ interface Curarse {
     fun curar(porcentajeQueSeVaACurar:Int= 100):Float
 }
 
-interface TransaccionesPeleas{
-    fun pagarPelea(coste:Float):Float
-    fun ingresoPelea(coste:Float):Float
-}
-interface TransaccionesObjetos{
-    fun pagarEquipable(coste:EquipablesPrecioEstadisticas):Float
-    fun ingresoEquipable(coste:EquipablesPrecioEstadisticas):Float
+interface Transacciones{
+    fun pagar(coste:Float):Float
+    fun ingreso(coste:Float):Float
 }
 
 /**
  * Esta interfaz me sirveen peleas para cuand oun enemigo tenga una probalididad de darme e lobjeto que tenga en su cuerpo
  * */
-interface ComprobarObjeto{
-    fun comprobarObjetos ():Objetos?
-}
 /**
  * Esta interfaz me sirveen peleas para cuando un enemigo tenga una probalididad de darme el objeto que tenga en su cuerpo
  * añadirlo a la lista inventario del jugador
  * */
-interface RecibirObjeto{
-
-    fun recibirobjeto(objeto:Objetos):Objetos
-
-}
 
 /**
  * Esta interfaz me sirve en Tiendas para cuando un enemigo tenga una probalididad de darme el objeto que tenga en su cuerpo
  * añadirlo a la lista inventario del jugador
  * */
-interface MostrarDarObjeto{
-    fun mostrarObjetos():List<EquipablesPrecioEstadisticas>
-    fun darObjeto(objeto:EquipablesPrecioEstadisticas):EquipablesPrecioEstadisticas?
-}
 
 interface SubirDeNivel{
     fun subirDeNivel():Int?
     fun ComprobarSiTieneExpSuficiente(nivel: Float):Float
-}
-interface MostrarDarEquipables{
-    fun mostrarArmaduras():List<EquipablesPrecioEstadisticas>
-    fun darArma(nombreArma:EquipablesPrecioEstadisticas):EquipablesPrecioEstadisticas?
-    fun darArmadura(nombreArmadura: EquipablesPrecioEstadisticas):EquipablesPrecioEstadisticas?
-    fun mostrarArmas():List<EquipablesPrecioEstadisticas>
-}
-
-interface EquiparEquipables {
-    fun equiparArma(armaNueva:EquipablesPrecioEstadisticas?):EquipablesPrecioEstadisticas?
-    fun equiparArmadura(armaduraNueva: EquipablesPrecioEstadisticas?):EquipablesPrecioEstadisticas?
-
 }
 

@@ -1,44 +1,41 @@
 //se encarga de la logistica de la tienda
 class Tienda() {
         private var JUGADORESTAADENTRO = true
-    fun <T>comprobarOpciones(opcion:Int, jugador: T, vendedor: T)where T:MostrarDarObjeto, T:TransaccionesObjetos, T:MostrarDarEquipables, T:EquiparEquipables{
-        when (opcion){
-            1 -> vender(jugador,vendedor)
-            2 -> comprar(jugador,vendedor)
-            3 -> JUGADORESTAADENTRO = false
-        }
-    }
     /**
      * esta completada :D
      * */
-    fun <T>comprar(jugador:T,vendedor:T) where T:MostrarDarEquipables, T:EquiparEquipables, T:TransaccionesObjetos{
+    fun comprar(jugador:Player,vendedor:Seller){
         while (true){
             TextoConsola.menuComprar()
-            when (EntradasUsuario().tresOpciones()){
+            when (EntradasUsuario().opciones(3)){
                 1 ->{
-                    val armas = vendedor.mostrarArmas()
-                    TextoConsola.mostrarArmas(armas)
-                    val opcion =EntradasUsuario().seisOpciones()
-                    var arma = vendedor.darArma(armas[opcion-1])
-                    arma = jugador.equiparArma(arma)
-                    if(arma != null){
-                        vendedor.ingresoEquipable(arma)
-                        jugador.pagarEquipable(arma)
+                    TextoConsola.mostrarArmas(vendedor.armaduras)
+                    var opcion = EntradasUsuario().variasOpcionesTienda(vendedor.armaduras.size)
+                    if(opcion.toString() != "X"){
+                        opcion = opcion.toString().toInt()
+                        val armadura=vendedor.armaduras[opcion]
+                        vendedor.ingreso(armadura.precio())
+                        jugador.pagar(armadura.precio())
+                        jugador.armadura = armadura
+                        TextoConsola.jugadorRecibeEquipable(jugador.armadura)
+                    }else{
+                        TextoConsola.jugadorNoCompraNada()
                     }
-                    TextoConsola.jugadorRecibeEquipable(arma)
                     break
                 }
                 2->{
-                    val armaduras = vendedor.mostrarArmaduras()
-                    TextoConsola.mostrarArmaduras(armaduras)
-                    val opcion =EntradasUsuario().seisOpciones()
-                    var armadura = vendedor.darArmadura(armaduras[opcion-1])
-                    armadura = jugador.equiparArmadura(armadura)
-                    if(armadura != null){
-                        vendedor.ingresoEquipable(armadura)
-                        jugador.pagarEquipable(armadura)
+                    TextoConsola.mostrarArmas(vendedor.armaduras)
+                    var opcion = EntradasUsuario().variasOpcionesTienda(vendedor.armas.size)
+                    if(opcion.toString() != "X"){
+                        opcion = opcion.toString().toInt()
+                        val arma=vendedor.armas[opcion]
+                        vendedor.ingreso(arma.precio())
+                        jugador.pagar(arma.precio())
+                        jugador.armadura = arma
+                        TextoConsola.jugadorRecibeEquipable(jugador.arma)
+                    }else{
+                        TextoConsola.jugadorNoCompraNada()
                     }
-                    TextoConsola.jugadorRecibeEquipable(armadura)
                     break
                 }
                 3->{
@@ -50,42 +47,38 @@ class Tienda() {
 
     }
 
-    fun <T>vender(jugador: T, vendedor: T) where T:MostrarDarObjeto,T:TransaccionesObjetos {
+    fun vender(jugador: Player, vendedor: Seller){
         while (true){
-            val inventarioDisponible= (jugador.mostrarObjetos())
-            TextoConsola.mostrarObjetosVentaJugador(inventarioDisponible)
-            if(inventarioDisponible.isNotEmpty()){
-                val opcion = EntradasUsuario().variasOpciones(inventarioDisponible.size)
-                if (opcion != null){
-                    TextoConsola.objetoVendido(inventarioDisponible[opcion])
-                    vendedor.pagarEquipable(inventarioDisponible[opcion])
-                    jugador.ingresoEquipable(inventarioDisponible[opcion])
-                    jugador.darObjeto(inventarioDisponible[opcion])
+            TextoConsola.mostrarObjetosVentaJugador(jugador.inventario)
+            if(jugador.inventario.isNotEmpty()){
+                var opcion = EntradasUsuario().variasOpcionesTienda(jugador.inventario.size)
+                if (opcion.toString() != "X"){
+                    opcion = opcion.toString().toInt()
+                    val objeto=jugador.inventario[opcion]
+                    TextoConsola.jugadorVendeEquipable(objeto)
+                    vendedor.pagar(objeto.precio())
+                    jugador.ingreso(objeto.precio())
+                    jugador.inventario.remove(objeto)
                     break
                 }else{
-                    TextoConsola.errorObjetos()
+                    TextoConsola.jugadorNoCompraNada()
                 }
             } else{
+                TextoConsola.enterparacontinuar()
                 break
             }
 
         }
     }
-    fun <T>tienda(jugador:T,vendedor: T)
-    where T:Any{
-        if (
-            jugador is EquiparEquipables &&
-            jugador is MostrarDarEquipables &&
-            jugador is MostrarDarObjeto &&
-            jugador is TransaccionesObjetos &&
-            vendedor is EquiparEquipables &&
-            vendedor is MostrarDarEquipables &&
-            vendedor is MostrarDarObjeto &&
-            vendedor is TransaccionesObjetos)
+    fun tienda(jugador:Player,vendedor: Seller){
         while(JUGADORESTAADENTRO){
-            TextoConsola.mostrarTienda()
-            val opcion = EntradasUsuario().tresOpciones()
-            comprobarOpciones(opcion,jugador,vendedor)
+            TextoConsola.mostrarTienda(jugador.nombre)
+            val opcion = EntradasUsuario().opciones(3)
+            when (opcion){
+                1 -> vender(jugador,vendedor)
+                2 -> comprar(jugador,vendedor)
+                3 -> JUGADORESTAADENTRO = false
+            }
         }
         JUGADORESTAADENTRO = true
     }

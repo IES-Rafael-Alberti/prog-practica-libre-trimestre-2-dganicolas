@@ -4,22 +4,16 @@ class RecibirTratamiento() { // clase terminada
         return persona.curar(porcentaje)
 
     }
-    fun <T:Any>empezarTratamiento(persona:T){
-        if (persona is Curarse &&
-            persona is TransaccionesObjetos &&
-            persona is TratamientoRecibido)
-            queTipoDeTratamiento(persona)
 
-
-    }
-    fun <T> queTipoDeTratamiento(personaACurar:T):Float where T:TratamientoRecibido,T:Curarse, T:TransaccionesObjetos{
+    fun queTipoDeTratamiento(personaACurar:Player){
 
         while (true){
             TextoConsola.mostrarTratamientos()
-            val opciones = EntradasUsuario().tresOpciones()
+            val opciones = EntradasUsuario().opciones(3)
             if(opciones != 0){
                 if (opciones == 1){ // se cura el solo, no gasta dinero
                     TextoConsola.curarVida(darTratamiento(personaACurar,(5..70).random()))
+                    break
                 }
                 if (opciones == 2){ // recibe tratamiento, gasta dinero
                     val coste = personaACurar.medicoPreguntaPorTuCondicionFisica()
@@ -28,10 +22,11 @@ class RecibirTratamiento() { // clase terminada
                         personaACurar.pagarAlmedico(coste)
                         TextoConsola.curarVida(darTratamiento(personaACurar,100))
                     }
-
+                    break
                 }
                 if(opciones == 3){
-                    return 0f
+                    TextoConsola.jugadorNoSeCura(personaACurar)
+                    break
                 }
 
         }}}}

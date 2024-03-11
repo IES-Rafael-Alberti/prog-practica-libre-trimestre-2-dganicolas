@@ -85,7 +85,7 @@ enum class Objetos: EquipablesPrecioEstadisticas{
         override fun precio() = 18000.0f
         override fun estadistica() = 14.0f
     },
-    DAGA_DE_SUSPENSO {
+    DAGA_DEL_SUSPENSO {
         override fun nombre() = "maldicion del programa"
         override fun precio() = 900.0f
         override fun estadistica() = 8.0f

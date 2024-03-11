@@ -1,35 +1,37 @@
 package org.practicatrim2
 
+import Enemigos
 import Estadisticas
+import Player
+import TextoConsola
+import Zombie
+
 data class InformePartida(
     var nombre:String?,
-    var nivel:Int?,
     var vida: Float?,
     var vidaActual:Float?,
-    var experiencia:Float?,
     var totalMonedas:Float?,
     var combatesTotales: Int,
     var combatesGanados:Int,
-    var combatesPerdidos: Int)
+    var combatesPerdidos: Int,
+    var enemigos:Int)
 class GestioninfoJuego(var basesDeDatos:InformePartida):
     InteractuarBasesDeDatos
 {
 
-    override fun  actualizarBaseDeDatos(jugador: Estadisticas) {
-        basesDeDatos.nombre = jugador.nombre
-        basesDeDatos.nivel = jugador.nivel
-        basesDeDatos.vida = jugador.vida
-        basesDeDatos.vidaActual = jugador.vidaActual
-        basesDeDatos.experiencia = jugador.experiencia
-        basesDeDatos.totalMonedas = jugador.totalMonedas
+    override fun  mostrarBaseDeDatos() {
+        TextoConsola.mostrarBaseDeDatos(basesDeDatos)
     }
 
-    override fun registrarResultadoCombte(comproba: Boolean) {
-        basesDeDatos.combatesTotales++
-        if(comproba){
-            basesDeDatos.combatesGanados++
-        }else{
+    override fun registrarResultadoCombate(personaDerrotada:Any) {
+        if (personaDerrotada is Player){
+            basesDeDatos.combatesTotales++
             basesDeDatos.combatesPerdidos++
+            basesDeDatos.totalMonedas
+        }
+        if (personaDerrotada is Enemigos){
+            basesDeDatos.combatesGanados++
+            basesDeDatos.enemigos++
         }
     }
 
@@ -37,6 +39,6 @@ class GestioninfoJuego(var basesDeDatos:InformePartida):
 }
 
 interface InteractuarBasesDeDatos{
-    fun actualizarBaseDeDatos(jugador:Estadisticas)
-    fun registrarResultadoCombte(comproba:Boolean)
+    fun mostrarBaseDeDatos()
+    fun registrarResultadoCombate(personaDerrotada:Any)
 }

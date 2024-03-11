@@ -1,5 +1,5 @@
-import org.practicatrim2.Armas
 import org.practicatrim2.EquipablesPrecioEstadisticas
+import org.practicatrim2.InformePartida
 
 object TextoConsola {
 
@@ -7,7 +7,7 @@ object TextoConsola {
      * FUNCIONES VARIAS
      * */
     private fun limpiarConsola(){
-        println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+        repeat(10){println()}
     }
     /**************** Clase: EntradasUsuario**************************/
     fun textoNombre(nombre:String){
@@ -20,35 +20,31 @@ object TextoConsola {
     /**************** Fin de la Clase: EntradasUsuario**************************/
 
     /**************** Clase: Tienda**************************/
-    fun menuComprar(){
-        println("(1) Comprar Armas")
-        println("(2) Comprar Armaduras")
-        println("(3) No hacer nada")
+
+    fun mostrarTienda(nombreJugador: String){
+        println("Bienvenido a NAYD3C SHOPS")
+        println("¿Que deseas $nombreJugador?")
+        println("(1) Comprar")
+        println("(2) vender Objeto")
+        println("(3) Salir de la tienda")
     }
-    fun jugadorRecibeArma(arma: Armas?) {
-        if (arma != null){
-            println("El jugador se equipa el ${arma.name}.")
-        }else{
-            println("El jugador no pudo equiparse el arma.")
-        }
+
+    fun menuComprar(){
+        println("(1) Comprar Armaduras")
+        println("(2) Comprar Armas")
+        println("(3) No hacer nada")
     }
     fun jugadorNoCompraNada(){
         println("bueno otro dia sera...")
     }
-    fun errorObjetos() {
-        println("Objeto no encontrado, por favor introduce el numero del objeto que quieres")
+
+    fun <T:Enum<T>>jugadorRecibeEquipable(objeto: EquipablesPrecioEstadisticas){
+            println("El jugador se equipa el ${objeto.nombre()}.")
+
     }
 
-    fun <T:Enum<T>>jugadorRecibeEquipable(objeto: EquipablesPrecioEstadisticas?){
-        if (objeto != null){
-            println("El jugador se equipa el objeto.")
-        }else{
-            println("El jugador no pudo comprar la armadura.")
-        }
-    }
-
-    fun objetoVendido(objeto: EquipablesPrecioEstadisticas) {
-        println("El objeto ha sido vendido con exito, has ganado ${objeto.precio()}")
+    fun jugadorVendeEquipable(objeto: EquipablesPrecioEstadisticas) {
+        println("El ${objeto.nombre()} ha sido vendido, has ganado ${objeto.precio()}")
     }
 
     fun mostrarObjetosVentaJugador(listaObjetoJugador: List<EquipablesPrecioEstadisticas>) {
@@ -107,23 +103,18 @@ object TextoConsola {
      * Mostrar pantalla
      * */
 
-    fun <T:Peleas>mostrarEscenario(jugador: T, enemigo: T)  {
-        if (jugador is Estadisticas &&
-            enemigo is Estadisticas)
-            mostrarEscenarioEnPantalla(jugador,enemigo)
-    }
-    fun <T>mostrarEscenarioEnPantalla(jugador:T,enemigo:T)where T:Estadisticas{
+    fun mostrarEscenario(jugador: Player, enemigo: Enemigos)  {
         limpiarConsola()
         println("-------------------------------------------------------")
         println("-Enemigo: ${enemigo.nombre}")
-        println("-Nivel: ${enemigo.nivel}")
+        println("-Monedas: ${enemigo.totalMonedas}")
         println("-Vida: ${mostrarvida(enemigo.vida,0f)}")
         println("-Tu: ${jugador.nombre}")
-        println("-Nivel: ${jugador.nivel}")
+        println("-Monedas: ${jugador.totalMonedas}")
         println("-Vida: ${jugador.vida}")
         println("-------------------------------------------------------")
         println("-Selecciona una opcion:")
-        println("- (1)Atacar (2)Defenderse (3)Huir")
+        println("- (1)Atacar (2)Huir")
         println("-------------------------------------------------------")
     }
 
@@ -142,35 +133,21 @@ object TextoConsola {
         return corazones
     }
 
-    fun subirDeNivel(jugador:Estadisticas){
-        println("${jugador.nombre} se volvio mas fuerte")
-    }
-    fun <T>mostrarMenu(jugador:T) where T:Peleas{
-        if(jugador is Estadisticas){
-            mostrarMenuenPantalla(jugador)
-        }
-
-    }
-    fun <T:Estadisticas>mostrarMenuenPantalla(jugador: T){
+    fun mostrarMenu(jugador: Player){
         limpiarConsola()
         println("BIENVENIDO A NAYD3C WORLDS")
         println("Nombre: ${jugador.nombre}")
-        println("Nivel: ${jugador.nivel}")
+        println("Monedas: ${jugador.totalMonedas}€")
         println("Vida: ${mostrarvida(jugador.vida,jugador.vidaActual)}")
         println("¿Que quieres hacer joven aventurero?")
         println("(1) Pelea")
         println("(2) Recuperar vida")
         println("(3) ir al vendedor")
-        println("(4) fin del juego")
+        println("(4) ver Historial")
+        println("(5) salir del juego")
     }
 
-    fun mostrarTienda(){
-        println("Bienvenido a NAYD3C SHOPS")
-        println("¿Que deseas?")
-        println("(1) Comprar")
-        println("(2) vender Objeto")
-        println("(3) Salir de la tienda")
-    }
+
 
     /**
      * Acciones
@@ -182,7 +159,9 @@ object TextoConsola {
     /**
      * BATALLAS
      * */
-
+    fun elJugadorSeGuardaElItemDelEnemigo(objeto: EquipablesPrecioEstadisticas) {
+        println("has ganado $objeto, lo guardas en el inventario")
+    }
 
     fun recibirAtaque(nombre:String, ataque:Float){
         println("$nombre recibe un daño de $ataque puntos")
@@ -194,13 +173,13 @@ object TextoConsola {
 
     fun <T>finalBatalla(jugador : T,luchador:T){
         if (jugador is Estadisticas && luchador is Estadisticas &&
-            jugador is TransaccionesPeleas && luchador is TransaccionesPeleas)
+            jugador is Transacciones && luchador is Transacciones)
             finalBatallaTexto(jugador,luchador)
     }
-    fun <T>finalBatallaTexto(jugador : T,luchador:T) where T:Estadisticas, T:TransaccionesPeleas{
+    fun <T>finalBatallaTexto(jugador : T,luchador:T) where T:Estadisticas, T:Transacciones{
         when(jugador){
-            is Jugador -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagarPelea(jugador.totalMonedas/2)}") }
-            else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${jugador.ingresoPelea(luchador.totalMonedas)}") }
+            is Jugador -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagar(jugador.totalMonedas/2)}") }
+            else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${jugador.ingreso(luchador.totalMonedas)}") }
         }
     }
     fun huidaPelea(){
@@ -219,18 +198,37 @@ object TextoConsola {
     fun mensajeDeError()= "ERROR,Las Opciones validas son 1, 2 o 3"
 
     fun mostrarArmaduras(armaduras: List<EquipablesPrecioEstadisticas>) {
-        for (i in (0..armaduras.size-1)){
-            println("${i+1}. ${armaduras[i].nombre()}  ${armaduras[i].precio()}€ (${armaduras[i].estadistica()} PD)")
+        var contador= 0
+        armaduras.forEach{
+            println("${contador++}${it.nombre()}  ${it.precio()}€ (${it.estadistica()} PD)")
         }
         println("6. no comprar nada")
     }
 
     fun mostrarArmas(armas: List<EquipablesPrecioEstadisticas>) {
-        for (i in (0..armas.size-1)){
-            println("${i+1}. ${armas[i].nombre()}  ${armas[i].precio()}€ (${armas[i].estadistica()} PD)")
+        var contador= 0
+        armas.forEach{
+            println("(${contador++}). ${it.nombre()}  ${it.precio()}€ (${it.estadistica()} PD)")
         }
         println("6. no comprar nada")
     }
+
+    fun mostrarBaseDeDatos(basesDeDatos: InformePartida) {
+        println("jugador ${basesDeDatos.nombre}")
+        println("jugador ${basesDeDatos.vida}")
+        println("jugador ${basesDeDatos.vidaActual}")
+        println("jugador ${basesDeDatos.totalMonedas}")
+        println("jugador ${basesDeDatos.combatesTotales}")
+        println("jugador ${basesDeDatos.combatesPerdidos}")
+        println("jugador ${basesDeDatos.enemigos}")
+
+    }
+
+    fun jugadorNoSeCura(jugador: Player) {
+        println("el ${jugador.nombre} no se ha curado")
+    }
+
+
 }
 
 

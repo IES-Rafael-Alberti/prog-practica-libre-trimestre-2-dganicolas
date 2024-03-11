@@ -13,20 +13,13 @@ class RealizarBatalla {
         TextoConsola.recibirAtaque(objetivo.nombre,atacante.hacerAtaque())
     }
 
-    fun <T:Any>comienzaBatalla(jugador:T,luchador:T):Boolean{
-        return if (jugador is Peleas && jugador is Curarse && jugador is Estadisticas && luchador is Estadisticas && luchador is Peleas && luchador is Curarse )
-            batalla(jugador,luchador)
-        else{false}
-    }
-
-    fun elegirOpcion() = EntradasUsuario().tresOpciones()
-    fun <T>batalla(jugador:T,luchador:T):Boolean where T:Peleas,T:Curarse,T:Estadisticas{
+    fun batalla(jugador:Player, luchador:Enemigos):Any{
         DEFENSA= false
         PELEA =true
         COMBATEGANADO = true
         while (PELEA && luchador.saberVida() >= 0 && jugador.saberVida() >= 0 && !HUIDA) {
             TextoConsola.mostrarEscenario(jugador, luchador)
-            val opcion = EntradasUsuario().Opciones(2)
+            val opcion = EntradasUsuario().opciones(2)
             when (opcion) {
                 //atacar
                 1 -> {
@@ -47,26 +40,28 @@ class RealizarBatalla {
 
 
         }
-        return finalBatalla(luchador,jugador)
+        return finalBatalla(jugador,luchador)
     }
 
-    private fun <T>finalBatalla(luchador:T,jugador: T):Boolean where T:Peleas, T:Curarse {
-
+    private fun finalBatalla(jugador:Player,luchador: Enemigos):Any{
         luchador.curar(100)
         if (HUIDA){
             HUIDA = false
             TextoConsola.huidaPelea()
-            return false
+            return jugador
         }
-        if (jugador.saberVida() <= 0){
+        return if (jugador.saberVida() <= 0){
             TextoConsola.finalBatalla(jugador,luchador)
             TextoConsola.enterparacontinuar()
-            return false
-        }
-        else{
+            if (80 > (0..100).random()){
+                TextoConsola.elJugadorSeGuardaElItemDelEnemigo(luchador.objeto)
+                jugador.inventario.add(luchador.objeto)
+            }
+            luchador
+        } else{
             TextoConsola.finalBatalla(luchador,jugador)
             TextoConsola.enterparacontinuar()
-            return true
+            jugador
         }
     }
 }

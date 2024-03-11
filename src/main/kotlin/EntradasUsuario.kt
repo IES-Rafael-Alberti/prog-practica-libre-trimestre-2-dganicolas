@@ -1,5 +1,3 @@
-import org.practicatrim2.Objetos
-
 class EntradasUsuario() {
 
     fun usuarioIntroduceNombre(nombre:String):String{
@@ -15,7 +13,7 @@ class EntradasUsuario() {
         }
     }
 
-    fun Opciones(numeroOpciones:Int):Int{
+    fun opciones(numeroOpciones:Int):Int{
         return try {
             val opcion = readln().toInt()
             if (opcion > numeroOpciones || opcion < 0) {
@@ -29,65 +27,21 @@ class EntradasUsuario() {
         }
     }
 
-
-    fun cuatroOpciones():Int{
-        return try {
-            val opcion = readln().toInt()
-            if (opcion > 4 || opcion < 0) {
-                throw IllegalArgumentException()
-            }
-            opcion
-        }catch (e:IllegalArgumentException){
-            println(TextoConsola.mensajeDeError())
-            TextoConsola.enterparacontinuar()
-            0
-        }
-
-    }
-
-    fun seisOpciones():Int{
-        return try {
-            val opcion = readln().toInt()
-            if (opcion > 6 || opcion < 0) {
-                throw IllegalArgumentException()
-            }
-            opcion
-        }catch (e:IllegalArgumentException){
-            println(TextoConsola.mensajeDeError())
-            TextoConsola.enterparacontinuar()
-            0
-        }
-
-    }
-
-    fun tresOpciones():Int{
-        return try {
-            val opcion = readln().toInt()
-            if (opcion > 4) {
-                throw IllegalArgumentException()
-            }
-            opcion
-        }catch (e:IllegalArgumentException){
-            println(TextoConsola.mensajeDeError())
-            TextoConsola.enterparacontinuar()
-            0
-        }
-
-    }
-
-    fun variasOpciones(listaObjetos: Int): Int?{
-        while (true){
+    fun variasOpcionesTienda(listaObjetos: Int):Any{
+        while (true) {
+            var opcion:Any = readln()
             try {
-                val opcion = readln().toInt()
+                 opcion=opcion.toString().toInt()
                 if (opcion > listaObjetos || opcion < 0) {
                     throw IllegalArgumentException()
                 }
                 return opcion
             }catch (e:IllegalArgumentException){
-                return null
+                return ""
+            }catch (e:NumberFormatException){
+                return opcion.toString()
             }
         }
-        }
-
+    }
 
 }
