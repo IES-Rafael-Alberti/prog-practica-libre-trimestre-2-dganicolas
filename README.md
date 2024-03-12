@@ -81,8 +81,9 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - tambien tengo en el main una lista de tipo interfaz enemigo, donde tengo las clases que implemente la interfaz enemigo, inicializada dentro de una lista
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/97f3c539266ffdde5bdc0f3ccda3368704d8fdc6/src/main/kotlin/Main.kt#L27-L46
 
-a la hora de pasar los parametros al constructor, lo he hecho mediante valores constantes que yo previamente pong en el codigo, por falta de tiempo se que se le pueden pasar variables en el constructor principal
-entonces ahora esta asi:
+a la hora de pasar los parametros al constructor, 
+lo he hecho mediante valores constantes que yo previamente pong en el codigo, por falta de tiempo se que se le pueden pasar variables en el constructor principal entonces ahora esta asi:
+
 EJEMPLO HIPOTETICO:
 Jugador:Player(var nombre: String,....){...}
 yo ahora inicializo las clases asi
@@ -90,7 +91,6 @@ jugador= Jugador("nico",....)
 pero me hubiera gustado asi 
 val nombre = readln()
 jugador= Jugador(nombre,....)
-
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
@@ -114,6 +114,7 @@ entonces el parametro porcentajeQueSeVaACurar, lo divido entre 100, por que me e
 0 a un numero entero, ya sea positivo o negativo, por si acaso tengo que implementar que un mal curamiento, te haga daño 
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.
+
 - en el proceso de creacion de clases, al crear las diferentes clases padres, el IDE me ayudaba en errores comunes como el no poner que tipo de variables que es en el constructor 
 - tambien a la hora de hacer clases heredadas, el ide en todo momento me aleertaba de fallos como que en el constructor primario de la clase heredada no era igual que el de la clase padre o que me faltaba importar variables de la clase padre
 - en el proceso de compilacion el propio IDE me decia, aqui hay un error de sisntaxis, o en el archivo, en la funcion y en la linea (98:94) se esperaba un valor de tipo Float, pero se ha introducido uno de tipo Int
