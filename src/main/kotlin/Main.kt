@@ -44,31 +44,10 @@ fun main() {
                 10f
             )
         )
-    val jugador = Jugador(
-        "Nicolas",
-        10000000000f,
-        1f,
-        10f,
-        10f,
-        Armaduras.ARMADURA_DE_DRAGON,
-        Armas.ANILLO_UNICO,
-        mutableListOf(Objetos.INVESTIGARESPONDE_DE_ELOY)
-    )
-    val vendedor = Vendedor(
-        "Troy",
-        10f,
-        listOf<EquipablesPrecioEstadisticas>(
-            Armaduras.ARMADURA_DE_DRAGON,
-            Armaduras.ARMADURA_DE_MITHRIL,
-            Armaduras.ARMADURA_DE_PLATINO,
-            Armaduras.ARMADURA_DE_ADAMANTIO,
-            Armaduras.ARMADURA_DE_ACHILLES),
-        listOf<EquipablesPrecioEstadisticas>(
-            Armas.ANILLO_UNICO,
-            Armas.DAGA_DE_ALTÄIR,
-            Armas.ARCO_DE_LEGOLAS,
-            Armas.VARITA_DE_SAUCO,
-            Armas.ESPADA_EXCALIBUR))
+    val jugador = Jugador("Nicolas",100f,1f,10f,10f,
+        Armaduras.ARMADURA_DE_DRAGON,Armas.ANILLO_UNICO,mutableListOf(Objetos.INVESTIGARESPONDE_DE_ELOY))
+    val vendedor = Vendedor("Troy",10f,listOf<EquipablesPrecioEstadisticas>(Armaduras.ARMADURA_DE_DRAGON,Armaduras.ARMADURA_DE_MITHRIL,Armaduras.ARMADURA_DE_PLATINO,Armaduras.ARMADURA_DE_ADAMANTIO,Armaduras.ARMADURA_DE_ACHILLES),
+                    listOf<EquipablesPrecioEstadisticas>(Armas.ANILLO_UNICO,Armas.DAGA_DE_ALTÄIR,Armas.ARCO_DE_LEGOLAS,Armas.VARITA_DE_SAUCO,Armas.ESPADA_EXCALIBUR))
     val bdRpg = InformePartida(jugador.nombre,jugador.vida,jugador.vidaActual,jugador.totalMonedas,0,0,0,0)
     val bdLocal = GestioninfoJuego(bdRpg)
     val partida = Partida(jugador,vendedor,personajes,bdLocal)
