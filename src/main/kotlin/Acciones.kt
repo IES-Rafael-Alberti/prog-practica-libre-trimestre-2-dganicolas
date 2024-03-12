@@ -83,8 +83,4 @@ interface Transacciones{
  * añadirlo a la lista inventario del jugador
  * */
 
-interface SubirDeNivel{
-    fun subirDeNivel():Int?
-    fun ComprobarSiTieneExpSuficiente(nivel: Float):Float
-}
 

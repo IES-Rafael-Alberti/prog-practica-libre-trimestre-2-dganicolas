@@ -65,7 +65,25 @@ La actividad consiste en el desarrollo de un proyecto software en Kotlin, permit
 Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre cómo has aplicado los criterios de evaluación en tu proyecto. Al responderlas, **asegúrate de hacer referencia y enlazar al código relevante** en tu `README.md`, facilitando así la evaluación de tu trabajo.
 
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
-- **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
+- **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? 
+
+- Tengo dos objetos principales,
+- donde uno es Jugador y otro el vendedor,
+- que jugador sigue la jerarquia de la Interfaz de Player y vendedor de la interfaz de Seller,
+- y la hora de interactuar con los objetos, lo hago mediantes las dependencias de sus interfaces
+- como en los ejemplos de abajo.
+
+- tambien tengo en el main una lista de tipo interfaz enemigo, donde tengo las clases que implemente la interfaz enemigo, inicializada de 
+- Proporciona ejemplos específicos de tu código.
+````
+    val jugador = Jugador("Nicolas",10000000000f,1f,10f,10f,Armaduras.ARMADURA_DE_DRAGON,Armas.ANILLO_UNICO,mutableListOf(Objetos.INVESTIGARESPONDE_DE_ELOY))
+     
+     class Jugador(...):Player
+     class Vendedor(...):Seller
+     fun comprar(jugador:Player,vendedor:Seller)
+     fun batalla(jugador:Player, luchador:Enemigo):Any
+````
+
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?

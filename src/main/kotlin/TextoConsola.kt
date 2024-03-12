@@ -13,15 +13,6 @@ object TextoConsola {
     private fun limpiarConsola(){
         repeat(10){println()}
     }
-    /**************** Clase: EntradasUsuario**************************/
-    fun textoNombre(nombre:String){
-        println("Dime el nombre del $nombre")
-    }
-
-    fun nombreMalTecleado(nombre: String){
-        println("El nombre no puede estar vacio,Por Favor dime el nombre del $nombre")
-    }
-    /**************** Fin de la Clase: EntradasUsuario**************************/
 
     /**************** Clase: Tienda**************************/
 
@@ -42,7 +33,7 @@ object TextoConsola {
         println("bueno otro dia sera...")
     }
 
-    fun <T:Enum<T>>jugadorRecibeEquipable(objeto: EquipablesPrecioEstadisticas){
+    fun jugadorRecibeEquipable(objeto: EquipablesPrecioEstadisticas){
             println("El jugador se equipa el ${objeto.nombre()}.")
 
     }
@@ -69,24 +60,6 @@ object TextoConsola {
         println("(1) curarte tu mismo")
         println("(2) ir al doctor")
         println("(3) no hacer nada")
-    }
-
-    fun recibeTratamiento(nombreJugador:String,coste:Float){
-        println("El doctor te curo, coste del tratamiento: $coste" +
-                "$nombreJugador se recupero completamente")
-    }
-
-    fun noRecibeTratamiento(coste:Float,cartera:Float){
-        println("Dinero insuficiente, el tratamiento cuesta $coste y tienes $cartera ")
-    }
-
-    fun noRealizarNingunaAccion(nombreJugador:String){
-        println("$nombreJugador no realizo ninguna opcion")
-    }
-
-    /**************** Fin de la Clase: RecibirTratamiento**************************/
-    fun <T>imprimir(imprimir:T){
-        println(imprimir)
     }
 
     private fun animacion(){
@@ -194,9 +167,6 @@ object TextoConsola {
         println("Has podido huir de la batalla")
     }
 
-    fun bloqueoEnemigo(){
-        println("intentaste huir pero el enemigo te bloqueo el paso, ataque inminente")
-    }
 
     fun enterparacontinuar() {
         println("pulsa ENTER para continuar")
