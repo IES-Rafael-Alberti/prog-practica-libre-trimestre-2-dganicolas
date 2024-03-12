@@ -17,11 +17,11 @@ import org.practicatrim2.*
         Player
     {
         override fun pagar(coste:Float):Float {
-            totalMonedas -= coste
+            totalMonedas -= coste.redondear()
             return coste
         }
         override fun ingreso(coste:Float):Float{
-            totalMonedas+= coste
+            totalMonedas+= coste.redondear()
             return coste
         }
 
@@ -45,7 +45,7 @@ import org.practicatrim2.*
 
         override fun curar(porcentajeQueSeVaACurar:Int):Float{
             val vidaPrevia =vida
-            val porcentaje= porcentajeQueSeVaACurar.toFloat().redondear(-2)
+            val porcentaje= porcentajeQueSeVaACurar.toFloat().dividirEntreCien()
             val recuperar = (vidaActual*porcentaje).redondear()
             if (recuperar+ vida<vidaActual){
                 vida += recuperar
