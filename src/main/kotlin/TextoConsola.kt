@@ -5,14 +5,9 @@ import com.github.ajalt.mordant.widgets.Panel
 import com.github.ajalt.mordant.widgets.Text
 import org.practicatrim2.EquipablesPrecioEstadisticas
 import org.practicatrim2.InformePartida
-object TextoConsola {
+import javax.swing.border.Border
 
-    /**
-     * FUNCIONES VARIAS
-     * */
-    private fun limpiarConsola(){
-        repeat(10){println()}
-    }
+object TextoConsola {
 
     /**************** Clase: Tienda**************************/
 
@@ -56,10 +51,17 @@ object TextoConsola {
     /**************** Fin de la Clase: Tienda**************************/
     /**************** Clase: RecibirTratamiento**************************/
     fun mostrarTratamientos(){
-        println("¿?Que quieres hacer?")
-        println("(1) curarte tu mismo")
-        println("(2) ir al doctor")
-        println("(3) no hacer nada")
+        val terminal = Terminal()
+        terminal.println(
+            Panel(
+                borderStyle = TextColors.blue,
+                content = Text(
+                    TextColors.brightGreen(
+                        "¿Que quieres hacer?\n"+
+                                "(1) curarte tu mismo\n"+
+                                "(2) ir al doctor\n"+
+                                "(3) no hacer nada\n"), whitespace = Whitespace.PRE_WRAP),
+                title = Text(TextColors.brightCyan("Hospital"))))
     }
 
     private fun animacion(){
@@ -82,54 +84,62 @@ object TextoConsola {
 
     fun mostrarEscenario(jugador: Player, enemigo: Enemigo)  {
         limpiarConsola()
-        println("-------------------------------------------------------")
-        println("-Enemigo: ${enemigo.nombre}")
-        println("-Monedas: ${enemigo.totalMonedas}")
-        println("-Vida: ${mostrarvida(enemigo.vida,0f)}")
-        println("-Tu: ${jugador.nombre}")
-        println("-Monedas: ${jugador.totalMonedas}")
-        println("-Vida: ${jugador.vida}")
-        println("-------------------------------------------------------")
-        println("-Selecciona una opcion:")
-        println("- (1)Atacar (2)Huir")
-        println("-------------------------------------------------------")
+        val terminal = Terminal()
+        terminal.println(
+            Panel(
+                borderStyle = TextColors.blue,
+                content = Text(
+                    TextColors.brightGreen(
+                        "-------------------------------------------------------\n" +
+                            "-Enemigo: ${enemigo.nombre}\n"+
+                            "-Monedas: ${enemigo.totalMonedas}\n"+
+                            "arma: ${jugador.arma} (${jugador.arma.estadistica()}\n"+
+                                "-Vida: ${mostrarvida(enemigo.vida,0f)}\n"+
+                             "-Tu: ${jugador.nombre}\n"+
+                             "-Monedas: ${jugador.totalMonedas}\n"+
+                             "-Vida: ${jugador.vida}\n"+
+                             "-------------------------------------------------------\n"+
+                             "-Selecciona una opcion:\n"+
+                             "- (1)Atacar (2)Huir\n"+
+                             "-------------------------------------------------------\n"), whitespace = Whitespace.PRE_WRAP),
+                title = Text(TextColors.brightCyan("Batalla"))))
+
     }
 
     fun mostrarvida(vida:Float,vidaActual:Float):String{
 
         var corazones= ""
         for (i in 1.. (vida.toInt())){
-            corazones+= "♥"
+            corazones+= "*"
         }
         if (vidaActual != 0f){
             for(i in 1..(vidaActual - vida).toInt()){
-                corazones+= "♡"
+                corazones+= "-"
             }
         }
-        corazones += "($vida)"
         return corazones
     }
 
     fun mostrarMenu(jugador: Player){
         limpiarConsola()
-        val vida = mostrarvida(jugador.vida,jugador.vidaActual)
         val terminal = Terminal()
             terminal.println(
                 Panel(
+                    borderStyle = TextColors.blue,
                     content = Text(
-                        TextColors.red("Nombre: ${jugador.nombre}\n") +
+                        TextColors.brightGreen("Nombre: ${jugador.nombre}\n" +
                                         "Monedas: ${jugador.totalMonedas}€\n"+
-                                        "Vida: ${vida}\n"+
+                                        "Vida: ${mostrarvida(jugador.vida,jugador.vidaActual)}\n"+
                                         "arma: ${jugador.arma} (${jugador.arma.estadistica()}\n"+
                                         "armadura:  ${jugador.armadura} (${jugador.armadura.estadistica()}\n"+
                                         "Bolsa: ${jugador.inventario.size} objetos\n"+
-                                    "¿Que quieres hacer joven aventurero?\n"+
-                                    "(1) Pelea\n"+
-                                    "(2) Recuperar vida\n"+
-                                    "(3) ir al vendedor\n" +
-                                    "(4) ver Historial\n" +
-                                    "(5) salir del juego", whitespace = Whitespace.PRE_WRAP),
-                    title = Text("BIENVENIDO A NAYD3C WORLDS")
+                                        "¿Que quieres hacer joven aventurero?\n"+
+                                        "(1) Pelea\n"+
+                                        "(2) Recuperar vida\n"+
+                                        "(3) ir al vendedor\n" +
+                                        "(4) ver Historial\n" +
+                                        "(5) salir del juego"), whitespace = Whitespace.PRE_WRAP,),
+                    title = Text(TextColors.brightCyan("BIENVENIDO A NAYD3C WORLDS"))
                 )
             )
         }
