@@ -1,3 +1,6 @@
+import consola.EntradasUsuario
+import consola.TextoConsola
+
 //se encarga de la logistica de la tienda
 class Tienda() {
         private var JUGADORESTAADENTRO = true

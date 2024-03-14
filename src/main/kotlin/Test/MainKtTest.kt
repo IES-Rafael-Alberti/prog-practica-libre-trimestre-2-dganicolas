@@ -1,3 +1,5 @@
+package Test
+
 import org.junit.jupiter.api.Assertions.*
 import org.practicatrim2.dividirEntreCien
 import org.practicatrim2.redondear

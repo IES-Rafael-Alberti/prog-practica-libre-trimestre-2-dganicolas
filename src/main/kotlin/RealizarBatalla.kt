@@ -1,3 +1,6 @@
+import consola.EntradasUsuario
+import consola.TextoConsola
+
 //esta clase se encarga de toda logistica de la batalla
 class RealizarBatalla() {
     companion object{
@@ -52,7 +55,6 @@ class RealizarBatalla() {
         }
         return if (jugador.saberVida() <= 0){
             TextoConsola.finalBatalla(jugador,luchador)
-            TextoConsola.enterparacontinuar()
             if (80 > (0..100).random()){
                 TextoConsola.elJugadorSeGuardaElItemDelEnemigo(luchador.objeto)
                 jugador.inventario.add(luchador.objeto)
@@ -60,7 +62,6 @@ class RealizarBatalla() {
             jugador
         } else{
             TextoConsola.finalBatalla(luchador,jugador)
-            TextoConsola.enterparacontinuar()
             luchador
         }
     }

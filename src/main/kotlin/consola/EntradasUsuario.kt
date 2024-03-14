@@ -1,3 +1,5 @@
+package consola
+
 class EntradasUsuario() {
 
     fun opciones(numeroOpciones:Int):Int{
@@ -9,7 +11,6 @@ class EntradasUsuario() {
             opcion
         }catch (e:IllegalArgumentException){
             println(TextoConsola.mensajeDeError())
-            TextoConsola.enterparacontinuar()
             0
         }
     }

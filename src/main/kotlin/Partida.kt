@@ -1,4 +1,5 @@
-import org.practicatrim2.GestioninfoJuego
+import consola.EntradasUsuario
+import consola.TextoConsola
 import org.practicatrim2.InteractuarBasesDeDatos
 import org.practicatrim2.Objetos
 
@@ -26,6 +27,7 @@ class Partida(private var jugador: Player,
         while (PARTIDA) {
             TextoConsola.mostrarMenu(jugador)
             escogerOpcion(EntradasUsuario().opciones(5))
+            TextoConsola.enterparacontinuar()
         }
     }
     fun escogerOpcion(opcion:Int){
@@ -33,16 +35,19 @@ class Partida(private var jugador: Player,
             1 -> batallaComienza()
             2 -> RecibirTratamiento().queTipoDeTratamiento(jugador)
             3 -> irATienda()
-            4 -> informePartida.mostrarBaseDeDatos()
+            4 -> {
+                TextoConsola.animacion();informePartida.mostrarBaseDeDatos()}
             5 -> PARTIDA = false
         }
     }
     fun irATienda(){
+        TextoConsola.animacion()
         Tienda().tienda(jugador,vendedor)
 
     }
 
     fun batallaComienza(){
+        TextoConsola.animacion()
         val enemigo = personajes.random()
         enemigo.objeto = listaObjetos.random()
         val resultado = RealizarBatalla().batalla(jugador,enemigo)

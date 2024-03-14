@@ -1,3 +1,6 @@
+import consola.EntradasUsuario
+import consola.TextoConsola
+
 //esta clase se encarga de curar a personas
 class RecibirTratamiento() { // clase terminada
     fun<T:Curarse> darTratamiento(persona:T, porcentaje:Int=100):Float{
@@ -6,7 +9,7 @@ class RecibirTratamiento() { // clase terminada
     }
 
     fun queTipoDeTratamiento(personaACurar:Player){
-
+        TextoConsola.animacion()
         while (true){
             TextoConsola.mostrarTratamientos()
             val opciones = EntradasUsuario().opciones(3)

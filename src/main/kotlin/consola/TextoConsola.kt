@@ -1,3 +1,9 @@
+package consola
+
+import Enemigo
+import Estadisticas
+import Player
+import Transacciones
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.rendering.Whitespace
 import com.github.ajalt.mordant.terminal.Terminal
@@ -64,17 +70,17 @@ object TextoConsola {
                 title = Text(TextColors.brightCyan("Hospital"))))
     }
 
-    private fun animacion(){
+     fun animacion(){
         limpiarConsola()
         print("*")
-        Thread.sleep(1000)
+        Thread.sleep(40)
 
         for (i in 1..5) {
             print("-")
-            Thread.sleep(500)
+            Thread.sleep(40)
         }
         print("*")
-        Thread.sleep(500)
+        Thread.sleep(50)
         limpiarConsola()
     }
 
@@ -167,7 +173,7 @@ object TextoConsola {
     fun hacerAtaque(nombre:String, ataque:Float){
         println("$nombre lanza un ataque de $ataque puntos")
     }
-    fun <T>finalBatalla(jugador : T,luchador:T) where T:Estadisticas, T:Transacciones{
+    fun <T>finalBatalla(jugador : T,luchador:T) where T: Estadisticas, T: Transacciones {
         when(jugador){
             is Player -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagar(jugador.totalMonedas/2)}") }
             else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${luchador.ingreso(jugador.totalMonedas)}") }
