@@ -66,7 +66,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? 
-- **Paso 1**: 
+- **Paso 1** Definir acciones en el juego: 
   - pienso en las acciones que puedes hacer en una pelea
   - en la vida real para hacer una pelea minimo, debe haber 2 personas 
   - en la pelea, puedes infligir daño al atacante o que el atacante te dañe a ti, 
@@ -80,16 +80,15 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   - la eleccion de que sea una interfaz en vez de una clase que herede de otras, es por que el propio IDE,
   - al ver que una clase implementa una interfaz y detecta que esa interfaz tiene variables abstracta el mismo te lo pone en el constructor primario automaticamente, lo que me ahorra tiempo al desarrollar nuevas clases, tambien es una interfaz para cumplir el principio del **DIP**,en este caso con la abstraccion mediante la interfaz, en la clase partida
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Partida.kt#L8-L11
-  - y tambier cumplir con el principio solid **ISP**, ya que las clases clientes que implementen Enemigo, Player o Seller, no tendran metodos que no necesiten 
-- **Paso2**: 
+  - y tambien cumplir con el principio solid **ISP**, ya que las clases clientes que implementen Enemigo, Player o Seller, no tendran metodos que no necesiten 
+- **Paso2** Creacion de clases: 
   - Creacion de clases mediante la dependencia de la interfaz
   - creo las clases Jugador, Enemigo, Vendedor que implemente las Interfaces que requieran 
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L7-L17
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L73-L80
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L94-L103
 
-  - una vez creadas, desarrollando solo el comportamientos de los  metodos, ya que las variables se definen automaticamente en la clase al implementar la interfaz que necesite, ahorro un poco de tiemnpo al crearlo de esta manera.
-
+  - Una vez creadas, desarrollando solo el comportamientos de los  metodos, ya que las variables se definen automaticamente en la clase al implementar la interfaz que necesite, ahorro un poco de tiemnpo al crearlo de esta manera.
   - Asi tambien cumplo con el principio SOLID de ISP, 
   - ya que la clase cliente Zombie, no tiene los metodos de la interfaz IrAlHospital,
   - y solo tiene la interfaz Curarse una vez terminada la pelea que en este caso si es necesario que lo implemente
