@@ -323,7 +323,7 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 
 - la jerarquia que he presentado es la siguiente
 - es la siguiente
-- https://docs.google.com/drawings/d/e/2PACX-1vTHG4IYbCmOevr0zFYeg3j-z5IR12AesUpCpEgd8_vdOVbiSdSd4Pu7RSrpKIJUmzTwnHzaPgZJ1Ao6/pub?w=1093&h=337
+- ![alt imagen de las interfaces](https://docs.google.com/drawings/d/e/2PACX-1vTHG4IYbCmOevr0zFYeg3j-z5IR12AesUpCpEgd8_vdOVbiSdSd4Pu7RSrpKIJUmzTwnHzaPgZJ1Ao6/pub?w=1093&h=337)
 - en la cual la Interfaz Player puede salir todas las clases jugables
 - en la Interfaz Enemigos puede salir todas las clases que son enemigos de player
 - en la interfaz EquipablesPrecioEstadisticas puede salir todas las clase que sean consumibles o equipable.
