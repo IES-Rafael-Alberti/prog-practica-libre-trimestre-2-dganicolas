@@ -1,5 +1,5 @@
 /**
- * @author Nicolas De Gomar Almellones
+
  * Interfaz que enfocada para objetos equipables o consumibles
  * con las siguientes funciones
  * fun nombre():String
@@ -19,27 +19,31 @@
  *         override fun precio() = 2000.0f
  *         override fun estadistica() = 3.0f
  *     }
- *
+ * @author Nicolas De Gomar Almellones
  */
 interface EquipablesPrecioEstadisticas{
     /**
      * es el nombre del objeto
+     * @return el nombre del objeto
      * */
     fun nombre():String
     /**
      * es el precio del objeto
+     * @return el precio del objeto
      * */
     fun precio():Float
     /**
      * es la estadistica del objeto
+     * @return la estadistica del objeto
      * */
     fun estadistica():Float
 }
 /**
- * @author Nicolas De Gomar Almellones
+
  * una enumeracion de clases en este caso de Armas
  * que implementa la interfaz EquipablesPrecioEstadisticas
  * las funciones de los objetos estan documentadas en la propia interfaz
+ * @author Nicolas De Gomar Almellones
  */
 enum class Armas: EquipablesPrecioEstadisticas {
     ESPADA_EXCALIBUR {
@@ -69,10 +73,11 @@ enum class Armas: EquipablesPrecioEstadisticas {
     }
    }
 /**
- * @author Nicolas De Gomar Almellones
+
  * una enumeracion de clases en este caso de Armaduras
  * que implementa la interfaz EquipablesPrecioEstadisticas
  * las funciones de los objetos estan documentadas en la propia interfaz
+ * @author Nicolas De Gomar Almellones
  */
 enum class Armaduras: EquipablesPrecioEstadisticas {
     ARMADURA_DE_ACHILLES {
@@ -102,10 +107,10 @@ enum class Armaduras: EquipablesPrecioEstadisticas {
     };
 }
 /**
- * @author Nicolas De Gomar Almellones
  * una enumeracion de clases en este caso de Objetos
  * que implementa la interfaz EquipablesPrecioEstadisticas
  * las funciones de los objetos estan documentadas en la propia interfaz
+ * @author Nicolas De Gomar Almellones
  */
 enum class Objetos: EquipablesPrecioEstadisticas {
     INVESTIGARESPONDE_DE_ELOY {

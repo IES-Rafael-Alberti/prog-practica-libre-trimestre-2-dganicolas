@@ -14,6 +14,7 @@ import org.practicatrim2.InteractuarBasesDeDatos
  * @property vendedor el la entidad que el jugador le puede comprar o vender
  * @property personajes es la lista de enemigo donde el jugador se puede enfrentar
  * @property informePartida es donde se registraran todas las acciones del jugador
+ * @property PARTIDA con esta variable controlo si la partida esta en funcionamiento o se termina
  * @author Nicolas De Gomar
  * */
 class Partida(private var jugador: Player,
@@ -35,10 +36,6 @@ class Partida(private var jugador: Player,
             Objetos.INVESTIGARESPONDE_DE_ELOY)
     }
 
-    /**
-     * con esta variable controlo si la partida esta en funcionamiento o se termina
-     * @author Nicolas De Gomar
-     * */
     private var PARTIDA = false
 
     /**
@@ -70,7 +67,7 @@ class Partida(private var jugador: Player,
     fun escogerOpcion(opcion:Int){
         when(opcion){
             1 -> batallaComienza()
-            2 -> RecibirTratamiento().queTipoDeTratamiento(jugador)
+            2 -> Hospital().queTipoDeTratamiento(jugador)
             3 -> irATienda()
             4 -> {
                 TextoConsola.animacion()
@@ -89,7 +86,6 @@ class Partida(private var jugador: Player,
     }
 
     /**
-     *
      * funcion llama a la clase batalla
      * @author Nicolas De Gomar
      * */
@@ -99,9 +95,6 @@ class Partida(private var jugador: Player,
          * escoge un enemigo aleatorio
          * */
         val enemigo = personajes.random()
-        /**
-         * le pone un objeto aleatorio al enemigo
-         * */
         enemigo.objeto = listaObjetos.random()
         /**
          * devuelve null en caso de que el player haya perdido
