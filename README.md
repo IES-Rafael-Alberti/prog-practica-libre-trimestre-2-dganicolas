@@ -323,7 +323,7 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 
 - la jerarquia que he presentado es la siguiente
 - es la siguiente
-- ![alt imagen de las interfaces](https://docs.google.com/drawings/d/e/2PACX-1vTHG4IYbCmOevr0zFYeg3j-z5IR12AesUpCpEgd8_vdOVbiSdSd4Pu7RSrpKIJUmzTwnHzaPgZJ1Ao6/pub?w=1093&h=337)
+![alt imagen de las interfaces](https://docs.google.com/drawings/d/e/2PACX-1vTHG4IYbCmOevr0zFYeg3j-z5IR12AesUpCpEgd8_vdOVbiSdSd4Pu7RSrpKIJUmzTwnHzaPgZJ1Ao6/pub?w=1093&h=337)
 - en la cual la Interfaz Player puede salir todas las clases jugables
 - en la Interfaz Enemigos puede salir todas las clases que son enemigos de player
 - en la interfaz EquipablesPrecioEstadisticas puede salir todas las clase que sean consumibles o equipable.
@@ -333,57 +333,25 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 - una vez que me funcionaban correctamente, cogi todo de las diferentes clase y la hize una interfaz 
 - despues implemente esas interfaces en partida y consegui un nuevo nivel de abstraccion.
 
-- el tipo de herencia utilizxado es Especialización,
+- el tipo de herencia utilizado es Especialización,
 - dado que las interfaceses para algo general, per oen cuantro creo una clase derivada de ella
 - es algo mas concreto.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #### **Criterio global 7: Librerías de clases**
 - **(2.g, 4.k)**: Describe cualquier librería externa que hayas incorporado en tu proyecto. 
 - Explica cómo y por qué las elegiste, y cómo las incorporaste en tu proyecto. 
 - ¿Cómo extendió la funcionalidad de tu aplicación? Proporciona ejemplos específicos de su uso en tu proyecto.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- he utilizado la libreria mordant
+- la escogi por el diseño de la consola, me gusta que pueda añadirle colores al menu
+- la incorpore en la clase TextoConsola
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f8a03fe93f31cec5adf6200958f72f502861bca9/src/main/kotlin/consola/TextoConsola.kt#L126-L147
+- la escogi por temas de expandir la funcionalidad de la estetica 
+- añadiendo una barra de carga mas estetica o añadiendo que los menus se vean con un borde o con un color diferente
 
 
 #### **Criterio global 8: Documentado**
-- **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? 
+- **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. 
+- ¿Que herramientas has utilizado? 
 - ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
 
 
@@ -407,7 +375,11 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 
 
 #### **Criterio global 9: Genéricos**
-- **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?
+- **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. 
+- ¿Qué beneficio has obtenido?
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f8a03fe93f31cec5adf6200958f72f502861bca9/src/main/kotlin/consola/TextoConsola.kt#L172-L177
+- aqui he utilizado una funcion generica, ya que a la hora de finalizar la pelea, nose si me entra un Enemigo o un Player, 
+- entonces como ganador o perdedor
 
 
 

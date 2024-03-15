@@ -11,7 +11,6 @@ import com.github.ajalt.mordant.widgets.Panel
 import com.github.ajalt.mordant.widgets.Text
 import org.practicatrim2.EquipablesPrecioEstadisticas
 import org.practicatrim2.InformePartida
-import javax.swing.border.Border
 
 object TextoConsola {
 
@@ -169,10 +168,10 @@ object TextoConsola {
     fun hacerAtaque(nombre:String, ataque:Float){
         println("$nombre lanza un ataque de $ataque puntos")
     }
-    fun <T>finalBatalla(jugador : T,luchador:T) where T: Estadisticas, T: Transacciones {
-        when(jugador){
-            is Player -> { println("${jugador.nombre} ha sido debilitado, has perdido ${jugador.pagar(jugador.totalMonedas/2)}") }
-            else -> { println("${jugador.nombre} ha sido debilitado, has ganado ${luchador.ingreso(jugador.totalMonedas)}") }
+    fun <T>finalBatalla(ganador : T, perdedor:T) where T: Estadisticas, T: Transacciones {
+        when(ganador){
+            is Player -> { println("${ganador.nombre} ha sido debilitado, has perdido ${ganador.pagar(ganador.totalMonedas/2)}") }
+            else -> { println("${ganador.nombre} ha sido debilitado, has ganado ${perdedor.ingreso(ganador.totalMonedas)}") }
         }
     }
     fun huidaPelea(){
