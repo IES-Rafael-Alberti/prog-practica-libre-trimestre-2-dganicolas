@@ -67,7 +67,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? 
 - Proporciona ejemplos específicos de tu código.
-- **Paso 1**Definir acciones en el juego: 
+- **Paso 1**Definir acciones en el juego:
   - Anoto todas las acciones que puedes hacer en una pelea,
   - En la vida real para hacer una pelea minimo, debe haber 2 personas,
   - En la pelea, puedes infligir daño al atacante o que el atacante te dañe a ti, 
@@ -112,7 +112,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? 
 - ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
-- si he definido 2 metodos estaticos,
+- si he definido 2 metodos estaticos, 
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/173d5f8eeb325b1b682e89586b277193e676bffb/src/main/kotlin/Main.kt#L24-L27
 - uno es el de dividir entre 100,
 - que es tu le pasas un numero ya sea negativo o positivo,
@@ -177,7 +177,8 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - cosa que ya no me es necesario mirar gracias al uso de interfaces,
 - ya que el ide me implementa automaticamente las variables que usa esa clase que hereda de esa interfaz.
 -
-- Tambien me decia en todo momento los errores de sintaxis o que un metodo o clase no estaba cerrado,
+- Tambien cuando intentaba compilar el programa 
+- el propio IDE me decia en todo momento los errores de sintaxis o que un metodo o clase no estaba cerrado,
 - avisandome del error diciendome,
 - en el archivo tal, hay un error en la linea 95:100, el primer numero es la linea y el segundo el caracter
 
@@ -211,9 +212,9 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
       HUIDA = false 
     }
     }
-- donde este codiog resumido, cuando el usuario apretaba la opcion 3, 
+- donde este codigo resumido, cuando el usuario apretaba la opcion 3, 
 - que era huida,
-- entonces en el if marcado ateriormente,
+- entonces en el if marcado anteriormente,
 - estaba la condicion distinto de true de HUIDA, entonces me genero un bucle infinito
 - que gracias al modo debug del IDE pude solucionar, con rapidez
 
@@ -258,25 +259,14 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   - el medico pregunta si tienes dinero antes de recibir el tratamiento
 - pagarAlmedico(coste: Float):
 - una vez que hayas pagado a lmedico, es cuando ya te da el tratamiento y cura tu condicion fisica
-
-
-
-
-
-
-
-
-
-
-
-
+- 
 #### **Criterio global 5: Herencia y uso de clases abstractas e interfaces**
 - **(4.h, 4.j, 7.a, 7.b, 7.c)**: 
 - Describe sobre tu código cómo has implementado la herencia o utilizado interfaces en tu proyecto. 
 - ¿Por qué elegiste este enfoque y cómo beneficia a la estructura de tu aplicación? 
 - ¿De qué manera has utilizado los principios SOLID para mejorar el diseño de tu proyecto? 
 - ¿Mostrando tu código, contesta a qué principios has utilizado y qué beneficio has obtenido?
-- 
+
 la herencia la he implementado, con las diferentes interfaces, donde en partida 
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Partida.kt#L9-L12
   - tengo las siguientes variables:
@@ -285,39 +275,39 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
   - private var personajes: List<Enemigo> : esta variable hace que la clase partida tenga una dependencia de la interfaz Enemigo
   - private var informePartida: InteractuarBasesDeDatos : esta variable hace que la clase partida tenga una dependencia de la interfaz InteractuarBasesDeDatos
 - entonces en la clase partida cumplo 
-- el principio de DIP: que dice que ninguna clase tiene que depender de clases o interfaces abstractas y no de clases o interfaces concretas
+- **el principio de DIP**: que dice que ninguna clase tiene que depender de clases o interfaces abstractas y no de clases o interfaces concretas
   - la clase partida depende de las interfaces en vez de clases concretas
-- el principio OCP: que dice una clase debe estar abierta a su modificacion pero cerrado a su modificacion 
+- **el principio OCP**: que dice una clase debe estar abierta a su modificacion pero cerrado a su modificacion 
   - a la hora de modificar algo del funcionamiento de la partida, yo tengo que modificar las clases que llama partida,
   - pero en ningun momento tengo que modificar partida como tal
-- el principio LSP: que dice que cualquier clase padre puede ser sustituido por sus subclases
+- **el principio LSP**: que dice que cualquier clase padre puede ser sustituido por sus subclases y no afectar al sistema
   - yo puedo reemplazar las diferentes clases o crear nuevas 
   - y la clase partida no se entera, 
-  - ya que van a implementar las interfaces que necesiten
-- el principio ISP: dice que ninguina interfaz debe estar sobrecargada con metodos innecesarios
+  - ya que necesitan implementar las interfaces que necesiten
+- **el principio ISP**: dice que ninguina interfaz debe estar sobrecargada con metodos innecesarios
   - la Clase partida depende de la interfaz Player, pero
   - Player hereda de otras interfaces que necesita
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Acciones.kt#L4-L13
 
 - Tambien tengo otro principio que cumplo
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Acciones.kt#L4-L74
-- en este cas , implemento una jerarquia de interfaces donde 
+- en este caso , implemento una jerarquia de interfaces donde 
 - ejemplo:
 - interface Player:Estadisticas, Peleas, Curarse, Transacciones, IrAlMedico
 - la interfaz Player hereda de las siguientes interfaces Estadisticas, Peleas, Curarse, Transacciones, IrAlMedico
-  - el principio ISP: que dice que las interfaces deben ser especificas para sus clases clientes, en vez de tener una interfaz general para todo
+  - **el principio ISP**: que dice que las interfaces deben ser especificas para sus clases clientes, en vez de tener una interfaz general para todo
     - Player hereda de otras interfaces que realmente necesita
 
 - tambien tengo estas clases 
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/InformePartida.kt#L6-L44
   - la clase InformePartida:
-    - el principio de SPR: que dice que una clase solo debe de tener una unica responsabilidad
+    - **el principio de SPR**: que dice que una clase solo debe de tener una unica responsabilidad
       - la clase InformePartida la unica responsabilidad que tiene es gestionar la información del informe de partida
-    - el principio de OCP: que dice que una clase debe estaer abierta a su extension pero cerrada a su modificacion
+    - **el principio de OCP**: que dice que una clase debe estaer abierta a su extension pero cerrada a su modificacion
       - la clase InformePartida, puedo añadirle funcionalidad pero, no tengo el por que modificarla a futuro
   
     - la clase GestionInfoJuego:
-      - el principio SPR: que dice que la clase solo debe tener un motivo para cambiar
+      - **el principio SPR**: que dice que la clase solo debe tener un motivo para cambiar
         - la clase GestionInfoJuego solo se encarga de la gestion de la informacion
 
     
@@ -326,18 +316,22 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 - ¿Cómo probaste y depuraste esta jerarquía para asegurar su correcto funcionamiento? 
 - ¿Qué tipo de herencia has utilizado: Especificación, Especialización, Extensión, Construcción?
 
-- la jerarquia que he presentado es la siguiente
+- la jerarquia que he presentado es especializacion
 - es la siguiente
 ![alt imagen de las interfaces](https://docs.google.com/drawings/d/e/2PACX-1vTHG4IYbCmOevr0zFYeg3j-z5IR12AesUpCpEgd8_vdOVbiSdSd4Pu7RSrpKIJUmzTwnHzaPgZJ1Ao6/pub?w=1093&h=337)
 - en la cual la Interfaz Player puede salir todas las clases jugables
 - en la Interfaz Enemigos puede salir todas las clases que son enemigos de player
 - en la interfaz EquipablesPrecioEstadisticas puede salir todas las clase que sean consumibles o equipable.
-
+- entonces player puede ser cualquier cosa
+- pero a la hora de crear una clase que implemente Player, especializacion en la clase el tipo de player que es, 
+- ya sea mago, jugador o gerrero, entonces especializo esa herencia
+###
+- a la hora de depurar:
 - primero probe sin interfaces, si no una clase jugador y otra clase enemigo
 - depure esas dos clases,
 - una vez que me funcionaban correctamente, cogi todo de las diferentes clase y la hize una interfaz 
 - despues implemente esas interfaces en partida y consegui un nuevo nivel de abstraccion.
-
+###
 - el tipo de herencia utilizado es Especialización,
 - dado que las interfaceses para algo general, per oen cuantro creo una clase derivada de ella
 - es algo mas concreto.
@@ -352,7 +346,11 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f8a03fe93f31cec5adf6200958f72f502861bca9/src/main/kotlin/consola/TextoConsola.kt#L126-L147
 - la escogi por temas de expandir la funcionalidad de la estetica 
 - añadiendo una barra de carga mas estetica o añadiendo que los menus se vean con un borde o con un color diferente
-
+- tambien tengo otra libreria que es el junit jupite, que me sirve para poder comprobar si sirve una funcion o codigo funcionan bien 
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f8a03fe93f31cec5adf6200958f72f502861bca9/src/main/kotlin/Test/MainKtTest.kt#L7-L20
+- entones en estas pruebas, pruebo si funcionan correctamente los metodos estaticos 
+- de redondear() 
+- y dividirEntreCien()
 
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. 
