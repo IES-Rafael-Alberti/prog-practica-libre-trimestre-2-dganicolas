@@ -67,46 +67,49 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? 
 - Proporciona ejemplos específicos de tu código.
+##
 - **Paso 1**Definir acciones en el juego:
-  - Anoto todas las acciones que puedes hacer en una pelea,
-  - En la vida real para hacer una pelea minimo, debe haber 2 personas,
-  - En la pelea, puedes infligir daño al atacante o que el atacante te dañe a ti, 
-  - O tambien debes saber cuando retirarte si ves que estas a punto de morir, 
-  - Despues de esa pelea tanto tu como el atacante os debeis de curar, 
-  - Entonces he creado 2 interfaces que todo jugador o luchador debe de implementar. 
-  - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Acciones.kt#L4-L26
-  - La interfaz **player**, que hace referencia a todas las acciones que puede realizar los jugadores,
-  - Y la interfaz **enemigo**, que hace referencia a todas las acciones que puede realizar un enemigo
-
-  - La eleccion de que sea una interfaz en vez de una clase que herede de otras, es por que el propio IDE,
-  - Al ver que una clase implementa una interfaz y detecta que esa interfaz tiene variables abstracta,
-  - El mismo te lo pone en el constructor primario automaticamente,
-  - Lo que me ahorra tiempo al desarrollar nuevas clases.
-  - Tambien es una interfaz para cumplir el principio del **DIP**,en este caso con la abstraccion mediante la interfaz, en la clase partida
-  - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Partida.kt#L8-L11
-  - y tambien cumplir con el principio solid **ISP**, ya que las clases clientes que implementen Enemigo, Player o Seller, no tendran metodos que no necesiten 
+- Anoto todas las acciones que puedes hacer en una pelea,
+- En la vida real para hacer una pelea minimo, debe haber 2 personas,
+- En la pelea, puedes infligir daño al atacante o que el atacante te dañe a ti, 
+- O tambien debes saber cuando retirarte si ves que estas a punto de morir, 
+- Despues de esa pelea tanto tu como el atacante os debeis de curar, 
+- Entonces he creado 2 interfaces que todo jugador o luchador debe de implementar. 
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Acciones.kt#L4-L26
+- La interfaz **player**, que hace referencia a todas las acciones que puede realizar los jugadores,
+- Y la interfaz **enemigo**, que hace referencia a todas las acciones que puede realizar un enemigo
+##
+- La eleccion de que sea una interfaz en vez de una clase que herede de otras, es por que el propio IDE,
+- Al ver que una clase implementa una interfaz y detecta que esa interfaz tiene variables abstracta,
+- El mismo te lo pone en el constructor primario automaticamente,
+- Lo que me ahorra tiempo al desarrollar nuevas clases.
+- Tambien es una interfaz para cumplir el principio del **DIP**,en este caso con la abstraccion mediante la interfaz, en la clase partida
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Partida.kt#L8-L11
+- y tambien cumplir con el principio solid **ISP**, ya que las clases clientes que implementen Enemigo, Player o Seller, no tendran metodos que no necesiten 
+##
 - **Paso2** Creacion de clases: 
-  - Creacion de clases mediante la dependencia de la interfaz
-  - creo las clases Jugador, Enemigo, Vendedor que implemente las Interfaces que requieran 
-  - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L7-L17
-  - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L73-L80
-  - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L94-L103
-
-  - Una vez creadas, desarrollando solo el comportamientos de los  metodos, 
-  - ya que las variables se definen automaticamente en la clase al implementar la interfaz que necesite, 
-  - ahorro un poco de tiemnpo al crearlo de esta manera.
-  
-  - Asi tambien cumplo con el principio SOLID de ISP, 
-  - ya que la clase cliente Zombie, no tiene los metodos de la interfaz IrAlHospital,
-  - y solo tiene la interfaz Curarse una vez terminada la pelea que en este caso si es necesario que lo implemente
+- Creacion de clases mediante la dependencia de la interfaz
+- creo las clases Jugador, Enemigo, Vendedor que implemente las Interfaces que requieran 
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L7-L17
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L73-L80
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/67fa8ec906b169f582d745005f2c9662d5f4433d/src/main/kotlin/Personas.kt#L94-L103
+##
+- Una vez creadas, desarrollando solo el comportamientos de los  metodos, 
+- ya que las variables se definen automaticamente en la clase al implementar la interfaz que necesite, 
+- ahorro un poco de tiempo al crearlo de esta manera.
+  ##
+- Asi tambien cumplo con el principio SOLID de ISP, 
+- ya que la clase cliente Zombie, no tiene los metodos de la interfaz IrAlHospital,
+- y solo tiene la interfaz Curarse una vez terminada la pelea que en este caso si es necesario que lo implemente
+## 
 - **Paso 3**: Instanciar objetos
-  - a la hora instanciar los objetos he igualado la variable jugador y vendedor a sus respectivas clases,
-  - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Main.kt#L67-L110
-  - tambien los objetos que implementen la interfaz Enemigo, los he metido en una lista de tipo Enemigo
-  - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Main.kt#L111-L113
-  - tambien instancio como la base de datos del juego 
-  - el gestor de la base de datos
-  - y la partida 
+- a la hora instanciar los objetos he igualado la variable jugador y vendedor a sus respectivas clases,
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Main.kt#L67-L110
+- tambien los objetos que implementen la interfaz Enemigo, los he metido en una lista de tipo Enemigo
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Main.kt#L111-L113
+- tambien instancio como la base de datos del juego 
+- el gestor de la base de datos
+- y la partida 
 
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
@@ -117,6 +120,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - uno es el de dividir entre 100,
 - que es tu le pasas un numero ya sea negativo o positivo,
 - y te lo divide entre cien
+##
 - ejemplo: 
 - le entra un numero entero 60 
 - y te devuelve 
@@ -127,23 +131,22 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - 34.555444333365555
 - si no que me aparezca 
 - 34.55
+##
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/173d5f8eeb325b1b682e89586b277193e676bffb/src/main/kotlin/Main.kt#L39-L41
 - entonces por que uso los metodos estaticos en vez de en lugar de un método/propiedad de instancia,
 - por dos razones:
+##
 - **Razon numero 1**:
   - esos metodos lo deberian de usar tanto
-  - la interfaz Enemigo al curarse,
-  - como la interfaz Seller al recibir monedas y
-  - el jugador al curarse o recibir monedas.
-  
-  - **lo implementare mas a futuros algunas modificaciones de las clases para que use mas metodos pero por falta de tiempo lo he entregado asi,** 
-  
+  - la interfaz Enemigo al curarse, como la interfaz Seller al recibir monedas y el jugador al curarse o recibir monedas.
+  - **lo implementare mas a futuros algunas modificaciones de las clases para que use mas metodos pero por falta de tiempo lo he entregado asi,**
   - entonces pensando de esa manera 
   - esos metodos forman en comun con otras clases o interfaces
   - entonces para ahorrarme codigo repetido de funciones de diferentes clases con la misma funcion,
   - lo he creado de esa manera para no hacer la practica de  Don’t Repeat Yourself de clean code
   - mi objetivo es transforma la vida cuando el jugador se cura,
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/4eb8a1d1312fca7efbe6ef37c5529cdcc8296954/src/main/kotlin/Main.kt#L20-L26
+##
 - **Razon numero 2**:
   - por temas de mantenibilidad del codigo 
   - nos ponemos en un caso hipotetico que a futuro, mi proyecto necesita,
@@ -151,7 +154,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   - pues por mantenibilidad del codigo y por futuras modificaciones
   - esta modificacion tardo en cambiarlo en una sola linea de codigo, en vez de estar mirando todo el proyecto
 
-
+##
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
   
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/4eb8a1d1312fca7efbe6ef37c5529cdcc8296954/src/main/kotlin/Personas.kt#L46-L56
@@ -171,17 +174,17 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? 
 - Describe el proceso de creación, compilación, y prueba de tu programa.
-
+##
 - en el proceso de creacion de clases, al crear las diferentes clases padres,
 - el IDE me ayudaba en errores comunes como el no poner que tipo de variables que es en el constructor
 - cosa que ya no me es necesario mirar gracias al uso de interfaces,
 - ya que el ide me implementa automaticamente las variables que usa esa clase que hereda de esa interfaz.
--
-- Tambien cuando intentaba compilar el programa 
+##
+- Tambien a la hora de compilar el programa 
 - el propio IDE me decia en todo momento los errores de sintaxis o que un metodo o clase no estaba cerrado,
 - avisandome del error diciendome,
 - en el archivo tal, hay un error en la linea 95:100, el primer numero es la linea y el segundo el caracter
-
+##
 - en las pruebas del programa utilize el modo debug directamente:
 - donde ide me ha ayudado con su modo debug al hacer pruebas, 
 - tantos como formulas matematicas que puse de manera erronea, 
@@ -217,7 +220,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - entonces en el if marcado anteriormente,
 - estaba la condicion distinto de true de HUIDA, entonces me genero un bucle infinito
 - que gracias al modo debug del IDE pude solucionar, con rapidez
-
+##
 - el propio IDE ,me ha ayudado en solucionar errores comunes de manera muy rapida,
 - ya que me avisaba donde estaba ese error y me decia tambien algunas mejoras de codigo, 
 - entonces me ayudo de manera de ser mas eficiente a la hora de desarrollar.
@@ -243,14 +246,13 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   - te pueden hacer daño a ti
 - el saberVida() representa:
   - saber tu estado y retirarte antes de que mueras por las heridas
-
+##
 - Tambien tengo otra interfaz que es IrAlMedico,
 - Donde en la vida real, 
 - cuando tu vas al medico, 
 - el medico te analiza la condicion fisica,
 - el medico te pregunta si tienes dinero para el tratamiento y entonces
 - una vez que hayas pagado al medico, entonces es cuando el medico te cura.
-- 
 - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/85b4672634a48029ac860e906295ddcc786bcb5a/src/main/kotlin/Acciones.kt#L60-L66
 - entonces mi funciones de esa interfaz son las siguientes:
 - el medicoPreguntaPorTuCondicionFisica():
@@ -309,7 +311,7 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
     - la clase GestionInfoJuego:
       - **el principio SPR**: que dice que la clase solo debe tener un motivo para cambiar
         - la clase GestionInfoJuego solo se encarga de la gestion de la informacion
-
+- analizada ya todos los principios solid, seguimos con el readme
     
 #### **Criterio global 6: Diseño de jerarquía de clases**
 - **(7.d, 7.e, 7.f, 7.g)**: Presenta la jerarquía de clases que diseñaste. 
