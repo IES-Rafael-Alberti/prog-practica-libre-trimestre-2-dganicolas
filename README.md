@@ -95,7 +95,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   - Una vez creadas, desarrollando solo el comportamientos de los  metodos, 
   - ya que las variables se definen automaticamente en la clase al implementar la interfaz que necesite, 
   - ahorro un poco de tiemnpo al crearlo de esta manera.
-  - 
+  
   - Asi tambien cumplo con el principio SOLID de ISP, 
   - ya que la clase cliente Zombie, no tiene los metodos de la interfaz IrAlHospital,
   - y solo tiene la interfaz Curarse una vez terminada la pelea que en este caso si es necesario que lo implemente
@@ -113,9 +113,10 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? 
 - ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - si he definido 2 metodos estaticos,
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/173d5f8eeb325b1b682e89586b277193e676bffb/src/main/kotlin/Main.kt#L24-L27
 - uno es el de dividir entre 100,
 - que es tu le pasas un numero ya sea negativo o positivo,
-- y te lo divide entre cien 
+- y te lo divide entre cien
 - ejemplo: 
 - le entra un numero entero 60 
 - y te devuelve 
@@ -126,6 +127,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - 34.555444333365555
 - si no que me aparezca 
 - 34.55
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/173d5f8eeb325b1b682e89586b277193e676bffb/src/main/kotlin/Main.kt#L39-L41
 - entonces por que uso los metodos estaticos en vez de en lugar de un método/propiedad de instancia,
 - por dos razones:
 - **Razon numero 1**:
@@ -149,6 +151,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   - pues por mantenibilidad del codigo y por futuras modificaciones
   - esta modificacion tardo en cambiarlo en una sola linea de codigo, en vez de estar mirando todo el proyecto
 
+
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
   
   - https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/4eb8a1d1312fca7efbe6ef37c5529cdcc8296954/src/main/kotlin/Personas.kt#L46-L56
@@ -163,6 +166,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   - 6.33333333333333
   - si no asi 
   - 6.33
+
 
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? 
@@ -185,7 +189,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - El ide me ha ayudado en el uso de la visibilidad de las variables/metodos, 
 - por ejemplo si veia que esa variable o metodo se usaba solo dentro de una clase/objeto, 
 - me alertaba que se podia poner privada.
-- 
+
 - tambien en el modo debug o depuracion tenia un bucle infinito en Partida.kt, el cual es el siguiente:
   - codigo erroneo resumido:
     ````
@@ -216,6 +220,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 - el propio IDE ,me ha ayudado en solucionar errores comunes de manera muy rapida,
 - ya que me avisaba donde estaba ese error y me decia tambien algunas mejoras de codigo, 
 - entonces me ayudo de manera de ser mas eficiente a la hora de desarrollar.
+
 
 #### **Criterio global 4: Definir clases y su contenido**
 - **(4.b, 4.c, 4.d, 4.g)**: Explica sobre un ejemplo de tu código, 
