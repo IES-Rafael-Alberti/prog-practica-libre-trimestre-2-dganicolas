@@ -1,7 +1,7 @@
 import consola.EntradasUsuario
 import consola.TextoConsola
 
-//esta clase se encarga de curar a personas
+
 class RecibirTratamiento() { // clase terminada
     fun<T:Curarse> darTratamiento(persona:T, porcentaje:Int=100):Float{
         return persona.curar(porcentaje)

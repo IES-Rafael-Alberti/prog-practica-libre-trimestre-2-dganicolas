@@ -36,7 +36,8 @@ class Partida(private var jugador: Player,
             2 -> RecibirTratamiento().queTipoDeTratamiento(jugador)
             3 -> irATienda()
             4 -> {
-                TextoConsola.animacion();informePartida.mostrarBaseDeDatos()}
+                TextoConsola.animacion()
+                informePartida.mostrarBaseDeDatos()}
             5 -> PARTIDA = false
         }
     }

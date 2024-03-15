@@ -71,7 +71,6 @@ object TextoConsola {
     }
 
      fun animacion(){
-        limpiarConsola()
         print("*")
         Thread.sleep(40)
 
@@ -81,7 +80,6 @@ object TextoConsola {
         }
         print("*")
         Thread.sleep(50)
-        limpiarConsola()
     }
 
     /**
@@ -89,7 +87,6 @@ object TextoConsola {
      * */
 
     fun mostrarEscenario(jugador: Player, enemigo: Enemigo)  {
-        limpiarConsola()
         val terminal = Terminal()
         terminal.println(
             Panel(
@@ -127,7 +124,6 @@ object TextoConsola {
     }
 
     fun mostrarMenu(jugador: Player){
-        limpiarConsola()
         val terminal = Terminal()
             terminal.println(
                 Panel(
