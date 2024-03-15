@@ -353,7 +353,18 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. 
 - ¿Que herramientas has utilizado? 
 - ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
-
+en estos ejemplos he documentado con Kdoc 
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f28502426c6046bc1feb2e8b988844733033c9c8/src/main/kotlin/ArmasyArmaduras.kt#L1-L24
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f28502426c6046bc1feb2e8b988844733033c9c8/src/main/kotlin/Main.kt#L14-L27
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f28502426c6046bc1feb2e8b988844733033c9c8/src/main/kotlin/RealizarBatalla.kt#L14-L23
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f28502426c6046bc1feb2e8b988844733033c9c8/src/main/kotlin/InformePartida.kt#L5-L26
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f28502426c6046bc1feb2e8b988844733033c9c8/src/main/kotlin/InformePartida.kt#L44-L62
+- mi documentacion aporta valor a futuro, donde cuando yo no este trabajando en este proyecto o si tengo que retomar este codigo o modificarlo
+- me sea mas facil de entender viendo el comentario y viendo lo que pone mas ver el comentario me resultaria mas facil interpretar el codigo 
+- 
+- a la hora de depurar me puede servir para ayudar a otros programadores a entender el codigo
+- a la hora de mantenimiento, me sirve para que otros programadores hagan modificaciones del programa sin complicaciones gracias a la documentacion 
+- 
 
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. 
