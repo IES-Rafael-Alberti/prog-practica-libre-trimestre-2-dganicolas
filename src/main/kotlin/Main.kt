@@ -71,7 +71,7 @@ fun main() {
         )
     val jugador = Jugador(
         "Nicolas",
-        10000000000f,
+        100f,
         1f,
         1f,
         10f,
