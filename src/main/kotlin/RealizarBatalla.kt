@@ -16,7 +16,7 @@ class RealizarBatalla() {
         TextoConsola.recibirAtaque(objetivo.nombre,atacante.hacerAtaque())
     }
 
-    fun batalla(jugador:Player, luchador:Enemigo):Any{
+    fun batalla(jugador:Player, luchador:Enemigo):Player?{
         DEFENSA= false
         PELEA =true
         COMBATEGANADO = true
@@ -46,7 +46,7 @@ class RealizarBatalla() {
         return finalBatalla(jugador,luchador)
     }
 
-    private fun finalBatalla(jugador:Player,luchador: Enemigo):Any{
+    private fun finalBatalla(jugador:Player,luchador: Enemigo):Player?{
         luchador.curar(100)
         if (HUIDA){
             HUIDA = false
@@ -62,7 +62,7 @@ class RealizarBatalla() {
             jugador
         } else{
             TextoConsola.finalBatalla(luchador,jugador)
-            luchador
+            null
         }
     }
 }

@@ -355,85 +355,39 @@ la herencia la he implementado, con las diferentes interfaces, donde en partida
 - ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. 
 - ¿Qué beneficio has obtenido?
-- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f8a03fe93f31cec5adf6200958f72f502861bca9/src/main/kotlin/consola/TextoConsola.kt#L172-L177
-- aqui he utilizado una funcion generica, ya que a la hora de finalizar la pelea, nose si me entra un Enemigo o un Player, 
-- entonces como ganador o perdedor
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f0faa6faa783c04082168be864d5b1a9a59ba8fb/src/main/kotlin/consola/TextoConsola.kt#L171-L176
+- aqui he utilizado una funcion generica, 
+- ya que a la hora de finalizar la pelea, nose si me entra un Enemigo o un Player como ganador,
+- 
+- entonces como ganador o perdedor me puede entrar cualquier clase, 
+- pero como minimo tiene que cumplir que implemente las interfaces Estadisticas, Transacciones.
+-
+- esta funcion me soluciona el problema de
+- creo dos funcion para ganadorEnemigo, ganadorPlayer
+- pues con esta funcion la compacto en una y me soluciono ese problema
+- y unas lineas de codigos extras
 
+- tambien tengo esta otra funcion
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f0faa6faa783c04082168be864d5b1a9a59ba8fb/src/main/kotlin/RecibirTratamiento.kt#L6-L7
+- donde aqui tengo otra funcion generica donde me pueden pasar cualquier clase para que se cure.
+- pero tiene que implementar esa clase como minimo la interfaz Curarse
+- 
+- esta funcion me soluciona el problema de
+- creo dos funcion para curarEnemigo, curarPlayer
+- pues con esta funcion la compacto en una y me soluciono ese problema
+- y unas lineas de codigos extras
 
+- o esta otra
+- https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-dganicolas/blob/f0faa6faa783c04082168be864d5b1a9a59ba8fb/src/main/kotlin/RealizarBatalla.kt#L13-L17
+- donde tengo esta funcion generica para que el Player o el Enemigo se ataque.
+- 
+- esta funcion me soluciona el problema de 
+- creo dos funcion para turnoEnemigo, turnoJugador
+- pues con esta funcion la compacto en una y me soluciono ese problema
+- y unas lineas de codigos extras 
 
+- los beneficio de esta funcion es en hacer un codigo mas limpio al no repetir tanto codigo similar
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**APUNTES PARA NICOLAS**
-CLASES
--class
--abstract class
--enum class
--sealed class
-interfaces
-
-Tematica de la practica, 
-posible rpg 
-con un enum class para el tipo de arma 
-una data class para el personaje
-una abstract class o interfaz para los enemigo
-posible abstract class para los dungeons 
-una funcion generica para las batallas
-una class juego 
-quiero que el personaje pueda tener nombre
-
-principios de responsabilidad unica que debo cumplir
-
-
-Principio de Responsabilidad Única ("**S**ingle Responsibility Principle" - SRP)
-Un módulo o clase debe tener solo una razón para cambiar, lo que significa que debe tener solo una tarea o responsabilidad
-
-Principio de Abierto/Cerrado ("**O**pen/Closed Principle" - OCP)
-Definición: Las entidades de software (clases, módulos, funciones, etc.) deben estar abiertas para la extensión, pero cerradas para la modificación. Es decir, se debe poder extender el comportamiento de la entidad pero sin modificar su código fuente.
-
-Principio de Substitución de Liskov ("**L**iskov Substitution Principle" - LSP)
-Definición: Los objetos de una superclase deben poder ser reemplazados con objetos de sus subclases sin afectar la correctitud del programa.
-
-Principio de Segregación de la Interfaz ("**I**nterface Segregation Principle" - ISP)
-Definición: Los clientes no deben ser forzados a depender de interfaces que no utilizan.

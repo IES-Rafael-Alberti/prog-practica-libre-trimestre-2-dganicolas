@@ -7,36 +7,36 @@ import org.practicatrim2.*
     class Jugador
         (
         override val nombre: String,
-        override var totalMonedas:Float,
+        override var cartera:Float,
         override var dano:Float,
         override var vida: Float,
-        override var vidaActual:Float,
+        override var vidaMaxima:Float,
         override var armadura : EquipablesPrecioEstadisticas,
-        override var arma:EquipablesPrecioEstadisticas,
+        override var arma: EquipablesPrecioEstadisticas,
         override var inventario:MutableList<EquipablesPrecioEstadisticas>) :
         Player
     {
         override fun pagar(coste:Float):Float {
-            totalMonedas -= coste.redondear()
+            cartera -= coste.redondear()
             return coste
         }
         override fun ingreso(coste:Float):Float{
-            totalMonedas+= coste.redondear()
+            cartera+= coste.redondear()
             return coste
         }
 
         override fun medicoPreguntaPorTuCondicionFisica(): Float {
-            return (vidaActual - vida)*2
+            return (vidaMaxima - vida)*2
         }
 
         override fun pagarAlmedico(coste: Float): Float {
-            totalMonedas -= coste
+            cartera -= coste
             return coste
         }
 
         override fun medicoPreguntaPorTuDinero(coste: Float):Float?{
-            return if(coste < totalMonedas){
-                val curacion = vidaActual - vida
+            return if(coste < cartera){
+                val curacion = vidaMaxima - vida
                 curacion
             }else {
                 null
@@ -46,11 +46,11 @@ import org.practicatrim2.*
         override fun curar(porcentajeQueSeVaACurar:Int):Float{
             val vidaPrevia =vida
             val porcentaje= porcentajeQueSeVaACurar.toFloat().dividirEntreCien()
-            val recuperar = (vidaActual*porcentaje).redondear()
-            if (recuperar+ vida<vidaActual){
+            val recuperar = (vidaMaxima*porcentaje).redondear()
+            if (recuperar+ vida<vidaMaxima){
                 vida += recuperar
             }else {
-                vida = vidaActual
+                vida = vidaMaxima
             }
             return vida - vidaPrevia
         }
@@ -70,7 +70,10 @@ import org.practicatrim2.*
 
     }
 
-    class Vendedor
+/**
+ * es un vendedor generico
+ * */
+class Vendedor
         (
         override val nombre: String,
         override var monedas: Float,
@@ -95,9 +98,9 @@ import org.practicatrim2.*
         (
         override val nombre: String,
         override var vida: Float,
-        override val vidaActual: Float,
+        override val vidaMaxima: Float,
         override var objeto: EquipablesPrecioEstadisticas,
-        override var totalMonedas: Float,
+        override var cartera: Float,
         override var dano: Float
     ):
         Enemigo{
@@ -112,15 +115,15 @@ import org.practicatrim2.*
         }
 
         override fun curar(porcentajeQueSeVaACurar: Int): Float {
-            vida=vidaActual
+            vida=vidaMaxima
             return vida
         }
         override fun pagar(coste: Float): Float {
-            return totalMonedas
+            return cartera
         }
 
         override fun ingreso(coste: Float): Float {
-            totalMonedas += coste
+            cartera += coste
             return coste
         }
     }
@@ -129,9 +132,9 @@ import org.practicatrim2.*
         (
         override val nombre: String,
         override var vida: Float,
-        override val vidaActual: Float,
+        override val vidaMaxima: Float,
         override var objeto: EquipablesPrecioEstadisticas,
-        override var totalMonedas: Float,
+        override var cartera: Float,
         override var dano: Float
     ):
         Enemigo{
@@ -149,16 +152,16 @@ import org.practicatrim2.*
         }
 
         override fun curar(porcentajeQueSeVaACurar: Int): Float {
-            vida = vidaActual
+            vida = vidaMaxima
             return vida
         }
 
         override fun pagar(coste: Float): Float {
-            return totalMonedas
+            return cartera
         }
 
         override fun ingreso(coste: Float): Float {
-            totalMonedas += coste
+            cartera += coste
             return coste
         }
 

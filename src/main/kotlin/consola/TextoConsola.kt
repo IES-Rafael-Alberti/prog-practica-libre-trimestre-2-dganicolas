@@ -9,7 +9,7 @@ import com.github.ajalt.mordant.rendering.Whitespace
 import com.github.ajalt.mordant.terminal.Terminal
 import com.github.ajalt.mordant.widgets.Panel
 import com.github.ajalt.mordant.widgets.Text
-import org.practicatrim2.EquipablesPrecioEstadisticas
+import EquipablesPrecioEstadisticas
 import org.practicatrim2.InformePartida
 
 object TextoConsola {
@@ -94,11 +94,11 @@ object TextoConsola {
                     TextColors.brightGreen(
                         "-------------------------------------------------------\n" +
                             "-Enemigo: ${enemigo.nombre}\n"+
-                            "-Monedas: ${enemigo.totalMonedas}\n"+
+                            "-Monedas: ${enemigo.cartera}\n"+
                             "arma: ${jugador.arma} (${jugador.arma.estadistica()}\n"+
                                 "-Vida: ${mostrarvida(enemigo.vida,0f)}\n"+
                              "-Tu: ${jugador.nombre}\n"+
-                             "-Monedas: ${jugador.totalMonedas}\n"+
+                             "-Monedas: ${jugador.cartera}\n"+
                              "-Vida: ${jugador.vida}\n"+
                              "-------------------------------------------------------\n"+
                              "-Selecciona una opcion:\n"+
@@ -129,8 +129,8 @@ object TextoConsola {
                     borderStyle = TextColors.blue,
                     content = Text(
                         TextColors.brightGreen("Nombre: ${jugador.nombre}\n" +
-                                        "Monedas: ${jugador.totalMonedas}€\n"+
-                                        "Vida: ${mostrarvida(jugador.vida,jugador.vidaActual)}\n"+
+                                        "Monedas: ${jugador.cartera}€\n"+
+                                        "Vida: ${mostrarvida(jugador.vida,jugador.vidaMaxima)}\n"+
                                         "arma: ${jugador.arma} (${jugador.arma.estadistica()}\n"+
                                         "armadura:  ${jugador.armadura} (${jugador.armadura.estadistica()}\n"+
                                         "Bolsa: ${jugador.inventario.size} objetos\n"+
@@ -170,8 +170,8 @@ object TextoConsola {
     }
     fun <T>finalBatalla(ganador : T, perdedor:T) where T: Estadisticas, T: Transacciones {
         when(ganador){
-            is Player -> { println("${ganador.nombre} ha sido debilitado, has perdido ${ganador.pagar(ganador.totalMonedas/2)}") }
-            else -> { println("${ganador.nombre} ha sido debilitado, has ganado ${perdedor.ingreso(ganador.totalMonedas)}") }
+            is Player -> { println("${ganador.nombre} ha sido debilitado, has perdido ${ganador.pagar(ganador.cartera/2)}") }
+            else -> { println("${ganador.nombre} ha sido debilitado, has ganado ${perdedor.ingreso(ganador.cartera)}") }
         }
     }
     fun huidaPelea(){

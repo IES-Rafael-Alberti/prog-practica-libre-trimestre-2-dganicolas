@@ -1,15 +1,47 @@
-package org.practicatrim2
-
+/**
+ * @author Nicolas De Gomar Almellones
+ * Interfaz que enfocada para objetos equipables o consumibles
+ * con las siguientes funciones
+ * fun nombre():String
+ * esta funcion retorna el nombre del objeto
+ * fun precio():Float
+ * esta funcion retorna el precio que tendra el objeto
+ * fun estadistica():Float
+ * esta funcion retorna la estadistica que tendra el objeto
+ *
+ * @property nombre() es el nombre del objeto
+ * @property precio() es el precio del objeto
+ * @property estadistica() es la estadistica del objeto
+ * ejemplo:
+ * enum class Armaduras:EquipablesPrecioEstadisticas{
+ *     ARMADURA_DE_ACHILLES {
+ *         override fun nombre() = "Armadura de Achilles"
+ *         override fun precio() = 2000.0f
+ *         override fun estadistica() = 3.0f
+ *     }
+ *
+ */
 interface EquipablesPrecioEstadisticas{
+    /**
+     * es el nombre del objeto
+     * */
     fun nombre():String
+    /**
+     * es el precio del objeto
+     * */
     fun precio():Float
+    /**
+     * es la estadistica del objeto
+     * */
     fun estadistica():Float
 }
-// el set de armas del jugador
-// puede elegir entre espada, garra o lanza
-// puedo crear una interfaz que tenga los trers metodos,
-// si tiene una espada que ataque mas rapido o que como esta mas cerca que reciba mas daño que una lanza
-enum class Armas: EquipablesPrecioEstadisticas{
+/**
+ * @author Nicolas De Gomar Almellones
+ * una enumeracion de clases en este caso de Armas
+ * que implementa la interfaz EquipablesPrecioEstadisticas
+ * las funciones de los objetos estan documentadas en la propia interfaz
+ */
+enum class Armas: EquipablesPrecioEstadisticas {
     ESPADA_EXCALIBUR {
         override fun nombre() = "espada de Excalibur"
         override fun precio() = 1000.0f
@@ -30,13 +62,19 @@ enum class Armas: EquipablesPrecioEstadisticas{
         override fun precio() = 1500.0f
         override fun estadistica() = 12.0f
     },
-    DAGA_DE_ALTÄIR {
+    DAGA_DE_ALTAIR {
         override fun nombre() = "Daga de ALTÄIR"
         override fun precio() = 700.0f
         override fun estadistica() = 7.5f
     }
    }
-enum class Armaduras:EquipablesPrecioEstadisticas{
+/**
+ * @author Nicolas De Gomar Almellones
+ * una enumeracion de clases en este caso de Armaduras
+ * que implementa la interfaz EquipablesPrecioEstadisticas
+ * las funciones de los objetos estan documentadas en la propia interfaz
+ */
+enum class Armaduras: EquipablesPrecioEstadisticas {
     ARMADURA_DE_ACHILLES {
         override fun nombre() = "Armadura de Achilles"
         override fun precio() = 2000.0f
@@ -63,8 +101,13 @@ enum class Armaduras:EquipablesPrecioEstadisticas{
         override fun estadistica() = 6.0f
     };
 }
-
-enum class Objetos: EquipablesPrecioEstadisticas{
+/**
+ * @author Nicolas De Gomar Almellones
+ * una enumeracion de clases en este caso de Objetos
+ * que implementa la interfaz EquipablesPrecioEstadisticas
+ * las funciones de los objetos estan documentadas en la propia interfaz
+ */
+enum class Objetos: EquipablesPrecioEstadisticas {
     INVESTIGARESPONDE_DE_ELOY {
         override fun nombre() = "Investigacion sobre el powershell"
         override fun precio() = 2500.0f

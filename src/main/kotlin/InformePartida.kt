@@ -20,18 +20,19 @@ class GestioninfoJuego(var basesDeDatos:InformePartida):
         TextoConsola.mostrarBaseDeDatos(basesDeDatos)
     }
 
-    override fun registrarResultadoCombate(jugador: Player) {
-        basesDeDatos.nombre = jugador.nombre
-        basesDeDatos.vida = jugador.vida
-        basesDeDatos.vidaActual = jugador.vidaActual
-        basesDeDatos.totalMonedas = jugador.totalMonedas
-        if(jugador.vida< 0){
-            basesDeDatos.combatesPerdidos++
-            basesDeDatos.combatesTotales++
-        }else{
+    override fun registrarResultadoCombate(personaDerrotada: Player?) {
+        if (personaDerrotada != null){
+            basesDeDatos.nombre = personaDerrotada.nombre
+            basesDeDatos.vida = personaDerrotada.vida
+            basesDeDatos.vidaActual = personaDerrotada.vidaMaxima
+            basesDeDatos.totalMonedas = personaDerrotada.cartera
             basesDeDatos.combatesGanados++
             basesDeDatos.combatesTotales++
             basesDeDatos.enemigos++
+        }
+        else{
+            basesDeDatos.combatesPerdidos++
+            basesDeDatos.combatesTotales++
         }
     }
 
@@ -40,5 +41,5 @@ class GestioninfoJuego(var basesDeDatos:InformePartida):
 
 interface InteractuarBasesDeDatos{
     fun mostrarBaseDeDatos()
-    fun registrarResultadoCombate(personaDerrotada:Player)
+    fun registrarResultadoCombate(personaDerrotada:Player?)
 }
